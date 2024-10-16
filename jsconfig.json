@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@assets/*": ["./public/*"],
+      "@component/*": ["./app/components/*"]
     }
   }
 }
