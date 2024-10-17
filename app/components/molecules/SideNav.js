@@ -25,50 +25,16 @@ function SideNav({ user }) {
           </div>
         </div>
       </Modal>
-      <div className="fixed bg-white select-none overflow-y-auto flex flex-col h-screen shadow-md w-64 gap-y-6 py-8 px-1">
+      <div className="fixed bg-black select-none overflow-y-auto flex flex-col h-screen shadow-md w-64 gap-y-6 py-8 px-1">
         <div className="text-2xl px-1">
           <Image src={logo} className="w-28" alt="Michael Michael" />
         </div>
         <div className="flex-grow gap-y-4 flex flex-col gap-2">
-          <div>
+          <div className="px-3">
             <AppLink
-              text={"dashboard"}
+              text={"home"}
               icon={<i className="ri-layout-grid-fill"></i>}
             />
-            <AppLink
-              text={"orders"}
-              icon={<i className="ri-pantone-line"></i>}
-              subMenu={[
-                { name: "gift card", extra: false },
-                { name: "crypto", extra: false },
-              ]}
-            />
-            <AppLink
-              text={"transactions"}
-              icon={<i className="ri-refund-line"></i>}
-              subMenu={[
-                { name: "withdrawal", extra: false },
-                { name: "payment", extra: false }
-              ]}
-            />
-            <AppLink
-              text={"manage product"}
-              icon={<i className="ri-p2p-line"></i>}
-              subMenu={[
-                { name: "gift cards", extra: false },
-                { name: "crypto", extra: false },
-                { name: "E-funds", extra: false }
-              ]}
-            />
-            <AppLink
-              text={"users"}
-              icon={<i className="ri-team-line"></i>}
-            />
-            <AppLink
-              text={"staffs"}
-              icon={<TbUserCircle />}
-            />
-
             <AppLink
               text={"notifications"}
               icon={<i className="ri-notification-3-line"></i>}

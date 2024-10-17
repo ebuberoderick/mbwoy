@@ -6,14 +6,14 @@ import dynamic from 'next/dynamic';
 
 export function SignInAuth(data, dispatch) {
   dispatch(addData(data?.data));
-  Cookies.set('vilox_jwt', data?.data?.bearer_token)
-  // sessionStorage !== "undefined" && (sessionStorage['VILOX_JWT'] = data?.data?.bearer_token)
+  Cookies.set('Mbwoy_JWT', data?.data?.bearer_token)
+  // sessionStorage !== "undefined" && (sessionStorage['Mbwoy_JWT'] = data?.data?.bearer_token)
 }
 
 
 export function SignOut(dispatch) {
   dispatch(addData({}))
-  Cookies.remove('vilox_jwt')
+  Cookies.remove('Mbwoy_JWT')
 }
 
 export function Session(user) {
@@ -21,7 +21,7 @@ export function Session(user) {
     status: '',
     user
   }
-  if (Object.keys(user.value).length !== 0 && Cookies.get('vilox_jwt')) {
+  if (Object.keys(user.value).length !== 0 && Cookies.get('Mbwoy_JWT')) {
     session.status = verifyJWT(user.value.bearer_token)
   } else {
     session.status = 'unauthenticated'

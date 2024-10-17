@@ -54,7 +54,7 @@ function AuthLayout({ title,children, onSubmit, errMsg }) {
 
 
   if (isAuthenticated.status === "authenticated") {
-    router.push("/admin/dashboard");
+    router.push("/");
   } else {
     return (
       <div className="h-screen bg-black grid md:grid-cols-2 lg:grid-cols-3">

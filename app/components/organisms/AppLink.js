@@ -18,11 +18,7 @@ function AppLink({ text, icon, subMenu }) {
 
   const checkOpen = () => {
     const page = url.split("/");
-    setActive(page[2]);
-    if (page.length > 1 && page[2].toLowerCase() === text.toLowerCase().replaceAll(" ", "_").replaceAll("&", "x")) {
-      setActiveSub(page[3]);
-      openSubMenu();
-    }
+    // setActive(page[]);
   };
 
   useEffect(() => {
@@ -52,14 +48,14 @@ function AppLink({ text, icon, subMenu }) {
         </div>
       ) : (
         <Link
-          href={`/admin/${text === "dashboard"
-              ? "dashboard"
+          href={`/${text === "home"
+              ? ""
               : text.toLowerCase().replaceAll(" ", "_").replaceAll("&", "x")
             }`}
         >
           <div
-            className={`flex items-center gap-3 py-2 rounded-r-full text-gray-500 cursor-pointer px-3 ${active === text || (active === "admin" && text === "dashboard")
-                ? "text-white bg-black rounded-r-full"
+            className={`flex items-center gap-3 py-2 rounded-r-full text-gray-500 cursor-pointer px-3 ${active === text || (text === "home")
+                ? "bg-white rounded-full"
                 : "hover:bg-black hover:bg-opacity-70 hover:text-white"
               }`}
           >
@@ -89,7 +85,7 @@ function AppLink({ text, icon, subMenu }) {
                   <div className="pl-6 space-y-2 hidden" id={subText.name}>
                     {subText.option.map((e, i) => (
                       <div key={e + i}>
-                        <Link href={`/admin/${text.toLowerCase()}/${subText.name.toLowerCase()}/${e}`}>
+                        <Link href={`/${text.toLowerCase()}/${subText.name.toLowerCase()}/${e}`}>
                           <div className="hover:text-bg-black py-1">
                             {e}
                           </div>
@@ -100,7 +96,7 @@ function AppLink({ text, icon, subMenu }) {
                 </div>
               ) : (
                 <Link
-                  href={`/admin/${text.toLowerCase()
+                  href={`/${text.toLowerCase()
                     .replaceAll(" ", "_")
                     .replaceAll("&", "x")}/${subText.name.toLowerCase()
                       .replaceAll(" ", "_")

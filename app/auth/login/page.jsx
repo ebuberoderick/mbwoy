@@ -7,26 +7,29 @@ import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 import GoogleBtn from '@/app/components/organisms/GoogleBtn'
+import { Applogin } from '@/app/services/authService'
+import { SignInAuth } from '@/app/hooks/Auth'
 
 function Page() {
     const dispatch = useDispatch()
     const [proccessing, setProccessing] = useState(false)
     const [errMsg, setErrMsg] = useState(false)
     const router = useRouter()
-    const user = useSelector(state => state.User)
 
     const login = async (e) => {
-        // setProccessing(true)
-        // const { status, data } = await Applogin(e).catch(err => console.log(err))
-        // setProccessing(false)
-        // if (status) {
-        //     setErrMsg('')
-        //     SignInAuth(data, dispatch)
-        //     router.push("/admin/dashboard")
-        //     window !== "undefined" && window.location.reload()
-        // } else {
-        //     setErrMsg(data.message)
-        // }
+        setProccessing(true)
+        const { status, data } = await Applogin(e).catch(err => console.log(err))
+        setProccessing(false)
+        console.log(data);
+        
+        if (status) {
+            setErrMsg('')
+            SignInAuth(data, dispatch)
+            router.push("/")
+            window !== "undefined" && window.location.reload()
+        } else {
+            setErrMsg(data.message)
+        }
     }
 
 
