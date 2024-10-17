@@ -6,6 +6,7 @@ import { TbUserCircle } from "react-icons/tb";
 import { IoEllipsisVerticalOutline } from "react-icons/io5";
 import { CiPower } from "react-icons/ci";
 import Modal from "../organisms/Modal";
+import { LuHome } from "react-icons/lu";
 import { SignOut } from "@/app/hooks/Auth";
 import { useDispatch } from "react-redux";
 
@@ -25,16 +26,17 @@ function SideNav({ user }) {
           </div>
         </div>
       </Modal>
-      <div className="fixed bg-black select-none overflow-y-auto flex flex-col h-screen shadow-md w-64 gap-y-6 py-8 px-1">
+      <div className="fixed bg-white select-none overflow-y-auto flex flex-col h-screen shadow-md w-64 gap-y-6 py-8 px-1">
         <div className="text-2xl px-1">
           <Image src={logo} className="w-28" alt="Michael Michael" />
         </div>
         <div className="flex-grow gap-y-4 flex flex-col gap-2">
-          <div className="px-3">
+          <div>
             <AppLink
               text={"home"}
-              icon={<i className="ri-layout-grid-fill"></i>}
+              icon={<LuHome />}
             />
+
             <AppLink
               text={"notifications"}
               icon={<i className="ri-notification-3-line"></i>}
