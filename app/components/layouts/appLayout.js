@@ -28,7 +28,7 @@ function AppLayout({ children, title }) {
 
 
   if (isAuthenticated.status === "unauthenticated") {
-    router.push("/auth");
+    router.push("/auth/login");
   } else {
     return (
       <>

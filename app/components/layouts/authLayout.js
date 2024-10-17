@@ -7,7 +7,7 @@ import { Session } from "@/app/hooks/Auth";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-function AuthLayout({ children, onSubmit, errMsg }) {
+function AuthLayout({ title,children, onSubmit, errMsg }) {
   const user = useSelector((state) => state.User);
   const isAuthenticated = Session(user);
   const router = useRouter();
@@ -64,7 +64,7 @@ function AuthLayout({ children, onSubmit, errMsg }) {
           </div>
           <div className="flex-grow flex flex-col space-y-16 w-full justify-center">
             <div className="space-y-4">
-              <div className="text-3xl">Welcome Back</div>
+              <div className="text-3xl">{title}</div>
               <div className="text-sm text-gray-400">
                 Log in to access the control center of your platform. Manage, monitor, and make data-driven decisions with ease.
               </div>
@@ -81,18 +81,10 @@ function AuthLayout({ children, onSubmit, errMsg }) {
               </form>
             </div>
           </div>
-          <div className="text-center text-xs select-none pointer-events-none">Powered by Mbwoy</div>
+          <div className="text-center mt-12 text-xs select-none pointer-events-none">Powered by Mbwoy</div>
         </div>
         <div className="lg:col-span-2 hidden md:flex flex-col">
-          <div className="flex-grow space-y-2 px-3 py-12">
-            <div className="text-white text-5xl font-bold text-center">Swift Transactions</div>
-            <div className="text-gray-300 max-w-2xl text-center mx-auto">
-              We&apos;ve got the tools, you&apos;ve got the power. Let&apos;s manage greatness together!
-            </div>
-          </div>
-          <div>
-            <Image src={authImg} draggable={false} className="w-2/3 mx-auto" />
-          </div>
+          
         </div>
       </div>
     );
