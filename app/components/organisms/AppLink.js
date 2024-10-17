@@ -18,7 +18,7 @@ function AppLink({ text, icon, subMenu }) {
 
   const checkOpen = () => {
     const page = url.split("/");
-    // setActive(page[]);
+    setActive(page[1]);
   };
 
   useEffect(() => {
@@ -30,8 +30,8 @@ function AppLink({ text, icon, subMenu }) {
       {subMenu && subMenu.length > 0 ? (
         <div
           onClick={() => openSubMenu()}
-          className={`flex items-center gap-3 py-1 rounded-r-full text-gray-500 cursor-pointer px-3 ${active.replaceAll(" ", "_").toLowerCase() === text.replaceAll(" ", "_").toLowerCase()
-              ? "text-white bg-black rounded-r-full"
+          className={`flex items-center gap-3 py-1 rounded-full text-gray-500 cursor-pointer px-3 ${active.replaceAll(" ", "_").toLowerCase() === text.replaceAll(" ", "_").toLowerCase()
+              ? "text-white bg-black rounded-full"
               : "hover:bg-black hover:bg-opacity-70 hover:text-white"
             }`}
         >
@@ -54,8 +54,8 @@ function AppLink({ text, icon, subMenu }) {
             }`}
         >
           <div
-            className={`flex items-center gap-3 py-2 rounded-r-full text-gray-500 cursor-pointer px-3 ${active === text || (text === "home")
-                ? "bg-white rounded-full"
+            className={`flex items-center gap-3 py-2 rounded-full text-gray-500 cursor-pointer px-3 ${active === text || (active === "" && text === "home")
+                ? "bg-black bg-opacity-70 text-white rounded-full"
                 : "hover:bg-black hover:bg-opacity-70 hover:text-white"
               }`}
           >
