@@ -35,7 +35,7 @@ function Page() {
 
     return (
         <AuthLayout errMsg={errMsg} onSubmit={(e) => login(e)} title={"Welcome Back"} subText={"Please fill in your details"}>
-            <AppInput name="email" required label="Username" />
+            <AppInput name="email" required label="email" />
             <AppInput name="password" required label="Enter your password" type="password" />
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                 <div className="flex-grow">

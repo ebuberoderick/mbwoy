@@ -40,7 +40,7 @@ function AppLayout({ children, title }) {
             <div className="text-xl">Good {greetings} {user.value.user.name.split(" ")[0]}!</div>
             <div className="text-xs text-gray-400">{title}</div>
           </div>)}
-          <div onClick={() => setShowNav(!showNav)} className="h-8 w-8 absolute top-0 right-5 bg-black md:hidden text-white rounded-md text-xl flex items-center justify-center cursor-pointer"><i className="ri-menu-line"></i></div>
+          <div onClick={() => setShowNav(!showNav)} className="h-8 w-8 absolute top-4 right-5 bg-black md:hidden text-white rounded-md text-xl flex items-center justify-center cursor-pointer"><i className="ri-menu-line"></i></div>
           {children}
         </div>
       </>
