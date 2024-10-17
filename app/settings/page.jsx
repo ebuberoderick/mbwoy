@@ -6,6 +6,7 @@ import ChangePassword from '@/app/components/molecules/settings/ChangePassword';
 import Notifications from '@/app/components/molecules/settings/Notifications';
 import DeleteAccount from '@/app/components/molecules/settings/DeleteAccount';
 import Appearance from '@/app/components/molecules/settings/Appearance';
+import WithdrawalAccounts from '../components/molecules/settings/WithdrawalAccounts';
 
 function Page() {
   const [activeTab, setActiveTab] = useState("personal-info");
@@ -32,6 +33,10 @@ function Page() {
       id: "change-pin",
     },
     {
+      title: "Appearance",
+      id: "appearance",
+    },
+    {
       title: "About Mbwoy",
       id: "about-mbwoy",
     },
@@ -42,18 +47,23 @@ function Page() {
     {
       title: "FAQs",
       id: "faqs",
-    },,
+    },
     {
       title: "Support",
       id: "support",
     },
+    {
+      title: "Delete Account",
+      id: "delete-account",
+    },
+    
   ];
 
 
   return (
     <AppLayout>
       <div className="text-xl">Settings</div>
-      <div className="container md:grid grid-cols-3 gap-3">
+      <div className="container relative lg:grid grid-cols-3 gap-3">
         <div className="">
           <div className="md:w-[80%] md:border dark:border-gray-700 border-[#F2F4F7] p-3 rounded-lg">
             {settingsTabs.map((tab, i) => (
@@ -74,14 +84,12 @@ function Page() {
             ))}
           </div>
         </div>
-        <div className={`col-span-2 bg-gray-50 dark:bg-[#202B37] fixed md:relative h-screen md:h-auto w-screen md:w-full top-0 ${showNav ? "-right-full md:right-0" : "right-0"}`}>
-          <div className="h-full md:h-auto col-span-2 pb-5 overflow-y-scroll md:overflow-y-auto">
+        <div className={`col-span-2 min-h-screen bg-gray-50 backdrop-blur-2xl bg-opacity-0 dark:bg-[#202B37] fixed lg:relative h-screen md:h-auto w-screen md:w-full top-0 ${showNav ? "-right-full lg:right-0" : "right-0"}`}>
+          <div className="h-full md:h-auto col-span-2 pb-5 overflow-y-scroll ml-0 md:ml-72 lg:ml-0 md:overflow-y-auto">
             {activeTab === "personal-info" && <PersonalInfo reset={showNav} goBack={() => setShowNav(true)} />}
 
             {activeTab === "change-password" && <ChangePassword goBack={() => setShowNav(true)} />}
-
-            {activeTab === "notifications" && <Notifications goBack={() => setShowNav(true)} />}
-
+            {activeTab === "withdrawal_accounts" && <WithdrawalAccounts goBack={() => setShowNav(true)} />}
             {activeTab === "appearance" && <Appearance goBack={() => setShowNav(true)} />}
 
             {activeTab === "delete-account" && <DeleteAccount goBack={() => setShowNav(true)} />}

@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import AppLink from "../organisms/AppLink";
 import logo from "@assets/images/viloxLogo.png"
 import { TbUserCircle } from "react-icons/tb";
-import { IoEllipsisVerticalOutline } from "react-icons/io5";
+import { IoEllipsisVerticalOutline, IoWalletOutline } from "react-icons/io5";
 import { CiPower } from "react-icons/ci";
 import Modal from "../organisms/Modal";
 import { LuHome } from "react-icons/lu";
 import { SignOut } from "@/app/hooks/Auth";
 import { useDispatch } from "react-redux";
+import { FaRegFileAlt } from "react-icons/fa";
 
 function SideNav({ user }) {
   const [openModal, setModal] = useState(false)
@@ -35,6 +36,16 @@ function SideNav({ user }) {
             <AppLink
               text={"home"}
               icon={<LuHome />}
+            />
+
+            <AppLink
+              text={"wallet"}
+              icon={<IoWalletOutline />}
+            />
+
+            <AppLink
+              text={"transactions"}
+              icon={<FaRegFileAlt />}
             />
 
             <AppLink
