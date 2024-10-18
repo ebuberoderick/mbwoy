@@ -11,6 +11,10 @@ import Modal from '../components/organisms/Modal';
 import AppInput from '../components/organisms/AppInput';
 import Referrals from '../components/molecules/settings/Referrals';
 import ChangePin from '../components/molecules/settings/ChangePin';
+import AboutMbwoy from '../components/molecules/settings/AboutMbwoy';
+import PXT from '../components/molecules/settings/PXT';
+import FAQs from '../components/molecules/settings/FAQs';
+import Support from '../components/molecules/settings/Support';
 
 function Page() {
   const [activeTab, setActiveTab] = useState("personal-info");
@@ -107,6 +111,10 @@ function Page() {
             {activeTab === "withdrawal_accounts" && <WithdrawalAccounts openModal={()=> updateAddAccountModal(true)} goBack={() => setShowNav(true)} />}
             {activeTab === "referrals" && <Referrals goBack={() => setShowNav(true)} />}
             {activeTab === "change-pin" && <ChangePin goBack={() => setShowNav(true)} />}
+            {activeTab === "about-mbwoy" && <AboutMbwoy goBack={() => setShowNav(true)} />}
+            {activeTab === "pxt" && <PXT goBack={() => setShowNav(true)} />}
+            {activeTab === "faqs" && <FAQs goBack={() => setShowNav(true)} />}
+            {activeTab === "support" && <Support goBack={() => setShowNav(true)} />}
             {activeTab === "appearance" && <Appearance goBack={() => setShowNav(true)} />}
             {activeTab === "delete-account" && <DeleteAccount goBack={() => setShowNav(true)} />}
           </div>
