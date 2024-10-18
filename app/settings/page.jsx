@@ -7,10 +7,16 @@ import Notifications from '@/app/components/molecules/settings/Notifications';
 import DeleteAccount from '@/app/components/molecules/settings/DeleteAccount';
 import Appearance from '@/app/components/molecules/settings/Appearance';
 import WithdrawalAccounts from '../components/molecules/settings/WithdrawalAccounts';
+import Modal from '../components/organisms/Modal';
+import AppInput from '../components/organisms/AppInput';
+import Referrals from '../components/molecules/settings/Referrals';
+import ChangePin from '../components/molecules/settings/ChangePin';
 
 function Page() {
   const [activeTab, setActiveTab] = useState("personal-info");
   const [showNav, setShowNav] = useState(true)
+  const [addAccountModal, updateAddAccountModal] = useState(false)
+  
   const settingsTabs = [
     {
       title: "Personal Info",
@@ -56,12 +62,22 @@ function Page() {
       title: "Delete Account",
       id: "delete-account",
     },
-    
+
   ];
 
 
   return (
     <AppLayout>
+      <Modal closeModal={() => updateAddAccountModal(false)} isOpen={addAccountModal}>
+        <div className="space-y-4">
+          <AppInput name="email" required label="Account Number" />
+          <AppInput name="email" required label="Bank Name" />
+          {/* <div className="text-right">dfg</div> */}
+          <div className="flex gap-3">
+            <button className="flex-grow disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Save</button>
+          </div>
+        </div>
+      </Modal>
       <div className="text-xl">Settings</div>
       <div className="container relative lg:grid grid-cols-3 gap-3">
         <div className="">
@@ -87,11 +103,11 @@ function Page() {
         <div className={`col-span-2 min-h-screen bg-gray-50 backdrop-blur-2xl bg-opacity-0 dark:bg-[#202B37] fixed lg:relative h-screen md:h-auto w-screen md:w-full top-0 ${showNav ? "-right-full lg:right-0" : "right-0"}`}>
           <div className="h-full md:h-auto col-span-2 pb-5 overflow-y-scroll ml-0 md:ml-72 lg:ml-0 md:overflow-y-auto">
             {activeTab === "personal-info" && <PersonalInfo reset={showNav} goBack={() => setShowNav(true)} />}
-
             {activeTab === "change-password" && <ChangePassword goBack={() => setShowNav(true)} />}
-            {activeTab === "withdrawal_accounts" && <WithdrawalAccounts goBack={() => setShowNav(true)} />}
+            {activeTab === "withdrawal_accounts" && <WithdrawalAccounts openModal={()=> updateAddAccountModal(true)} goBack={() => setShowNav(true)} />}
+            {activeTab === "referrals" && <Referrals goBack={() => setShowNav(true)} />}
+            {activeTab === "change-pin" && <ChangePin goBack={() => setShowNav(true)} />}
             {activeTab === "appearance" && <Appearance goBack={() => setShowNav(true)} />}
-
             {activeTab === "delete-account" && <DeleteAccount goBack={() => setShowNav(true)} />}
           </div>
         </div>

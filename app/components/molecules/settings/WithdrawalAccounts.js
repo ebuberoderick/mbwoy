@@ -1,39 +1,8 @@
-import { useState } from "react";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-// import { BiLockOpen } from "react-icons/bi";
 import { FaAngleLeft } from "react-icons/fa6";
-// import { changePassword } from "../../apis/services/authService";
-// import { addData } from "../../reduxStore/reducers/UsersReducer";
-// import Cookies from "js-cookie";
-// import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import UseFormHandler from "@/app/hooks/useFormHandler";
-import AppInput from "../../organisms/AppInput";
-import { changePassword } from "@/app/services/authService";
-import serialize from "@/app/hooks/Serialize";
-
-const WithdrawalAccounts = ({ goBack }) => {
-    const [disable, setDisabled] = useState(true)
-    const [formError, setFormError] = useState("")
-    const dispatch = useDispatch()
-
-    const changeNow = async (e) => {
-        e.preventDefault();
-        const val = serialize(e.target)
-        if (val.new_password === val.comfirm_password) {
-            const { status, data } = await changePassword().catch(err => console.log(err))
-            if (status) {
-                // console.log(data);
-            } else {
-                setFormError(data.message)
-            }
-        } else {
-            setFormError("New Password do not match comfirm Password")
-        }
-    }
+const WithdrawalAccounts = ({ goBack,openModal }) => {
 
     return (
-        <form onSubmit={(e) => changeNow(e)} className="flex flex-col h-full">
+        <div className="flex flex-col h-full">
             <div className="text-center dark:text-white-1 md:hidden py-4 relative">
                 <div onClick={() => goBack()} className="absolute p-2 top-3 cursor-pointer"><FaAngleLeft /></div>
                 <div className="">Withdrawal Accounts</div>
@@ -45,7 +14,6 @@ const WithdrawalAccounts = ({ goBack }) => {
                 </div>
             </div>
 
-            <div className="px-4 md:px-0 text-danger text-sm">{formError}</div>
             <div className="px-4 space-y-6 pt-5 flex-grow md:px-0 md:w-[65%]">
                 <div className='space-y-2'>
                     <div className='flex items-center gap-3 border border-gray-300 rounded-lg p-3'>
@@ -61,12 +29,12 @@ const WithdrawalAccounts = ({ goBack }) => {
                     </div>
                 </div>
                 <div className="flex px-4 md:px-0 flex-col md:flex-row items-center gap-4 mt-6">
-                    <div className="bg-black text-center cursor-pointer w-full md:w-auto py-3 px-5 font-semibold text-[#fff] rounded-lg">
+                    <div onClick={openModal} className="bg-black text-center cursor-pointer w-full md:w-auto py-3 px-5 font-semibold text-[#fff] rounded-lg">
                         Add New Account
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     );
 };
 
