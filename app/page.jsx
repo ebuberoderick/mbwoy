@@ -27,7 +27,6 @@ export default function Home() {
               {
                 showBal ? <div className="text-white font-extrabold text-center text-3xl pb-6 pt-3">&#8358;1,000,000.00</div> : <div className="text-white font-extrabold text-center text-3xl pb-6 pt-3">*******</div>
               }
-
               <div className="flex-grow disabled:bg-opacity-35 shadow-md bg-white rounded-lg text-center font-bold cursor-pointer py-3">Withdraw</div>
             </div>
             <div className="px-4 py-8 bg-opacity-5 rounded-xl">
@@ -37,15 +36,15 @@ export default function Home() {
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            <Link href="/" className="px-4 py-8 bg-opacity-5 rounded-xl bg-blue">
+            <Link href="/sell/giftcard" className="px-4 py-8 bg-opacity-5 rounded-xl bg-blue">
               <div className="font-bold text-lg text-blue">Sell Giftcard</div>
               <div className="text-sm w-48 text-gray-400">Sell any kind of giftcard with ease</div>
             </Link>
-            <Link href="/" className="px-4 py-8 bg-opacity-5 rounded-xl bg-success">
+            <Link href="/sell/crypto" className="px-4 py-8 bg-opacity-5 rounded-xl bg-success">
               <div className="font-bold text-lg text-success">Sell Crypto Currency</div>
               <div className="text-sm w-48 text-gray-400">Sell crypto at best market rate with Mbwoy</div>
             </Link>
-            <Link href="/" className="px-4 py-8 bg-opacity-5 rounded-xl bg-danger">
+            <Link href="/sell/efund" className="px-4 py-8 bg-opacity-5 rounded-xl bg-danger">
               <div className="font-bold text-lg text-danger">Sell E-Fund</div>
               <div className="text-sm w-48 text-gray-400">Sell E-Fund at best market</div>
             </Link>

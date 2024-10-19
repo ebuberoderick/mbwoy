@@ -6,3 +6,6 @@ export const sendOTP = (formData) => apiWithOutAuth.post("/recover/send_otp", fo
 export const resendOTP = (formData) => apiWithOutAuth.post("/recover/resend_otp", formData).then(getApiResponse).catch(getErrorResponse);
 export const verifyOTP = (formData) => apiWithOutAuth.post("/recover/verify_otp", formData).then(getApiResponse).catch(getErrorResponse);
 export const createNewPassword = (formData) => apiWithOutAuth.post("/recover/create_new_password", formData).then(getApiResponse).catch(getErrorResponse);
+
+export const fetchGiftcards = () => apiWithAuth.post("app/giftcard/fetch_giftcards").then(getApiResponse).catch(getErrorResponse);
+

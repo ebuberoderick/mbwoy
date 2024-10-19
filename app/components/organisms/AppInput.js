@@ -1,10 +1,7 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-function AppInput({ label, type, required, name, max, options, value, defaultValue, display, onChange }) {
-  const [selected, setSelected] = useState("");
-  const [showOption, setShowOption] = useState(false);
-  const figu = Math.random(100000000);
+function AppInput({ label,maxLength, checked, type, required, name, max, options, value, defaultValue, display, onChange }) {
   const [inputType, setInputType] = useState(type);
 
   const makeid = (length) => {
@@ -18,11 +15,6 @@ function AppInput({ label, type, required, name, max, options, value, defaultVal
     }
     return result;
   }
-
-  useEffect(() => {
-    type === "select" && setSelected(defaultValue)
-  }, [])
-  
 
   const Fid = makeid(7)
 
@@ -40,12 +32,14 @@ function AppInput({ label, type, required, name, max, options, value, defaultVal
               className="peer group hidden appearance-none"
               name={name}
               required={required}
+              maxLength={maxLength}
               value={value}
+              checked={checked && checked}
               defaultValue={defaultValue}
               onChange={(e) => onChange && onChange(e)}
             />
             <div className="relative top-[1px] bg-white w-7 h-7 rounded-md dark:bg-gray-700 dark:border-gray-500 border peer-hover:hidden peer-checked:hidden " />
-            <div className="relative top-[1px] bg-white dark:bg-gray-700 dark:border-gray-500 w-7 h-7 text-xl rounded-md hidden peer-checked:flex border peer-hover:flex items-center justify-center text-gray-300">
+            <div className="relative top-[1px] bg-white dark:bg-gray-700 dark:border-gray-500 w-7 h-7 text-xl rounded-md peer-checked:bg-hrms_green hidden peer-checked:flex peer-hover:border peer-hover:flex items-center justify-center text-gray-300 peer-checked:text-white ">
               <i className="ri-check-line"></i>
             </div>
             <label
@@ -62,72 +56,49 @@ function AppInput({ label, type, required, name, max, options, value, defaultVal
           </div>
         </div>
       ) : type === "select" ? (
-        <div
-          onMouseLeave={() => {
-            setShowOption(false),
-              document.getElementById(label === "" ? "-" + figu : label).blur();
-          }}
-          onClick={() => setShowOption(!showOption)}
-          className="text-[16px] relative rounded-lg"
+        <select
+          name={name}
+          onChange={(e) => onChange && onChange(e)}
+          required={required}
+          className="w-full border bg-white focus:border-hrms_green border-hrms_green placeholder-shown:border-gray-300 p-3 peer outline-none rounded-lg placeholder:text-transparent"
         >
-          <input
-            value={selected}
-            readOnly
-            required={required}
-            name={name}
-            id={label === "" ? "-" + figu : label}
-            className="w-full border focus:border-black border-black placeholder-shown:border-gray-300 p-3 peer outline-none rounded-lg placeholder:text-transparent"
-            placeholder={label}
-            onChange={(e) => onChange && onChange(e)}
-          />
-          <span className="text-xl absolute top-3 right-3 text-black peer-focus:text-black peer-placeholder-shown:text-gray-300">
-            <i className="ri-arrow-down-s-line"></i>
-          </span>
-          <label className="absolute text-black peer-focus:text-black pointer-events-none peer-placeholder-shown:text-gray-300 z-20 left-4 peer-placeholder-shown:left-2 peer-focus:left-4 px-1 peer-focus:text-[14px] text-[14px] -top-[9px] transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-[16px] peer-focus:-top-[9px] bg-white">
+          <option value="" disabled selected hidden>
             {label}
-          </label>
-          <div
-            className={`absolute top-12 pt-3 z-50 w-full ${!showOption && "hidden"
-              } `}
-          >
-            <div className={`border border-black bg-white p-1 rounded-lg`}>
-              {options?.map((e, i) => (
-                <div
-                  key={i}
-                  onClick={() => { setSelected(e); onChange && onChange(e) }}
-                  className="hover:bg-gray-100 capitalize cursor-pointer rounded-lg p-2"
-                >
-                  {e}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+          </option>
+          {options?.map((option) => (
+            <option key={option.value} selected={ typeof(defaultValue) === "string" ? defaultValue === option.value : defaultValue === option.label} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       ) : type === "textarea" ? (
         <textarea
           name={name}
           required={required}
-          onChange={(e) => onChange && onChange(e)}
           value={value}
+          onChange={(e) => onChange && onChange(e)}
           defaultValue={defaultValue}
-          className="w-full border resize-none focus:border-black border-black placeholder-shown:border-gray-300 p-3 peer outline-none rounded-lg placeholder:text-transparent"
+          maxLength={maxLength}
+          className="w-full border resize-none focus:border-hrms_green border-hrms_green placeholder-shown:border-gray-300 p-3 peer outline-none rounded-lg placeholder:text-transparent"
           placeholder={label}></textarea>
       ) : (
         <input
           name={name}
           required={required}
           type={inputType}
-          onChange={(e) => onChange && onChange(e)}
           value={value}
+          onChange={(e) => onChange && onChange(e)}
           defaultValue={defaultValue}
-          className="w-full border focus:border-black border-black placeholder-shown:border-gray-300 p-3 peer outline-none rounded-lg placeholder:text-transparent"
+          className="w-full border focus:border-hrms_green border-hrms_green placeholder-shown:border-gray-300 p-3 peer outline-none rounded-lg placeholder:text-transparent"
           placeholder={label}
+          maxLength={maxLength}
+          {...(maxLength ? { maxLength } : {})}
           {...(max ? { max } : {})}
         />
       )}
       {
-        type !== "checkbox" && (
-          <label className="absolute text-black peer-focus:text-black pointer-events-none peer-placeholder-shown:text-gray-300 z-20 left-4 peer-placeholder-shown:left-2 peer-focus:left-4 px-1 peer-focus:text-[14px] text-[14px] -top-[9px] transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-[16px] peer-focus:-top-[9px] bg-white">
+        type !== "checkbox" && type !== "radio" && (
+          <label className="absolute text-hrms_green peer-focus:text-hrms_green pointer-events-none peer-placeholder-shown:text-gray-300 z-20 left-4 peer-placeholder-shown:left-2 peer-focus:left-4 px-1 peer-focus:text-[14px] text-[14px] -top-[9px] transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-[16px] peer-focus:-top-[9px] bg-white">
             {label}
           </label>
         )
@@ -135,7 +106,7 @@ function AppInput({ label, type, required, name, max, options, value, defaultVal
 
       {type === "password" && (
         <div
-          className="absolute cursor-pointer text-black peer-focus:text-black peer-placeholder-shown:text-gray-300 right-3 top-3"
+          className="absolute cursor-pointer text-hrms_green peer-focus:text-hrms_green peer-placeholder-shown:text-gray-300 right-3 top-3"
           onClick={() =>
             setInputType(inputType === "password" ? "text" : "password")
           }
