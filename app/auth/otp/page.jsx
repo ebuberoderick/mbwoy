@@ -10,6 +10,7 @@ import OtpInput from 'react-otp-input';
 import { resendOTP, verifyOTP } from '@/app/services/authService'
 import { useEffect } from 'react'
 import { SignInAuth } from '@/app/hooks/Auth'
+import { addPreuser } from '@/app/Store/reducers/PerUser'
 
 function Page() {
     const dispatch = useDispatch()
@@ -43,6 +44,7 @@ function Page() {
             if (status) {
                 setErrMsg('')
                 SignInAuth(user.value, dispatch)
+                dispatch(addPreuser({}))
                 router.push('setpin')
                 window !== "undefined" && window.location.reload('setpin')
             } else {

@@ -1,46 +1,41 @@
 'use client'
-import AuthLayout from '@component/layouts/authLayout'
-import AppInput from '@component/organisms/AppInput'
-import Link from 'next/link'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useDispatch, useSelector } from 'react-redux'
-import Cookies from 'js-cookie'
+import { useDispatch } from 'react-redux'
 import OtpInput from 'react-otp-input';
 import AuthLayoutX from '@/app/components/layouts/authLayoutX'
+import { setTransactionPin } from '@/app/services/authService'
 
 function Page() {
-    const dispatch = useDispatch()
     const [proccessing, setProccessing] = useState(false)
     const [errMsg, setErrMsg] = useState(false)
     const router = useRouter()
-    const user = useSelector(state => state.User)
-    const [code, setCode] = useState("");
-    const [otp, setOtp] = useState('');
+    const [pin, setPin] = useState('');
 
 
-    const confirmOTP = async (e) => {
-        // setProccessing(true)
-        // const { status, data } = await Applogin(e).catch(err => console.log(err))
-        // setProccessing(false)
-        // if (status) {
-        //     setErrMsg('')
-        //     SignInAuth(data, dispatch)
-        //     router.push("/admin/dashboard")
-        //     window !== "undefined" && window.location.reload()
-        // } else {
-        //     setErrMsg(data.message)
-        // }
+    const confirmPin = async (e) => {
+        if (pin.length === 4) {
+            setProccessing(true)
+            e.pin = pin
+            const { status, data } = await setTransactionPin(e).catch(err => console.log(err))
+            setProccessing(false)
+            if (status) {
+                setErrMsg('')
+                router.push("referral")
+            } else {
+                setErrMsg(data.message)
+            }
+        }
     }
 
 
     return (
-        <AuthLayoutX errMsg={errMsg} onSubmit={(e) => confirmOTP(e)} title={"Set Transaction Pin"} subText={"Please fill in your details"}>
+        <AuthLayoutX errMsg={errMsg} onSubmit={(e) => confirmPin(e)} title={"Set Transaction Pin"} subText={"Please fill in your details"}>
             <div className="space-y-7">
                 <div className="justify-center flex *:gap-4">
                     <OtpInput
-                        value={otp}
-                        onChange={setOtp}
+                        value={pin}
+                        onChange={setPin}
                         numInputs={4}
                         isInputNum={true}
                         shouldAutoFocus={true}
