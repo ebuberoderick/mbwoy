@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 import OtpInput from 'react-otp-input';
 import { resendOTP, verifyOTP } from '@/app/services/authService'
+import { useEffect } from 'react'
+import { SignInAuth } from '@/app/hooks/Auth'
 
 function Page() {
     const dispatch = useDispatch()
@@ -16,14 +18,17 @@ function Page() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const [otp, setOtp] = useState('');
+    const [counter, setCounter] = useState(60);
+
 
     const resend = async () => {
+        setCounter(60)
         const e = {
-            user_id : searchParams.get('uid'),
-            email : searchParams.get('em')
+            user_id: searchParams.get('uid'),
+            email: searchParams.get('em')
         }
         const { status, data } = await resendOTP(e).catch(err => console.log(err))
-
+        
     }
 
     const confirmOTP = async (e) => {
@@ -35,12 +40,22 @@ function Page() {
             setProccessing(false)
             if (status) {
                 setErrMsg('')
+                SignInAuth(data, dispatch)
                 router.push('setpin')
+                window !== "undefined" && window.location.href('setpin')
             } else {
                 setErrMsg(data.message)
             }
         }
     }
+
+
+    useEffect(() => {
+        counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+    }, [counter]);
+
+
+
 
 
     return (
@@ -77,8 +92,8 @@ function Page() {
                     </div>
                 </div>
                 <div className="text-center space-y-3 select-none">
-                    <div className="text-sm">00:00</div>
-                    <div className="font-bold cursor-pointer" onClick={resend}>Resend OTP</div>
+                    <div className="text-sm">00:{counter < 10 && '0'}{counter}</div>
+                    {counter < 1 && <div className="font-bold cursor-pointer" onClick={resend}>Resend OTP</div>}
                 </div>
             </div>
         </AuthLayout>

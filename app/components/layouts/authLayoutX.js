@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-function AuthLayout({ title, children, onSubmit, errMsg }) {
+function authLayoutX({ title, children, onSubmit, errMsg }) {
   const user = useSelector((state) => state.User);
   const isAuthenticated = Session(user);
   const router = useRouter();
@@ -57,8 +57,8 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
   }, [counter]);
 
 
-  if (isAuthenticated.status === "authenticated") {
-    router.push("/");
+  if (isAuthenticated.status === "unauthenticated") {
+    router.push("/auth/login");
   } else {
     return (
       <div className="min-h-screen grid md:grid-cols-2">
@@ -137,4 +137,4 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
 
 }
 
-export default AuthLayout;
+export default authLayoutX;

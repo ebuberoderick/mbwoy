@@ -35,7 +35,7 @@ function Page() {
 
     return (
         <AuthLayout errMsg={errMsg} onSubmit={(e) => confirmOTP(e)} title={"Set Transaction Pin"} subText={"Please fill in your details"}>
-            <div className="space-y-4">
+            <div className="space-y-7">
                 <div className="justify-center flex *:gap-4">
                     <OtpInput
                         value={otp}
