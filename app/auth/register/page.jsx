@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 import GoogleBtn from '@/app/components/organisms/GoogleBtn'
 import { registerAPI } from '@/app/services/authService'
+import { addPreuser } from '@/app/Store/reducers/PerUser'
 
 function Page() {
     const dispatch = useDispatch()
@@ -29,6 +30,7 @@ function Page() {
             const { status, data } = await registerAPI(i).catch(err => console.log(err))
             if (status) {
                 setErrMsg('')
+                dispatch(addPreuser(data));
                 router.push(`otp?em=${e.email}&uid=${data.data.user.id}`)
             } else {
                 setErrMsg(data.message)

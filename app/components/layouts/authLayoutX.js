@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-function authLayoutX({ title, children, onSubmit, errMsg }) {
+function AuthLayoutX({ title, children, onSubmit, errMsg }) {
   const user = useSelector((state) => state.User);
   const isAuthenticated = Session(user);
   const router = useRouter();
@@ -137,4 +137,4 @@ function authLayoutX({ title, children, onSubmit, errMsg }) {
 
 }
 
-export default authLayoutX;
+export default AuthLayoutX;

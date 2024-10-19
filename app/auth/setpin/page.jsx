@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 import OtpInput from 'react-otp-input';
+import AuthLayoutX from '@/app/components/layouts/authLayoutX'
 
 function Page() {
     const dispatch = useDispatch()
@@ -34,7 +35,7 @@ function Page() {
 
 
     return (
-        <AuthLayout errMsg={errMsg} onSubmit={(e) => confirmOTP(e)} title={"Set Transaction Pin"} subText={"Please fill in your details"}>
+        <AuthLayoutX errMsg={errMsg} onSubmit={(e) => confirmOTP(e)} title={"Set Transaction Pin"} subText={"Please fill in your details"}>
             <div className="space-y-7">
                 <div className="justify-center flex *:gap-4">
                     <OtpInput
@@ -67,7 +68,7 @@ function Page() {
                     </div>
                 </div>
             </div>
-        </AuthLayout>
+        </AuthLayoutX>
     )
 }
 

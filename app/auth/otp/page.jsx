@@ -19,6 +19,8 @@ function Page() {
     const searchParams = useSearchParams()
     const [otp, setOtp] = useState('');
     const [counter, setCounter] = useState(60);
+    const user = useSelector(state => state.PerUser)
+
 
 
     const resend = async () => {
@@ -40,9 +42,9 @@ function Page() {
             setProccessing(false)
             if (status) {
                 setErrMsg('')
-                SignInAuth(data, dispatch)
+                SignInAuth(user.value, dispatch)
                 router.push('setpin')
-                window !== "undefined" && window.location.href('setpin')
+                window !== "undefined" && window.location.reload('setpin')
             } else {
                 setErrMsg(data.message)
             }
