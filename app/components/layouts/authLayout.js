@@ -58,30 +58,32 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
   } else {
     return (
       <div className="min-h-screen grid md:grid-cols-2">
-        <div className="bg-white min-h-screen p-4 flex flex-col">
-          <div>
-            <Image src={logo} className="w-20" alt="LOGO" />
-          </div>
-          <div className="flex-grow flex flex-col space-y-16 w-full justify-center">
-            <div className="space-y-4">
-              <div className="text-3xl">{title}</div>
-              <div className="text-sm text-gray-400">
-                Log in to access the control center of your platform. Manage, monitor, and make data-driven decisions with ease.
+        <div className='max-w-sm mx-auto'>
+          <div className="bg-white min-h-screen p-4 flex flex-col">
+            <div>
+              <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
+            </div>
+            <div className="flex-grow flex flex-col space-y-4 w-full justify-center">
+              <div className="space-y-1">
+                <div className="text-3xl">{title}</div>
+                <div className="text-sm text-gray-400">
+                  Log in to access the control center of your platform. Manage, monitor, and make data-driven decisions with ease.
+                </div>
+              </div>
+              <div>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault(), onSubmit(serialize(e.target));
+                  }} >
+                  <div className="space-y-4">
+                    <div className="text-danger text-sm">{errMsg}</div>
+                    <div className="space-y-5">{children}</div>
+                  </div>
+                </form>
               </div>
             </div>
-            <div>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault(), onSubmit(serialize(e.target));
-                }} >
-                <div className="space-y-4">
-                  <div className="text-danger text-sm">{errMsg}</div>
-                  <div className="space-y-5">{children}</div>
-                </div>
-              </form>
-            </div>
+            {/* <div className="text-center mt-12 text-xs select-none pointer-events-none">Powered by Mbwoy</div> */}
           </div>
-          <div className="text-center mt-12 text-xs select-none pointer-events-none">Powered by Mbwoy</div>
         </div>
         <div className='relative top-0'>
           <div className="h-screen w-full fixed text-4xl md:grid md:grid-cols-2 bottom-0 hidden p-6 pr-20">
