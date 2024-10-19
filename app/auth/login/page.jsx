@@ -50,12 +50,12 @@ function Page() {
                     </div>
                     <div className=""><Link href="forgotten-password" className="text-sm text-black sm:hidden">Forgot Password ?</Link></div>
                 </div>
-                <div className="flex items-center gap-3">
+                {/* <div className="flex items-center gap-3">
                     <hr className="flex-grow" />
                     <div className="">or</div>
                     <hr className="flex-grow" />
                 </div>
-                <GoogleBtn />
+                <GoogleBtn /> */}
             </div>
 
             <div className="text-center">Don&apos;t have an account? <Link href="register" className="font-extrabold">sign Up</Link> </div>

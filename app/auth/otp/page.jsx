@@ -3,34 +3,43 @@ import AuthLayout from '@component/layouts/authLayout'
 import AppInput from '@component/organisms/AppInput'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 import OtpInput from 'react-otp-input';
+import { resendOTP, verifyOTP } from '@/app/services/authService'
 
 function Page() {
     const dispatch = useDispatch()
     const [proccessing, setProccessing] = useState(false)
     const [errMsg, setErrMsg] = useState(false)
     const router = useRouter()
-    const user = useSelector(state => state.User)
-    const [code, setCode] = useState("");
+    const searchParams = useSearchParams()
     const [otp, setOtp] = useState('');
 
+    const resend = async () => {
+        const e = {
+            user_id : searchParams.get('uid'),
+            email : searchParams.get('em')
+        }
+        const { status, data } = await resendOTP(e).catch(err => console.log(err))
+
+    }
 
     const confirmOTP = async (e) => {
-        otp.length === 5 && router.push('setpin')
-        // setProccessing(true)
-        // const { status, data } = await Applogin(e).catch(err => console.log(err))
-        // setProccessing(false)
-        // if (status) {
-        //     setErrMsg('')
-        //     SignInAuth(data, dispatch)
-        //     router.push("/admin/dashboard")
-        //     window !== "undefined" && window.location.reload()
-        // } else {
-        //     setErrMsg(data.message)
-        // }
+        e.otp = otp
+        e.email = searchParams.get('em')
+        if (otp.length === 5) {
+            setProccessing(true)
+            const { status, data } = await verifyOTP(e).catch(err => console.log(err))
+            setProccessing(false)
+            if (status) {
+                setErrMsg('')
+                router.push('setpin')
+            } else {
+                setErrMsg(data.message)
+            }
+        }
     }
 
 
@@ -59,7 +68,7 @@ function Page() {
                             background: "#f3f4fa"
                         }}
                         focusStyle={'outline-none ring-0 border border-gray-400'}
-                        renderInput={(props) => <input {...props} />}
+                        renderInput={(props) => <input name='otp' {...props} />}
                     />
                 </div>
                 <div className="space-y-2">
@@ -69,7 +78,7 @@ function Page() {
                 </div>
                 <div className="text-center space-y-3 select-none">
                     <div className="text-sm">00:00</div>
-                    <div className="font-bold cursor-pointer">Resend OTP</div>
+                    <div className="font-bold cursor-pointer" onClick={resend}>Resend OTP</div>
                 </div>
             </div>
         </AuthLayout>

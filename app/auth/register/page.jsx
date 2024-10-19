@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 import GoogleBtn from '@/app/components/organisms/GoogleBtn'
+import { registerAPI } from '@/app/services/authService'
 
 function Page() {
     const dispatch = useDispatch()
@@ -16,40 +17,49 @@ function Page() {
     const user = useSelector(state => state.User)
 
     const register = async (e) => {
-        router.push('otp')
-        // setProccessing(true)
-        // const { status, data } = await Applogin(e).catch(err => console.log(err))
-        // setProccessing(false)
-        // if (status) {
-        //     setErrMsg('')
-        //     SignInAuth(data, dispatch)
-        //     router.push("/admin/dashboard")
-        //     window !== "undefined" && window.location.reload()
-        // } else {
-        //     setErrMsg(data.message)
-        // }
+        setProccessing(true)
+        setErrMsg('')
+        const password = e.password.toString()
+        if (e.cpassword === e.password) {
+            const i = {
+                email: e.email,
+                name: e.firstname + ' ' + e.lastname,
+                password
+            }
+            const { status, data } = await registerAPI(i).catch(err => console.log(err))
+            if (status) {
+                setErrMsg('')
+                router.push(`otp?em=${e.email}&uid=${data.data.user.id}`)
+            } else {
+                setErrMsg(data.message)
+            }
+
+        } else {
+            setErrMsg('Password mis-match')
+        }
+        setProccessing(false)
     }
 
 
     return (
         <AuthLayout errMsg={errMsg} onSubmit={(e) => register(e)} title={"Create Account"} subText={"Please fill in your details"}>
             <div className="grid grid-cols-2 gap-5">
-                <AppInput name="email" required label="Firstname" />
-                <AppInput name="email" required label="Lastname" />
+                <AppInput name="firstname" required label="Firstname" />
+                <AppInput name="lastname" required label="Lastname" />
             </div>
-            <AppInput name="email" required label="Email" />
+            <AppInput name="email" type={'mail'} required label="Email" />
             <AppInput name="password" required label="Enter your password" type="password" />
             <AppInput name="cpassword" required label="Confirm Password" type="password" />
             <div className="space-y-4">
                 <div className="flex gap-3">
                     <button disabled={proccessing} className="flex-grow disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3"> {proccessing ? "Proccessing..." : "Create Account"}</button>
                 </div>
-                <div className="flex items-center gap-3">
+                {/* <div className="flex items-center gap-3">
                     <hr className="flex-grow" />
                     <div className="">or</div>
                     <hr className="flex-grow" />
                 </div>
-                <GoogleBtn />
+                <GoogleBtn /> */}
             </div>
 
             <div className="text-center">Already have an account? <Link href="login" className="font-extrabold">Login</Link> </div>

@@ -6,6 +6,7 @@ import authImg from "@assets/images/aythImage.png"
 import { Session } from "@/app/hooks/Auth";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { useState,useEffect } from "react";
 
 function AuthLayout({ title, children, onSubmit, errMsg }) {
   const user = useSelector((state) => state.User);
@@ -50,8 +51,21 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
     return serializeToJSON(data);
   };
 
+  const [currentIndex, setcurrentIndex] = useState(1)
 
+  const intal = setInterval(() => {
+    if (currentIndex === 3) {
+      setcurrentIndex(1)
+    } else {
+      setcurrentIndex(currentIndex + 1)
+    }
+  }, 9000);
 
+  useEffect(() => {
+    clearInterval()
+    intal
+  }, [])
+  
 
   if (isAuthenticated.status === "authenticated") {
     router.push("/");
@@ -87,7 +101,44 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
         </div>
         <div className='relative top-0'>
           <div className="h-screen w-full fixed text-4xl md:grid md:grid-cols-2 bottom-0 hidden p-6 pr-20">
-            <div className='bg-black h-full w-full rounded-3xl'></div>
+            <div className='bg-black flex text-center flex-col h-full w-full rounded-3xl'>
+              <div className='flex-grow'></div>
+              <div className='p-5'>
+                {
+                  currentIndex === 1 && (
+                    <div className='py-20 space-y-4 border border-gray-800 rounded-3xl'>
+                      <div className='text-white font-extrabold text-4xl'>Welcome to Mbwoy</div>
+                      <div className='text-gray-300 text-sm max-w-sm mx-auto'>Mbwoy is your onestep solution for selling gift cards, crypto currencies and electronic funds</div>
+                    </div>
+                  )
+                }
+
+                {
+                  currentIndex === 2 && (
+                    <div className='py-20 space-y-4 border border-gray-800 rounded-3xl'>
+                      <div className='text-white font-extrabold text-4xl'>Sell with Ease</div>
+                      <div className='text-gray-300 text-sm max-w-sm mx-auto'>With Mbwoy, selling is simple and secure.It&apos;s fast, convenient, and puts money back in your pocket.</div>
+                    </div>
+                  )
+                }
+
+
+                {
+                  currentIndex === 3 && (
+                    <div className='py-20 space-y-4 border border-gray-800 rounded-3xl'>
+                      <div className='text-white font-extrabold text-4xl'>Unlock Your Assets</div>
+                      <div className='text-gray-300 text-sm max-w-sm mx-auto'>Mbwoy enables you to optimize the value of your assets. Sign up for an Mbwoy account today.</div>
+                    </div>
+                  )}
+
+              </div>
+              {/* <div></div> */}
+              <div className='flex pb-12 justify-center gap-2'>
+                <div className={`h-2 ${currentIndex === 1 ? 'bg-white w-8' : 'w-2 bg-gray-400'} transition-all duration-500 rounded-full cursor-pointer`} onClick={() => setcurrentIndex(1)}></div>
+                <div className={`h-2 ${currentIndex === 2 ? 'bg-white w-8' : 'w-2 bg-gray-400'} transition-all duration-500 rounded-full cursor-pointer`} onClick={() => setcurrentIndex(2)}></div>
+                <div className={`h-2 ${currentIndex === 3 ? 'bg-white w-8' : 'w-2 bg-gray-400'} transition-all duration-500 rounded-full cursor-pointer`} onClick={() => setcurrentIndex(3)}></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
