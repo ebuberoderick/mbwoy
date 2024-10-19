@@ -34,10 +34,10 @@ function Page() {
     return (
         <AuthLayout errMsg={errMsg} onSubmit={(e) => register(e)} title={"Create Account"} subText={"Please fill in your details"}>
             <div className="grid grid-cols-2 gap-5">
-                <AppInput name="email" required label="Username" />
-                <AppInput name="email" required label="Username" />
+                <AppInput name="email" required label="Firstname" />
+                <AppInput name="email" required label="Lastname" />
             </div>
-            <AppInput name="email" required label="Username" />
+            <AppInput name="email" required label="Email" />
             <AppInput name="password" required label="Enter your password" type="password" />
             <AppInput name="cpassword" required label="Confirm Password" type="password" />
             <div className="space-y-4">

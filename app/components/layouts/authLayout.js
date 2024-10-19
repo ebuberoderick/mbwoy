@@ -7,7 +7,7 @@ import { Session } from "@/app/hooks/Auth";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-function AuthLayout({ title,children, onSubmit, errMsg }) {
+function AuthLayout({ title, children, onSubmit, errMsg }) {
   const user = useSelector((state) => state.User);
   const isAuthenticated = Session(user);
   const router = useRouter();
@@ -57,8 +57,8 @@ function AuthLayout({ title,children, onSubmit, errMsg }) {
     router.push("/");
   } else {
     return (
-      <div className="h-screen bg-black grid md:grid-cols-2 lg:grid-cols-3">
-        <div className="bg-white h-screen p-4 flex flex-col">
+      <div className="min-h-screen grid md:grid-cols-2">
+        <div className="bg-white min-h-screen p-4 flex flex-col">
           <div>
             <Image src={logo} className="w-20" alt="LOGO" />
           </div>
@@ -83,8 +83,10 @@ function AuthLayout({ title,children, onSubmit, errMsg }) {
           </div>
           <div className="text-center mt-12 text-xs select-none pointer-events-none">Powered by Mbwoy</div>
         </div>
-        <div className="lg:col-span-2 hidden md:flex flex-col">
-          
+        <div className='relative top-0'>
+          <div className="h-screen w-full fixed text-4xl md:grid md:grid-cols-2 bottom-0 hidden p-6 pr-20">
+            <div className='bg-black h-full w-full rounded-3xl'></div>
+          </div>
         </div>
       </div>
     );
