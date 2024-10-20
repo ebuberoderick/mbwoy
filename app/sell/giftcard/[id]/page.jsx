@@ -2,7 +2,6 @@
 import AppLayout from '@/app/components/layouts/appLayout'
 import AppInput from '@/app/components/organisms/AppInput'
 import Modal from '@/app/components/organisms/Modal'
-import Link from 'next/link'
 import { RiUploadCloud2Line } from "react-icons/ri";
 import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react'
