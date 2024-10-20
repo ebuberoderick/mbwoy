@@ -22,7 +22,6 @@ export function Session(user) {
     user
   }
 
-  console.log(user,Object?.keys(user).length);
   
   if (Object?.keys(user).length !== 0 && Cookies.get('Mbwoy_JWT')) {
     session.status = verifyJWT(user.value.bearer_token)
