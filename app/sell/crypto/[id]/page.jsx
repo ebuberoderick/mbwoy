@@ -72,14 +72,14 @@ function Page({ params }) {
                                             <div className="space-y-2">
                                                 <div className="">Choose Card Type</div>
                                                 <div className="flex gap-3">
-                                                    <label checked class="has-[:checked]:bg-black has-[:checked]:text-white cursor-pointer rounded-2xl border border-gray-100 has-[:checked]:border-0">
-                                                        <input type="radio" name="type" value='physical' onChange={e => updateType(e.target.value)} class="hidden absolute" />
+                                                    <label checked className="has-[:checked]:bg-black has-[:checked]:text-white cursor-pointer rounded-2xl border border-gray-100 has-[:checked]:border-0">
+                                                        <input type="radio" name="type" value='physical' onChange={e => updateType(e.target.value)} className="hidden absolute" />
                                                         <div className="py-3 px-5 space-y-3">
                                                             Physical
                                                         </div>
                                                     </label>
-                                                    <label checked class="has-[:checked]:bg-black has-[:checked]:text-white cursor-pointer rounded-2xl border border-gray-100 has-[:checked]:border-0">
-                                                        <input type="radio" name="type" value='ecode' onChange={e => updateType(e.target.value)} class="hidden absolute" />
+                                                    <label checked className="has-[:checked]:bg-black has-[:checked]:text-white cursor-pointer rounded-2xl border border-gray-100 has-[:checked]:border-0">
+                                                        <input type="radio" name="type" value='ecode' onChange={e => updateType(e.target.value)} className="hidden absolute" />
                                                         <div className="py-3 px-5 space-y-3">
                                                             E-code
                                                         </div>
