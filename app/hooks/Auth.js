@@ -21,7 +21,10 @@ export function Session(user) {
     status: '',
     user
   }
-  if (Object.keys(user.value).length !== 0 && Cookies.get('Mbwoy_JWT')) {
+
+  console.log(user,Object?.keys(user).length);
+  
+  if (Object?.keys(user).length !== 0 && Cookies.get('Mbwoy_JWT')) {
     session.status = verifyJWT(user.value.bearer_token)
   } else {
     session.status = 'unauthenticated'

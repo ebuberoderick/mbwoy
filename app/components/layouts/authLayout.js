@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 function AuthLayout({ title, children, onSubmit, errMsg }) {
   const user = useSelector((state) => state.User);
-  // const isAuthenticated = Session(user);
+  const isAuthenticated = Session(user);
   const router = useRouter();
   const serialize = (form) => {
     var result = [];
@@ -57,9 +57,9 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
   }, [counter]);
 
 
-  // if (isAuthenticated.status === "authenticated") {
-  //   router.push("/");
-  // } else {
+  if (isAuthenticated.status === "authenticated") {
+    router.push("/");
+  } else {
     return (
       <div className="min-h-screen grid md:grid-cols-2">
         <div className='max-w-sm mx-auto'>
@@ -135,6 +135,6 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
     );
   }
 
-// }
+}
 
 export default AuthLayout;

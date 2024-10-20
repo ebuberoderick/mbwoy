@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import AuthLayout from '@/app/components/layouts/authLayout'
-import { verifyReferral } from '@/app/services/authService'
+import { sendOTP } from '@/app/services/authService'
 import AppInput from '@/app/components/organisms/AppInput';
 import Link from 'next/link'
 
@@ -12,13 +12,13 @@ function Page() {
     const router = useRouter()
 
 
-    const confirmOTP = async (e) => {
+    const sendMail = async (e) => {
         setProccessing(true)
-        const { status, data } = await verifyReferral(e).catch(err => console.log(err))
+        const { status, data } = await sendOTP(e).catch(err => console.log(err))
         setProccessing(false)
         if (status) {
             setErrMsg('')
-            router.push("/")
+            router.push(`forgotten-password/otp?em=${e.email}&uid=${62345}`)
         } else {
             setErrMsg(data.message)
         }
@@ -26,7 +26,7 @@ function Page() {
 
 
     return (
-        <AuthLayout errMsg={errMsg} onSubmit={(e) => confirmOTP(e)} title={"Forgotten Password"} subText={"Please fill in your details"}>
+        <AuthLayout errMsg={errMsg} onSubmit={(e) => sendMail(e)} title={"Forgotten Password"} subText={"Please fill in your details"}>
             <div className="space-y-7">
                 <div className="space-y-3">
                     <div className="">Email Address</div>
