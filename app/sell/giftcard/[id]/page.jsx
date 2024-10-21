@@ -10,6 +10,8 @@ import { fetchGiftcard } from '@/app/services/authService'
 import { API_BASE_URL, TOKEN } from '@/app/services/httpService'
 import serialize from '@/app/hooks/Serialize'
 import axios from 'axios'
+import logo from "@assets/images/viloxLogo.png"
+import Image from 'next/image';
 
 
 function Page({ params }) {
@@ -22,6 +24,7 @@ function Page({ params }) {
     const [completed, setCompleted] = useState(false)
     const [view, setView] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [transactionReceipt, setTransactionReceipt] = useState({})
     const [cardDetail, setCardDetail] = useState({})
     const [selected, setSelected] = useState({})
     const [options, setOptions] = useState([])
@@ -71,7 +74,7 @@ function Page({ params }) {
         }
 
         await axios.post(`${API_BASE_URL}app/giftcard/sell`, formdata, { headers }).then(async (res) => {
-            console.log(res);
+            setTransactionReceipt(res.data.data[0]);
             setCompleted(true)
         }).catch((error) => {
             setConfirmModal(false)
@@ -108,9 +111,54 @@ function Page({ params }) {
                         <div className="grid lg:grid-cols-3">
                             {
                                 view ? (
-                                    <div className="col-span-2 space-y-5 flex py-20 items-center justify-center w-full">
+                                    <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
+                                        <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
                                         <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
-                                            <img src={cardDetail.image} className='bg-contain' width={100} height={100} />
+                                            <div className="space-y-3">
+                                                <div className="bg-gray-50 py-3 rounded-lg"><img src={cardDetail.image} className='bg-contain mx-auto' width={50} height={50} /></div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Country</div>
+                                                <div className="font-bold text-lg">{selected.name}</div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Card Type</div>
+                                                <div className="font-bold text-lg capitalize">{transactionReceipt?.type}</div>
+                                            </div>
+                                            {
+                                                transactionReceipt?.type === `physical` ? (
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="">Uploads</div>
+                                                        <div className="font-bold flex gap-2 text-lg">
+                                                            {
+                                                                transactionReceipt?.images.map((data, i) => (
+                                                                    <div key={i} className="h-10 w-10 bg-gray-50">
+                                                                        <img src={data} alt="" className="w-full h-full" srcset="" />
+                                                                    </div>
+                                                                ))
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="">E-code</div>
+                                                        <div className="font-bold text-lg">{transactionReceipt?.ecode}</div>
+                                                    </div>
+                                                )
+                                            }
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Rate</div>
+                                                <div className="font-bold text-lg">{transactionReceipt?.rate}</div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Amount</div>
+                                                <div className="font-bold text-lg">{transactionReceipt?.amount}</div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Payment in Naira</div>
+                                                <div className="font-bold text-lg">&#8358;{transactionReceipt?.amount_to_pay}</div>
+                                            </div>
+                                            <div className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
                                         </div>
                                     </div>
                                 ) : (
@@ -239,8 +287,8 @@ function Page({ params }) {
                     )
                 }
 
-            </div>
-        </AppLayout>
+            </div >
+        </AppLayout >
     )
 }
 
