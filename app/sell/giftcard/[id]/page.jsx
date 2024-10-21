@@ -52,6 +52,7 @@ function Page({ params }) {
 
     const process = async (e) => {
         console.log(e);
+        const images = e.target[4].files
         const data = serialize(e.target)
         const formdata = new FormData()
         setProcessing(true)
@@ -64,11 +65,10 @@ function Page({ params }) {
         if (data.type === 'ecode') {
             formdata.append('ecode', data.ecode)
         } else {
-            formdata.append('image', ...e.target[4].files)
+            for (let index = 0; index < images.length; index++) {
+                formdata.append(`images[]`, images[index])
+            }
         }
-
-        console.log(formdata, data);
-
 
         await axios.post(`${API_BASE_URL}app/giftcard/sell`, formdata, { headers }).then(async (res) => {
             console.log(res);
