@@ -28,7 +28,7 @@ function Page() {
     }, [])
 
     return (
-        <AppLayout title={`Sell Giftcard Transactions`}>
+        <AppLayout title={`Sell Crypto Transactions`}>
             <div className="space-y-5">
                 <div className="flex items-center">
                     <div className="flex-grow items-center flex">

@@ -20,3 +20,6 @@ export const fetchGiftcardOrder = (formData) => apiWithAuth.post("app/giftcard/f
 
 export const fetchCryptos = () => apiWithAuth.post("app/crypto/fetch_crypto").then(getApiResponse).catch(getErrorResponse);
 export const fetchCryptoOrder = () => apiWithAuth.post("app/crypto/fetch_crypto_order").then(getApiResponse).catch(getErrorResponse);
+
+export const fetchEFund = () => apiWithAuth.post("app/efund/fetch_efund").then(getApiResponse).catch(getErrorResponse);
+
