@@ -11,6 +11,9 @@ import { fetchCryptos } from '@/app/services/authService'
 import { API_BASE_URL, TOKEN } from '@/app/services/httpService'
 import serialize from '@/app/hooks/Serialize'
 import axios from 'axios'
+import logo from "@assets/images/viloxLogo.png"
+import success from "@assets/images/success.png"
+import Image from 'next/image';
 
 function Page({ params }) {
     const router = useRouter()
@@ -19,6 +22,7 @@ function Page({ params }) {
     const [errMsg, setErrMsg] = useState(false)
     const [proccessing, setProcessing] = useState(false)
     const [completed, setCompleted] = useState(false)
+    const [transactionReceipt, setTransactionReceipt] = useState({})
     const [view, setView] = useState(false)
     const [loading, setLoading] = useState(true)
     const [cryptos, setCrypto] = useState({})
@@ -44,27 +48,22 @@ function Page({ params }) {
     }
 
     const process = async (e) => {
-        console.log(e);
         const data = serialize(e.target)
+        const images = e.target[2].files
         const formdata = new FormData()
         setProcessing(true)
 
-        formdata.append('card_id', data.card_id)
+        formdata.append('crypto_id', params.id)
         formdata.append('amount', data.amount)
-        formdata.append('rate', parseInt(data.amount) > 500 ? selected.sell_rate_high : selected.sell_rate_low)
-        formdata.append('amount_to_pay', parseInt(data.amount) * (parseInt(data.amount) > 500 ? selected.sell_rate_high : selected.sell_rate_low))
-        formdata.append('type', data.type)
-        if (data.type === 'ecode') {
-            formdata.append('ecode', data.ecode)
-        } else {
-            formdata.append('image', ...e.target[4].files)
+        formdata.append('rate', parseInt(data.amount) * (parseInt(data.amount) > 500 ? cryptos.sell_rate_high : cryptos.sell_rate_low))
+        formdata.append('amount_to_pay', parseInt(data.amount) * (parseInt(data.amount) > 500 ? cryptos.sell_rate_high : cryptos.sell_rate_low))
+        for (let index = 0; index < images.length; index++) {
+            formdata.append(`images[]`, images[index])
         }
 
-        console.log(formdata, data);
 
-
-        await axios.post(`${API_BASE_URL}app/giftcard/sell`, formdata, { headers }).then(async (res) => {
-            console.log(res);
+        await axios.post(`${API_BASE_URL}app/crypto/sell`, formdata, { headers }).then(async (res) => {
+            setTransactionReceipt(res.data.data[0]);
             setCompleted(true)
         }).catch((error) => {
             setConfirmModal(false)
@@ -94,9 +93,45 @@ function Page({ params }) {
                         <div className="grid lg:grid-cols-3">
                             {
                                 view ? (
-                                    <div className="col-span-2 space-y-5 flex py-20 items-center justify-center w-full">
+                                    <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
+                                        <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
                                         <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
-                                            <img src={cryptos.icon} className='bg-contain' width={100} height={100} />
+                                            <div className="space-y-3">
+                                                <div className="bg-gray-50 py-3 rounded-lg"><img src={cryptos.icon} className='bg-contain mx-auto' width={50} height={50} /></div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Crypto</div>
+                                                <div className="font-bold text-lg">{cryptos.name}</div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Transaction Ref</div>
+                                                <div className="font-bold text-lg capitalize">{transactionReceipt?.transaction_id}</div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Uploads</div>
+                                                <div className="font-bold flex gap-2 text-lg">
+                                                    {
+                                                        transactionReceipt?.images.map((data, i) => (
+                                                            <div key={i} className="h-10 w-10 bg-gray-50">
+                                                                <Image src={data} alt="" className="w-full h-full" srcSet="" />
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Rate</div>
+                                                <div className="font-bold text-lg">${Number(transactionReceipt?.rate).toLocaleString('en-US')}</div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Amount</div>
+                                                <div className="font-bold text-lg">${Number(transactionReceipt?.amount).toLocaleString('en-US')}</div>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <div className="">Payment in Naira</div>
+                                                <div className="font-bold text-lg">&#8358;{Number(transactionReceipt?.amount_to_pay).toLocaleString('en-US')}</div>
+                                            </div>
+                                            <div className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
                                         </div>
                                     </div>
                                 ) : (
@@ -104,7 +139,9 @@ function Page({ params }) {
                                         {
                                             completed && (
                                                 <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
-                                                    <div className="font-extrabold text-2xl text-center"></div>
+                                                    <div className="font-extrabold text-2xl text-center">
+                                                        <Image src={success} className="mx-auto h-64" alt="" />
+                                                    </div>
                                                     <div className="font-extrabold text-2xl text-center">Transaction Successful</div>
                                                     <div className="text-center text-sm">Transaction would take 10-15 minutes to process please be patient</div>
                                                     <div onClick={() => setView(true)} className="flex-grow cursor-pointer disabled:bg-opacity-35 w-full bg-black text-white rounded-3xl text-center py-3">View Transaction</div>
@@ -166,7 +203,7 @@ function Page({ params }) {
                                                     </div>
                                                     <div className="">
                                                         <label htmlFor="upload" className="relative w-full rounded-2xl text-hrms_green border border-hrms_green p-2 inline-block cursor-pointer">
-                                                            <input id="upload" required name="images[]" multiple accept="image/png, image/gif, image/jpeg" type="file" className="opacity-0 absolute w-full cursor-pointer h-full" />
+                                                            <input id="upload" required name="images[]" accept="image/png, image/gif, image/jpeg" type="file" className="opacity-0 absolute w-full cursor-pointer h-full" />
                                                             <div className="flex items-center w-full">
                                                                 <div className="flex-grow text-gray-400">
                                                                     <div className="flex"><RiUploadCloud2Line /></div>

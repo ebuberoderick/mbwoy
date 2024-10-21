@@ -11,6 +11,7 @@ import { API_BASE_URL, TOKEN } from '@/app/services/httpService'
 import serialize from '@/app/hooks/Serialize'
 import axios from 'axios'
 import logo from "@assets/images/viloxLogo.png"
+import success from "@assets/images/success.png"
 import Image from 'next/image';
 
 
@@ -54,7 +55,6 @@ function Page({ params }) {
     }
 
     const process = async (e) => {
-        console.log(e);
         const images = e.target[4].files
         const data = serialize(e.target)
         const formdata = new FormData()
@@ -148,15 +148,15 @@ function Page({ params }) {
                                             }
                                             <div className="flex items-center justify-between">
                                                 <div className="">Rate</div>
-                                                <div className="font-bold text-lg">{transactionReceipt?.rate}</div>
+                                                <div className="font-bold text-lg">${Number(transactionReceipt?.rate).toLocaleString('en-US')}</div>
                                             </div>
                                             <div className="flex items-center justify-between">
                                                 <div className="">Amount</div>
-                                                <div className="font-bold text-lg">{transactionReceipt?.amount}</div>
+                                                <div className="font-bold text-lg">${Number(transactionReceipt?.amount).toLocaleString('en-US')}</div>
                                             </div>
                                             <div className="flex items-center justify-between">
                                                 <div className="">Payment in Naira</div>
-                                                <div className="font-bold text-lg">&#8358;{transactionReceipt?.amount_to_pay}</div>
+                                                <div className="font-bold text-lg">&#8358;{Number(transactionReceipt?.amount_to_pay).toLocaleString('en-US')}</div>
                                             </div>
                                             <div className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
                                         </div>
@@ -166,7 +166,9 @@ function Page({ params }) {
                                         {
                                             completed && (
                                                 <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
-                                                    <div className="font-extrabold text-2xl text-center"></div>
+                                                    <div className="font-extrabold text-2xl text-center">
+                                                        <Image src={success} className="mx-auto h-64" alt="" />
+                                                    </div>
                                                     <div className="font-extrabold text-2xl text-center">Transaction Successful</div>
                                                     <div className="text-center text-sm">Transaction would take 10-15 minutes to process please be patient</div>
                                                     <div onClick={() => setView(true)} className="flex-grow cursor-pointer disabled:bg-opacity-35 w-full bg-black text-white rounded-3xl text-center py-3">View Transaction</div>

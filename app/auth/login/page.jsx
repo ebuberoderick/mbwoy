@@ -20,8 +20,6 @@ function Page() {
         setProccessing(true)
         const { status, data } = await Applogin(e).catch(err => console.log(err))
         setProccessing(false)
-        console.log(data);
-        
         if (status) {
             setErrMsg('')
             SignInAuth(data, dispatch)

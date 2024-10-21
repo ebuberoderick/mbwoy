@@ -15,5 +15,7 @@ export const setTransactionPin = (formData) => apiWithAuth.post("app/wallet/crea
 
 export const fetchGiftcards = () => apiWithAuth.post("app/giftcard/fetch_giftcards").then(getApiResponse).catch(getErrorResponse);
 export const fetchGiftcard = (formData) => apiWithAuth.post("app/giftcard/fetch_a_giftcard",formData).then(getApiResponse).catch(getErrorResponse);
+export const fetchGiftcardOrder = (formData) => apiWithAuth.post("app/giftcard/fetch_giftcard_order",formData).then(getApiResponse).catch(getErrorResponse);
+
 
 export const fetchCryptos = () => apiWithAuth.post("app/crypto/fetch_crypto").then(getApiResponse).catch(getErrorResponse);

@@ -15,7 +15,6 @@ function Page() {
     const [proccessing, setProccessing] = useState(false)
     const [errMsg, setErrMsg] = useState(false)
     const router = useRouter()
-    const user = useSelector(state => state.User)
 
     const register = async (e) => {
         setProccessing(true)

@@ -37,7 +37,7 @@ function Page() {
 
 
     return (
-        <AuthLayout errMsg={errMsg} onSubmit={(e) => confirmOTP(e)} title={"Referral Code"} subText={"Please fill in your details"}>
+        <AuthLayout errMsg={errMsg} onSubmit={(e) => confirmOTP(e)} title={"Reset Password"} subText={"Please fill in your details"}>
             <div className="space-y-7">
                 <div className="space-y-3">
                     <div className="space-y-3">
