@@ -55,12 +55,11 @@ function Page({ params }) {
 
         formdata.append('crypto_id', params.id)
         formdata.append('amount', data.amount)
-        formdata.append('rate', parseInt(data.amount) * (parseInt(data.amount) > 500 ? cryptos.sell_rate_high : cryptos.sell_rate_low))
+        formdata.append('rate', parseInt(data.amount) > 500 ? cryptos.sell_rate_high : cryptos.sell_rate_low)
         formdata.append('amount_to_pay', parseInt(data.amount) * (parseInt(data.amount) > 500 ? cryptos.sell_rate_high : cryptos.sell_rate_low))
         for (let index = 0; index < images.length; index++) {
             formdata.append(`images[]`, images[index])
         }
-
 
         await axios.post(`${API_BASE_URL}app/crypto/sell`, formdata, { headers }).then(async (res) => {
             setTransactionReceipt(res.data.data[0]);
@@ -113,7 +112,7 @@ function Page({ params }) {
                                                     {
                                                         transactionReceipt?.images.map((data, i) => (
                                                             <div key={i} className="h-10 w-10 bg-gray-50">
-                                                                <Image src={data} alt="" className="w-full h-full" srcSet="" />
+                                                                <img src={data} alt="" className="w-full h-full" srcset="" />
                                                             </div>
                                                         ))
                                                     }

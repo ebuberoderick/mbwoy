@@ -1,7 +1,7 @@
 'use client'
 import AppLayout from '@/app/components/layouts/appLayout'
-import { fetchGiftcardOrder } from '@/app/services/authService'
-import { TfiGift } from "react-icons/tfi";
+import { fetchCryptoOrder } from '@/app/services/authService'
+import { PiHandCoinsFill } from "react-icons/pi";
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
@@ -15,7 +15,7 @@ function Page() {
     const [view, setView] = useState({})
 
     const fetch = async () => {
-        const { status, data } = await fetchGiftcardOrder().catch(err => console.log(err))
+        const { status, data } = await fetchCryptoOrder().catch(err => console.log(err))
         if (status) {
             setOrders(data.data[0]);
         }
@@ -46,37 +46,28 @@ function Page() {
                                 <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
                                 <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
                                     <div className="space-y-3">
-                                        <div className="bg-gray-50 py-3 rounded-lg"><img src={view.card.image} className='bg-contain mx-auto' width={50} height={50} /></div>
+                                        <div className="bg-gray-50 py-3 rounded-lg"><img src={view.crypto.icon} className='bg-contain mx-auto' width={50} height={50} /></div>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <div className="">Country</div>
-                                        <div className="font-bold text-lg">{view.card.name}</div>
+                                        <div className="">Crypto</div>
+                                        <div className="font-bold text-lg">{view.crypto.name}</div>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <div className="">Card Type</div>
-                                        <div className="font-bold text-lg capitalize">{view?.type}</div>
+                                        <div className="">Transaction Ref</div>
+                                        <div className="font-bold text-lg capitalize">{view?.transaction_id}</div>
                                     </div>
-                                    {
-                                        view?.type === `physical` ? (
-                                            <div className="flex items-center justify-between">
-                                                <div className="">Uploads</div>
-                                                <div className="font-bold flex gap-2 text-lg">
-                                                    {
-                                                        view?.images.map((data, i) => (
-                                                            <div key={i} className="h-10 w-10 bg-gray-50">
-                                                                <img src={data} alt="" className="w-full h-full" srcset="" />
-                                                            </div>
-                                                        ))
-                                                    }
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="flex items-center justify-between">
-                                                <div className="">E-code</div>
-                                                <div className="font-bold text-lg">{view?.ecode}</div>
-                                            </div>
-                                        )
-                                    }
+                                    <div className="flex items-center justify-between">
+                                        <div className="">Uploads</div>
+                                        <div className="font-bold flex gap-2 text-lg">
+                                            {
+                                                view?.images.map((data, i) => (
+                                                    <div key={i} className="h-10 w-10 bg-gray-50">
+                                                        <img src={data} alt="" className="w-full h-full" srcset="" />
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
                                     <div className="flex items-center justify-between">
                                         <div className="">Rate</div>
                                         <div className="font-bold text-lg">${Number(view?.rate).toLocaleString('en-US')}</div>
@@ -99,7 +90,7 @@ function Page() {
                                         <div onClick={() => setView(data)} key={i} className="p-3 flex items-center gap-2 space-y-1 cursor-pointer border rounded-xl">
                                             <div className="">
                                                 <div className={`w-10 h-10 bg-gray-50 bg-opacity-50 rounded-full flex items-center justify-center ${data.status === "processing" ? "text-yellow" : data.status === "success" ? "text-success" : "text-danger"}`}>
-                                                    <TfiGift />
+                                                    <PiHandCoinsFill />
                                                 </div>
                                             </div>
                                             <div className="flex flex-grow items-center justify-between">

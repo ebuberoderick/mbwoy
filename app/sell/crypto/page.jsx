@@ -5,6 +5,7 @@ import { fetchCryptos } from '@/app/services/authService'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { FaRegFileLines } from 'react-icons/fa6'
 import { IoIosArrowRoundBack } from 'react-icons/io'
 
 function Page() {
@@ -31,10 +32,18 @@ function Page() {
         <AppLayout title={`Sell Crypto`}>
             <div className="space-y-5">
                 <div className="flex items-center">
-                    <div className="flex-grow flex">
-                        <div onClick={() => router.back()} className="cursor-pointer flex items-center gap-1">
-                            <IoIosArrowRoundBack /> Back
+                    <div className="flex-grow items-center flex">
+                        <div className="flex-grow">
+                            <div onClick={() => router.back()} className="cursor-pointer flex items-center gap-1">
+                                <IoIosArrowRoundBack /> Back
+                            </div>
                         </div>
+                        <Link href="crypto/transactions">
+                            <div className="cursor-pointer flex items-center gap-1">
+                                <FaRegFileLines />
+                                Transactions
+                            </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
