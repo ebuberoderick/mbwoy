@@ -3,11 +3,25 @@ import Image from "next/image";
 import AppLayout from "./components/layouts/appLayout";
 import Link from "next/link";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchWallet } from "./services/authService";
 
 export default function Home() {
 
   const [showBal, updateBal] = useState(false)
+  const [walletInfo, updateWalletInfo] = useState(false)
+
+  const fetch = async () => {
+    const { status, data } = await fetchWallet().catch(err => console.log(err))
+    if (status) {
+      updateWalletInfo(data.data[0]);
+    }
+  }
+
+
+  useEffect(() => {
+    fetch()
+  }, [])
 
   return (
     <AppLayout title={"Dashboard"}>
@@ -25,7 +39,7 @@ export default function Home() {
             <div className="bg-black p-4 rounded-xl">
               <div className="text-white text-center flex items-center gap-2 justify-center">Current Balance <span onClick={() => updateBal(!showBal)} className='text-xl cursor-pointer'> {showBal ? <VscEyeClosed /> : <VscEye />}</span></div>
               {
-                showBal ? <div className="text-white font-extrabold text-center text-3xl pb-6 pt-3">&#8358;1,000,000.00</div> : <div className="text-white font-extrabold text-center text-3xl pb-6 pt-3">*******</div>
+                showBal ? <div className="text-white font-extrabold text-center text-3xl pb-6 pt-3">&#8358;{Number(walletInfo?.balance).toLocaleString("en-US")}</div> : <div className="text-white font-extrabold text-center text-3xl pb-6 pt-3">*******</div>
               }
               <div className="flex-grow disabled:bg-opacity-35 shadow-md bg-white rounded-lg text-center font-bold cursor-pointer py-3">Withdraw</div>
             </div>

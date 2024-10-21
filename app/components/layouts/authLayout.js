@@ -1,6 +1,9 @@
 "use client";
 import React from "react";
 import logo from "@assets/images/viloxLogo.png"
+import F1 from "@assets/images/F1.png"
+import F2 from "@assets/images/F2.png"
+import F3 from "@assets/images/F3.png"
 import Image from "next/image";
 import authImg from "@assets/images/aythImage.png"
 import { Session } from "@/app/hooks/Auth";
@@ -92,8 +95,15 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
         <div className='relative top-0'>
           <div className="h-screen w-full fixed text-4xl md:grid md:grid-cols-2 bottom-0 hidden p-6 pr-20">
             <div className='bg-black flex text-center flex-col h-full w-full rounded-3xl'>
-              <div className='flex-grow'></div>
-              <div className='p-5'>
+              <div className='flex-grow relative'>
+                <div className="absolute w-full bottom-0 ">
+                  {counter === 1 && <Image src={F1} className="mx-auto transition-all duration-500" alt="LOGO" />}
+                  {counter === 2 && <Image src={F2} className="mx-auto transition-all duration-500" alt="LOGO" />}
+                  {counter === 3 && <Image src={F3} className="mx-auto transition-all duration-500" alt="LOGO" />}
+
+                </div>
+              </div>
+              <div className='px-5 pb-5'>
                 {
                   counter === 1 && (
                     <div className='py-20 space-y-4 border border-gray-800 rounded-3xl'>
