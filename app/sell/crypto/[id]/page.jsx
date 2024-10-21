@@ -155,10 +155,13 @@ function Page({ params }) {
                                                         Send Coins the wallet below  and upload receipt in the provided field below
                                                     </div>
                                                     <div className="w-52 h-52 bg-gray-100 mx-auto rounded-lg"></div>
-                                                    <div className="w-full flex ">
-                                                        <div className='text-gray-500 flex-grow bg-gray-100 w-full flex gap-5 items-center'>
-                                                            <span >{cryptos.wallet_address}</span>
-                                                            <span className='cursor-pointer bg-gray-100 w-6 h-6 text-xs flex rounded-full items-center justify-center' title='Click to Copy' onClick={() => navigator?.clipboard?.writeText(cryptos.wallet_address)}><MdOutlineFileCopy /></span>
+                                                    <div title='Click to Copy' onClick={() => navigator?.clipboard?.writeText(cryptos.wallet_address)} className="bg-gray-100 pl-1 relative pr-8 rounded-xl">
+                                                        <div className="max-w-sm trunck-text space-x-3 p-2 rounded-lg">
+                                                            <div className="max-w-[18rem] inline-block flex-grow">
+                                                                <div className="trunck-text relative top-1">{cryptos.wallet_address}</div>
+                                                            </div>
+                                                            <div className="opacity-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni officia quasi nulla odit corporis aliquid? Error reprehenderit nostrum iste laudantium quibusdam tenetur ipsa alias, numquam, voluptates sit soluta, quod corporis?</div>
+                                                            <div className="inline-block w-5 h-5 absolute bottom-7 top-4 right-2"><MdOutlineFileCopy /></div>
                                                         </div>
                                                     </div>
                                                     <div className="">
