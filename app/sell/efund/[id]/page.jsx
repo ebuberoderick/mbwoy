@@ -33,12 +33,9 @@ function Page({ params }) {
 
     const sellNow = async (e) => {
         e.preventDefault()
-        !confirmModal ? setConfirmModal(true) : process(e)
-    }
-
-    const process = async (e) => {
         setView(true)
     }
+
 
 
     useEffect(() => {

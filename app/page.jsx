@@ -9,7 +9,7 @@ import { fetchWallet } from "./services/authService";
 export default function Home() {
 
   const [showBal, updateBal] = useState(false)
-  const [walletInfo, updateWalletInfo] = useState(false)
+  const [walletInfo, updateWalletInfo] = useState({balance:0.00})
 
   const fetch = async () => {
     const { status, data } = await fetchWallet().catch(err => console.log(err))
@@ -41,7 +41,11 @@ export default function Home() {
               {
                 showBal ? <div className="text-white font-extrabold text-center text-3xl pb-6 pt-3">&#8358;{Number(walletInfo?.balance).toLocaleString("en-US")}</div> : <div className="text-white font-extrabold text-center text-3xl pb-6 pt-3">*******</div>
               }
-              <div className="flex-grow disabled:bg-opacity-35 shadow-md bg-white rounded-lg text-center font-bold cursor-pointer py-3">Withdraw</div>
+              <div className="">
+                <Link href="wallet/withdrawal">
+                  <div className="flex-grow disabled:bg-opacity-35 shadow-md bg-white rounded-lg text-center font-bold cursor-pointer py-3">Withdraw</div>
+                </Link>
+              </div>
             </div>
             <div className="px-4 py-8 bg-opacity-5 rounded-xl">
               <div className="font-bold text-lg">Trade Smart &</div>
