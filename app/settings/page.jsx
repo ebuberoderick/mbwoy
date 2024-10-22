@@ -15,12 +15,13 @@ import AboutMbwoy from '../components/molecules/settings/AboutMbwoy';
 import PXT from '../components/molecules/settings/PXT';
 import FAQs from '../components/molecules/settings/FAQs';
 import Support from '../components/molecules/settings/Support';
+import AddBankModal from '../components/molecules/AddBankModal';
 
 function Page() {
   const [activeTab, setActiveTab] = useState("personal-info");
   const [showNav, setShowNav] = useState(true)
   const [addAccountModal, updateAddAccountModal] = useState(false)
-  
+
   const settingsTabs = [
     {
       title: "Personal Info",
@@ -72,16 +73,7 @@ function Page() {
 
   return (
     <AppLayout>
-      <Modal closeModal={() => updateAddAccountModal(false)} isOpen={addAccountModal}>
-        <div className="space-y-4">
-          <AppInput name="email" required label="Account Number" />
-          <AppInput name="email" required label="Bank Name" />
-          {/* <div className="text-right">dfg</div> */}
-          <div className="flex gap-3">
-            <button className="flex-grow disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Save</button>
-          </div>
-        </div>
-      </Modal>
+      <AddBankModal close={() => updateAddAccountModal(false)} isOpen={addAccountModal} />
       <div className="text-xl">Settings</div>
       <div className="container relative lg:grid grid-cols-3 gap-3">
         <div className="">
@@ -108,7 +100,7 @@ function Page() {
           <div className="h-full md:h-auto col-span-2 pb-5 overflow-y-scroll ml-0 md:ml-72 lg:ml-0 md:overflow-y-auto">
             {activeTab === "personal-info" && <PersonalInfo reset={showNav} goBack={() => setShowNav(true)} />}
             {activeTab === "change-password" && <ChangePassword goBack={() => setShowNav(true)} />}
-            {activeTab === "withdrawal_accounts" && <WithdrawalAccounts openModal={()=> updateAddAccountModal(true)} goBack={() => setShowNav(true)} />}
+            {activeTab === "withdrawal_accounts" && <WithdrawalAccounts openModal={() => updateAddAccountModal(true)} goBack={() => setShowNav(true)} />}
             {activeTab === "referrals" && <Referrals goBack={() => setShowNav(true)} />}
             {activeTab === "change-pin" && <ChangePin goBack={() => setShowNav(true)} />}
             {activeTab === "about-mbwoy" && <AboutMbwoy goBack={() => setShowNav(true)} />}

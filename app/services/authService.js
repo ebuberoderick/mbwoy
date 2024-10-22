@@ -22,7 +22,7 @@ export const fetchWallet = () => apiWithAuth.post("app/wallet/fetch").then(getAp
 export const fetchReferrals = () => apiWithAuth.post("app/wallet/referrals").then(getApiResponse).catch(getErrorResponse);
 export const fetchBanks = () => apiWithAuth.post("app/wallet/fetch_bank").then(getApiResponse).catch(getErrorResponse);
 export const fetchTransactions = () => apiWithAuth.post("app/wallet/fetch_transactions").then(getApiResponse).catch(getErrorResponse);
-export const addBankAccoutn = (formData) => apiWithAuth.post("app/wallet/add_bank_account",formData).then(getApiResponse).catch(getErrorResponse);
+export const addBankAccount = (formData) => apiWithAuth.post("app/wallet/add_bank_account",formData).then(getApiResponse).catch(getErrorResponse);
 export const verifyPin = (formData) => apiWithAuth.post("app/wallet/verify_pin",formData).then(getApiResponse).catch(getErrorResponse);
 export const withdraw = (formData) => apiWithAuth.post("app/wallet/withdraw",formData).then(getApiResponse).catch(getErrorResponse);
 
