@@ -107,12 +107,11 @@ function Page() {
                   }
                   {
                     transactions.length === 0 && !loading && (
-                      <div className="">
+                      <div className="space-y-2">
                         <div className="">
                           <Image src={Ticon} className='w-44 mx-auto' alt='' />
                         </div>
                         <div className="text-center text-gray-400">There is no recent transaction</div>
-                        <div className=""></div>
                       </div>
                     )
                   }

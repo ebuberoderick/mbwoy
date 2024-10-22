@@ -13,7 +13,6 @@ import Image from 'next/image';
 function Page({ params }) {
     const router = useRouter()
     const [amt, setAmt] = useState('')
-    const [confirmModal, setConfirmModal] = useState(false)
     const [view, setView] = useState(false)
     const [loading, setLoading] = useState(true)
     const [EFundData, setEFund] = useState({})
