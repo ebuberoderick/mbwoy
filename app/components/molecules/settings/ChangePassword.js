@@ -1,35 +1,31 @@
 import { useState } from "react";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-// import { BiLockOpen } from "react-icons/bi";
 import { FaAngleLeft } from "react-icons/fa6";
-// import { changePassword } from "../../apis/services/authService";
-// import { addData } from "../../reduxStore/reducers/UsersReducer";
-// import Cookies from "js-cookie";
-// import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import UseFormHandler from "@/app/hooks/useFormHandler";
 import AppInput from "../../organisms/AppInput";
-import { changePassword } from "@/app/services/authService";
+import { updatePassword } from "@/app/services/authService";
 import serialize from "@/app/hooks/Serialize";
 
 const ChangePassword = ({ goBack }) => {
   const [disable, setDisabled] = useState(true)
+  const [proccessing, setProcessing] = useState(false)
   const [formError, setFormError] = useState("")
-  const dispatch = useDispatch()
 
   const changeNow = async (e) => {
     e.preventDefault();
+    setFormError("")
+    setProcessing(true)
     const val = serialize(e.target)
     if (val.new_password === val.comfirm_password) {
-      const { status, data } = await changePassword().catch(err => console.log(err))
+      const { status, data } = await updatePassword(val).catch(err => console.log(err))
       if (status) {
-        // console.log(data);
+        e.target.reset()
       } else {
         setFormError(data.message)
       }
     } else {
       setFormError("New Password do not match comfirm Password")
     }
+    setProcessing(false)
   }
 
 
@@ -48,15 +44,16 @@ const ChangePassword = ({ goBack }) => {
 
       <div className="px-4 md:px-0 text-danger text-sm">{formError}</div>
       <div className="px-4 space-y-6 pt-5 flex-grow md:px-0 md:w-[65%]">
-        <AppInput type={"password"} onChange={(e) => setDisabled(false)} label={"Current Password"} required name={"current_password"} />
+        <AppInput type={"password"} onChange={(e) => setDisabled(false)} label={"Current Password"} required name={"old_password"} />
         <AppInput type={"password"} onChange={(e) => setDisabled(false)} label={"New Password"} required name={"new_password"} />
         <AppInput type={"password"} onChange={(e) => setDisabled(false)} label={"Comfirm Password"} required name={"comfirm_password"} />
       </div>
       <div className="flex px-4 md:px-0 flex-col md:flex-row items-center gap-4 mt-6">
-        <button disabled={disable} className="bg-black disabled:bg-gray-200 dark:disabled:bg-gray-700 dark:disabled:text-gray-600  w-full md:w-auto py-3 px-5 font-semibold text-[#fff] rounded-lg">
+        {!proccessing && (<button disabled={disable} className="bg-black disabled:bg-gray-200 dark:disabled:bg-gray-700 dark:disabled:text-gray-600  w-full md:w-auto py-3 px-5 font-semibold text-[#fff] rounded-lg">
           Confirm
-        </button>
-        <button className="font-semibold w-full md:w-auto text-[#344051]">Cancel</button>
+        </button>)}
+
+        {proccessing && (<div className="font-semibold w-full md:w-auto bg-gray-200 py-3 px-8 rounded-lg text-gray-400">Proccessing...</div>)}
       </div>
     </form>
   );

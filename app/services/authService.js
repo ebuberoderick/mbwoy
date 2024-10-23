@@ -33,3 +33,4 @@ export const fetchEFund = () => apiWithAuth.post("app/efund/fetch_efund").then(g
 
 
 export const updateInfoAPI = (formData) => apiWithAuth.post("app/profile/update",formData).then(getApiResponse).catch(getErrorResponse);
+export const updatePassword = (formData) => apiWithAuth.post("app/profile/update_password",formData).then(getApiResponse).catch(getErrorResponse);

@@ -17,8 +17,8 @@ const PersonalInfo = ({ goBack }) => {
   const userx = useSelector((state) => state.User);
   const [selectedUpdateImage, setSelectedUpdateImage] = useState(user?.avatar);
   const [disable, setDisabled] = useState(true)
-    const [proccessing, setProcessing] = useState(false)
-    const [savingImg, setSavingImg] = useState(false)
+  const [proccessing, setProcessing] = useState(false)
+  const [savingImg, setSavingImg] = useState(false)
   const [changed, setChanged] = useState(false)
   const dispatch = useDispatch()
   const headers = { 'Authorization': TOKEN }
@@ -45,7 +45,7 @@ const PersonalInfo = ({ goBack }) => {
     const { status, data } = await updateInfoAPI(i).catch(err => console.log(err))
     if (status) {
       let newData = {}
-      newData = { ...userx.value}
+      newData = { ...userx.value }
       newData.user = data.data[0]
       dispatch(addData(newData));
     }

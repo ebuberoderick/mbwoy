@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 
 
 const Referrals = ({ goBack }) => {
-
     const [loading, setLoading] = useState(true)
     const [referralList, setReferralList] = useState([])
 
@@ -19,8 +18,6 @@ const Referrals = ({ goBack }) => {
         }
         setLoading(false)
     }
-
-
     useEffect(() => {
         fetch()
     }, [])
