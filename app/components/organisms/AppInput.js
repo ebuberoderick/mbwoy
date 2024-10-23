@@ -89,7 +89,7 @@ function AppInput({ label,maxLength, checked, type, required, name, max, options
           value={value}
           onChange={(e) => onChange && onChange(e)}
           defaultValue={defaultValue}
-          className="w-full border focus:border-black border-black placeholder-shown:border-gray-300 p-3 peer outline-none rounded-lg placeholder:text-transparent"
+          className="w-full border appearance-none focus:border-black border-black placeholder-shown:border-gray-300 p-3 peer outline-none rounded-lg placeholder:text-transparent"
           placeholder={label}
           maxLength={maxLength}
           {...(maxLength ? { maxLength } : {})}
