@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import AppLayout from '@component/layouts/appLayout'
 import PersonalInfo from '@/app/components/molecules/settings/PersonalInfo';
-import ChangePassword from '@/app/components/molecules/settings/ChangePassword';
+// import ChangePassword from '@/app/components/molecules/settings/ChangePassword';
 import DeleteAccount from '@/app/components/molecules/settings/DeleteAccount';
 import Appearance from '@/app/components/molecules/settings/Appearance';
 import WithdrawalAccounts from '../components/molecules/settings/WithdrawalAccounts';
@@ -115,7 +115,7 @@ function Page() {
         <div className={`col-span-2 min-h-screen bg-gray-50 backdrop-blur-2xl bg-opacity-0 dark:bg-[#202B37] fixed lg:relative h-screen md:h-auto w-screen md:w-full top-0 ${showNav ? "-right-full lg:right-0" : "right-0"}`}>
           <div className="h-full md:h-auto col-span-2 pb-5 overflow-y-scroll ml-0 md:ml-72 lg:ml-0 md:overflow-y-auto">
             {activeTab === "personal-info" && <PersonalInfo reset={showNav} goBack={() => setShowNav(true)} />}
-            {activeTab === "change-password" && <ChangePassword goBack={() => setShowNav(true)} />}
+            {/* {activeTab === "change-password" && <ChangePassword goBack={() => setShowNav(true)} />} */}
             {activeTab === "withdrawal_accounts" && <WithdrawalAccounts bankList={bankList} loading={loading} openModal={() => updateAddAccountModal(true)} goBack={() => setShowNav(true)} />}
             {activeTab === "referrals" && <Referrals goBack={() => setShowNav(true)} />}
             {activeTab === "change-pin" && <ChangePin goBack={() => setShowNav(true)} />}
