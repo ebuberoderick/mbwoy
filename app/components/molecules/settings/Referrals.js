@@ -77,7 +77,7 @@ const Referrals = ({ goBack }) => {
                         {
                             !loading && referralList?.referrals.length === 0 && (
                                 <div className="space-y-2 pt-12">
-                                    <div className="text-center text-gray-400">There is no recent transaction</div>
+                                    <div className="text-center text-gray-400">No Referrals yet</div>
                                 </div>
                             )
                         }
