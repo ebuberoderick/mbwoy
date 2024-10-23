@@ -1,14 +1,11 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AppLayout from '@component/layouts/appLayout'
 import PersonalInfo from '@/app/components/molecules/settings/PersonalInfo';
 import ChangePassword from '@/app/components/molecules/settings/ChangePassword';
-import Notifications from '@/app/components/molecules/settings/Notifications';
 import DeleteAccount from '@/app/components/molecules/settings/DeleteAccount';
 import Appearance from '@/app/components/molecules/settings/Appearance';
 import WithdrawalAccounts from '../components/molecules/settings/WithdrawalAccounts';
-import Modal from '../components/organisms/Modal';
-import AppInput from '../components/organisms/AppInput';
 import Referrals from '../components/molecules/settings/Referrals';
 import ChangePin from '../components/molecules/settings/ChangePin';
 import AboutMbwoy from '../components/molecules/settings/AboutMbwoy';
@@ -16,11 +13,30 @@ import PXT from '../components/molecules/settings/PXT';
 import FAQs from '../components/molecules/settings/FAQs';
 import Support from '../components/molecules/settings/Support';
 import AddBankModal from '../components/molecules/AddBankModal';
+import { fetchBanks } from '../services/authService';
 
 function Page() {
   const [activeTab, setActiveTab] = useState("personal-info");
   const [showNav, setShowNav] = useState(true)
+  const [bankList, setBankList] = useState([])
+  const [loading, setLoading] = useState(true)
   const [addAccountModal, updateAddAccountModal] = useState(false)
+
+
+  const fetch = async () => {
+    setLoading(true)
+    setBankList([])
+    const { status, data } = await fetchBanks().catch(err => console.log(err))
+    if (status) {
+      setBankList(data.data[0]);
+    }
+    setLoading(false)
+  }
+
+
+  useEffect(() => {
+    fetch()
+  }, [])
 
   const settingsTabs = [
     {
@@ -73,7 +89,7 @@ function Page() {
 
   return (
     <AppLayout>
-      <AddBankModal close={() => updateAddAccountModal(false)} isOpen={addAccountModal} />
+      <AddBankModal refresh={() => fetch()} close={() => updateAddAccountModal(false)} isOpen={addAccountModal} />
       <div className="text-xl">Settings</div>
       <div className="container relative lg:grid grid-cols-3 gap-3">
         <div className="">
@@ -100,7 +116,7 @@ function Page() {
           <div className="h-full md:h-auto col-span-2 pb-5 overflow-y-scroll ml-0 md:ml-72 lg:ml-0 md:overflow-y-auto">
             {activeTab === "personal-info" && <PersonalInfo reset={showNav} goBack={() => setShowNav(true)} />}
             {activeTab === "change-password" && <ChangePassword goBack={() => setShowNav(true)} />}
-            {activeTab === "withdrawal_accounts" && <WithdrawalAccounts openModal={() => updateAddAccountModal(true)} goBack={() => setShowNav(true)} />}
+            {activeTab === "withdrawal_accounts" && <WithdrawalAccounts bankList={bankList} loading={loading} openModal={() => updateAddAccountModal(true)} goBack={() => setShowNav(true)} />}
             {activeTab === "referrals" && <Referrals goBack={() => setShowNav(true)} />}
             {activeTab === "change-pin" && <ChangePin goBack={() => setShowNav(true)} />}
             {activeTab === "about-mbwoy" && <AboutMbwoy goBack={() => setShowNav(true)} />}

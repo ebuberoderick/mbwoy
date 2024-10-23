@@ -52,10 +52,13 @@ function AddBankModal({ isOpen, close, refresh }) {
     const add = async (e) => {
         e.preventDefault()
         if (Object.keys(bankInfo).length > 0) {
+            setMeg("")
             setProccessing(true)
             const { status, data } = await addBankAccount({ account_name: bankInfo.account_name, bank_name: selectedBank.name, account_number: bankInfo.account_number }).catch(err => console.log(err))
             if (status) {
                 setCompleted(true)
+            }else{
+                setMeg(data.message);
             }
             setProccessing(false)
         }

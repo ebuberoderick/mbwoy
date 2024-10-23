@@ -81,11 +81,16 @@ function Page() {
               </div>
             </div>
             <div className="space-y-4">
+              <div className="flex justify-between items-center">
               <div className="font-bold">Recent Transactions</div>
+              <div className="">
+                <Link href="transactions">View all</Link>
+              </div>
+              </div>
               <div className="">
                 <div className="col-span-2 space-y-2">
                   {
-                    transactions.map((data, i) => (
+                    transactions.slice(0, 5).map((data, i) => (
                       <div key={i} className="p-3 flex items-center gap-2 space-y-1 cursor-pointer border rounded-xl">
                         <div className="">
                           <div className={`w-10 h-10 bg-gray-50 bg-opacity-50 rounded-full flex items-center justify-center ${data.status === "processing" ? "text-yellow" : data.status === "success" ? "text-success" : "text-danger"}`}>
