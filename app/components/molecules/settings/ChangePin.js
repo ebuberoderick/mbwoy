@@ -1,10 +1,69 @@
 import { FaAngleLeft } from "react-icons/fa6";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OTPInput from "react-otp-input";
 import Link from "next/link";
-const ChangePin = ({ goBack, openModal }) => {
+import { sendOTP, setTransactionPin, verifyOTP } from "@/app/services/authService";
+import { useSelector } from "react-redux";
+const ChangePin = ({ goBack }) => {
     const [otp, setOtp] = useState('');
+    const [pin, setPin] = useState('');
+    const user = useSelector((state) => state.User.value.user);
+    const [counter, setCounter] = useState(60);
     const [current, updateCurrent] = useState(1)
+    const [err, setErr] = useState()
+    const [proccessing, setProcessing] = useState(false)
+
+    const confirm = async () => {
+        setProcessing(true)
+        setCounter(60)
+        setErr("")
+        const { status, data } = await sendOTP({ email: user?.email }).catch(err => console.log(err))
+        if (status) {
+            updateCurrent(2)
+        }
+        setProcessing(false)
+    }
+
+
+    const confirmOTP = async () => {
+        let e = {}
+        setErr("")
+        e.otp = otp
+        e.email = user?.email
+        if (otp.length === 5) {
+            setProcessing(true)
+            const { status, data } = await verifyOTP(e).catch(err => console.log(err))
+            setProcessing(false)
+            if (status) {
+                updateCurrent(3)
+            } else {
+                setErr(data.message)
+            }
+        }
+
+    }
+
+
+    const set = async () => {
+        if (pin.length === 4) {
+            setProcessing(true)
+            let e = {}
+            e.pin = pin
+            const { status, data } = await setTransactionPin(e).catch(err => console.log(err))
+            setProcessing(false)
+            if (status) {
+                setErr('')
+                updateCurrent(4)
+            } else {
+                setErr(data.message)
+            }
+        }
+
+    }
+
+    useEffect(() => {
+        current === 2 && counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+    }, [counter, current]);
 
     return (
         <div className="flex flex-col h-full">
@@ -29,7 +88,7 @@ const ChangePin = ({ goBack, openModal }) => {
                             </div>
                             <div>
                                 <div className="flex justify-center px-4 md:px-0 flex-col md:flex-row items-center gap-4 mt-6">
-                                    <button onClick={() => updateCurrent(2)} className="bg-black disabled:bg-gray-200 dark:disabled:bg-gray-700 dark:disabled:text-gray-600  w-full md:w-auto py-3 px-12 font-semibold text-[#fff] rounded-lg">
+                                    <button disabled={proccessing} onClick={() => confirm()} className="bg-black disabled:bg-gray-200 dark:disabled:bg-gray-700 dark:disabled:text-gray-600  w-full md:w-auto py-3 px-12 font-semibold text-[#fff] rounded-lg">
                                         Confirm
                                     </button>
                                 </div>
@@ -41,7 +100,10 @@ const ChangePin = ({ goBack, openModal }) => {
                     current === 2 && (
                         <div className='max-w-md space-y-5 text-center '>
                             <div className='space-y-3'>
-                                <div className='text-sm'> A 5-digit code was sent to </div>
+                                <div>
+                                    <div className='text-sm'> A 5-digit code was sent to </div>
+                                    <div className="text-xs text-danger">{err}</div>
+                                </div>
                                 <div className="justify-center flex *:gap-4">
                                     <OTPInput
                                         value={otp}
@@ -70,14 +132,14 @@ const ChangePin = ({ goBack, openModal }) => {
                             </div>
                             <div>
                                 <div className="flex justify-center px-4 md:px-0 flex-col md:flex-row items-center gap-4 mt-6">
-                                    <button onClick={() => updateCurrent(3)} className="bg-black disabled:bg-gray-200 dark:disabled:bg-gray-700 dark:disabled:text-gray-600  w-full md:w-auto py-3 px-12 font-semibold text-[#fff] rounded-lg">
+                                    <button disabled={proccessing} onClick={() => confirmOTP()} className="bg-black disabled:bg-gray-200 dark:disabled:bg-gray-700 dark:disabled:text-gray-600  w-full md:w-auto py-3 px-12 font-semibold text-[#fff] rounded-lg">
                                         Confirm
                                     </button>
                                 </div>
                             </div>
                             <div className="text-center space-y-3 select-none">
-                                <div className="text-sm">00:00</div>
-                                <div className="font-bold cursor-pointer">Resend OTP</div>
+                                <div className="text-sm">00:{counter < 10 && '0'}{counter}</div>
+                                {counter < 1 && <div className="font-bold cursor-pointer" onClick={confirm}>Resend OTP</div>}
                             </div>
                         </div>
                     )
@@ -89,8 +151,8 @@ const ChangePin = ({ goBack, openModal }) => {
                                 <div className='font-bold text-xl'>Set new Pin</div>
                                 <div className="justify-center flex *:gap-4">
                                     <OTPInput
-                                        value={otp}
-                                        onChange={setOtp}
+                                        value={pin}
+                                        onChange={setPin}
                                         numInputs={4}
                                         isInputNum={true}
                                         shouldAutoFocus={true}
@@ -115,7 +177,7 @@ const ChangePin = ({ goBack, openModal }) => {
                             </div>
                             <div>
                                 <div className="flex justify-center px-4 md:px-0 flex-col md:flex-row items-center gap-4 mt-6">
-                                    <button onClick={() => updateCurrent(4)} className="bg-black disabled:bg-gray-200 dark:disabled:bg-gray-700 dark:disabled:text-gray-600  w-full md:w-auto py-3 px-12 font-semibold text-[#fff] rounded-lg">
+                                    <button disabled={proccessing} onClick={() => set()} className="bg-black disabled:bg-gray-200 dark:disabled:bg-gray-700 dark:disabled:text-gray-600  w-full md:w-auto py-3 px-12 font-semibold text-[#fff] rounded-lg">
                                         Confirm
                                     </button>
                                 </div>
