@@ -41,7 +41,7 @@ const Referrals = ({ goBack }) => {
 
             <div className="px-4 space-y-6 pt-5 flex-grow md:px-0 md:w-[65%]">
                 <div>
-                    <Image src={referral} alt="referral" className="h-72 w-auto mx-auto" />
+                    <Image src={referral} alt="referral" width={"100"} height={"100"} className="h-72 w-auto mx-auto" />
                 </div>
                 <div className="max-w-[300px] space-y-2 mx-auto text-center">
                     <div className="font-bold text-2xl">Redeemed &#8358;{!loading && Number(referralList?.user.wallet.bonus).toLocaleString("en-US")}</div>
@@ -56,12 +56,13 @@ const Referrals = ({ goBack }) => {
                     <div className="space-y-1">
                         {
                             !loading && referralList?.referrals.map((x, i) => (
-                                <div className="flex items-center gap-2">
+                                <div key={i} className="flex items-center gap-2">
                                     <div>
-                                        <div key={i} className="w-12 h-12 bg-gray-50 rounded-full overflow-hidden">
+                                        <div className="w-12 h-12 bg-gray-50 rounded-full overflow-hidden">
                                             <Image
                                                 src={x.avatar === "avatar.png" ? logo : x.avatar}
                                                 alt={x?.name}
+                                                width={"100"} height={"100"}
                                                 className="w-full h-full rounded-full"
                                             />
                                         </div>
