@@ -70,7 +70,7 @@ function AddBankModal({ isOpen, close, refresh }) {
 
     return (
         <div>
-            <Modal promt={completed} closeModal={close} isOpen={isOpen}>
+            <Modal promt={completed} closeModal={() => {setProccessing(false) ; close()}} isOpen={isOpen}>
                 {
                     completed ? (
                         <div className='space-y-3'>
@@ -88,7 +88,7 @@ function AddBankModal({ isOpen, close, refresh }) {
                         <form onSubmit={add} className="space-y-4">
                             <div className='text-xs text-danger'>{msg}</div>
                             <AppInput required name="number" onChange={fetchAccountDetails} label="Account Number" />
-                            <AppInput type={'select'} required name="code" label='select country' onChange={e => x(e.target.value)} options={[...bankList]} />
+                            <AppInput type={'select'} required name="code" label='Select bank' onChange={e => x(e.target.value)} options={[...bankList]} />
                             <div className="text-right">
                                 {
                                     fetchingBank ? (
