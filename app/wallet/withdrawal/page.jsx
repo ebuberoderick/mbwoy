@@ -23,6 +23,7 @@ function Page() {
     const [bankList, setBankList] = useState([])
     const [pin, setPin] = useState('');
     const [errMsg, setErrMsg] = useState("")
+    const [amtErr, setAmtErr] = useState("")
 
     const fetch = async () => {
         setLoading(true)
@@ -36,12 +37,17 @@ function Page() {
 
     const withdrawNw = async (e) => {
         e.preventDefault()
-        !confirmModal ? setConfirmModal(true) : FN(e)
+        setAmtErr("")
+        const x = serialize(e.target)
+        if (x.amount > 999) {
+            !confirmModal ? setConfirmModal(true) : FN(x)
+        } else {
+            setAmtErr("Minimum withdrawal amount is N1,000")
+        }
     }
 
-    const FN = async (e) => {
+    const FN = async (x) => {
         setProccessing(true)
-        const x = serialize(e.target)
         x.pin = pin
         setErrMsg("")
         if (x.pin.length === 4) {
@@ -88,16 +94,16 @@ function Page() {
                                             </div>
                                         </div>
                                         <form onSubmit={withdrawNw} className="space-y-4">
-                                            <Modal isOpen={confirmModal} closeModal={() => {setConfirmModal(false);setCompleted(false);setPin("")}} promt={proccessing}>
+                                            <Modal isOpen={confirmModal} closeModal={() => { setConfirmModal(false); setCompleted(false); setPin("") }} promt={proccessing}>
                                                 {
                                                     completed ? (
-                                                        <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
+                                                        <div className="max-w-sm rounded-2xl space-y-4 p-4 py-10 w-full">
                                                             <div className="font-extrabold text-2xl text-center">
                                                                 <Image src={success} className="mx-auto h-64" alt="" />
                                                             </div>
                                                             <div className="font-extrabold text-2xl text-center">Transaction Successful</div>
                                                             <div className="text-center text-sm">Transaction would take 10-15 minutes to process please be patient</div>
-                                                            <div onClick={() => {setConfirmModal(false);setCompleted(false);setPin("")}} className="flex-grow cursor-pointer disabled:bg-opacity-35 w-full bg-black text-white rounded-3xl text-center py-3">Close</div>
+                                                            <div onClick={() => router.back()} className="flex-grow cursor-pointer disabled:bg-opacity-35 w-full bg-black text-white rounded-3xl text-center py-3">Close</div>
                                                         </div>
                                                     ) : (
                                                         <div className="space-y-6">
@@ -160,6 +166,7 @@ function Page() {
                                                 ))
                                             }
                                             <div className="">
+                                                <div className="text-center text-danger text-xs">{amtErr}</div>
                                                 <div className="space-y-3">
                                                     <div className="">Email Amount</div>
                                                     <AppInput required label='Enter Amount' name='amount' />

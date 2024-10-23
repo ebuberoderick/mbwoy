@@ -5,6 +5,7 @@ import { TfiGift } from "react-icons/tfi";
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
+import Ticon from "@assets/images/TIcon.png"
 import logo from "@assets/images/viloxLogo.png"
 import Image from 'next/image';
 
@@ -114,6 +115,16 @@ function Page() {
                                             </div>
                                         </div>
                                     ))
+                                }
+                                {
+                                    orders.length === 0 && !loading && (
+                                        <div className="space-y-2">
+                                            <div className="">
+                                                <Image src={Ticon} className='w-44 mx-auto' alt='' />
+                                            </div>
+                                            <div className="text-center text-gray-400">There is no recent transaction</div>
+                                        </div>
+                                    )
                                 }
                                 {
                                     loading && ["", "", "", "", "", ""].map((data, i) => (
