@@ -5,7 +5,7 @@ import Modal from '@/app/components/organisms/Modal'
 import { RiUploadCloud2Line } from "react-icons/ri";
 import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react'
-import { IoIosArrowRoundBack } from 'react-icons/io'
+import { IoIosArrowRoundBack, IoMdClose } from 'react-icons/io'
 import { fetchGiftcard } from '@/app/services/authService'
 import { API_BASE_URL, TOKEN } from '@/app/services/httpService'
 import serialize from '@/app/hooks/Serialize'
@@ -30,7 +30,7 @@ function Page({ params }) {
     const [selected, setSelected] = useState({})
     const [options, setOptions] = useState([])
     const [cardOptions, setCardOptions] = useState([])
-
+    const [uploadImg, setUploadImg] = useState([])
     const headers = { 'Authorization': TOKEN }
 
     const fetch = async () => {
@@ -54,8 +54,28 @@ function Page({ params }) {
         !confirmModal ? setConfirmModal(true) : process(e)
     }
 
+
+
+    const uploadUpdateImg = async (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setUploadImg(prev => [...prev, ...e.target.files])
+        }
+    }
+
+    const removeImg = (e) => {
+
+        var arr = uploadImg
+        var index = arr.indexOf(e);
+        if (index > -1) {
+            arr.splice(index, 1);
+        }
+
+        setUploadImg([...arr])
+    }
+
+
     const process = async (e) => {
-        const images = e.target[4].files
+        const images = uploadImg
         const data = serialize(e.target)
         const formdata = new FormData()
         setProcessing(true)
@@ -217,15 +237,48 @@ function Page({ params }) {
                                                     </div>
                                                     {
                                                         type === 'physical' && (
-                                                            <div className="">
-                                                                <label htmlFor="upload" className="relative space-y-5 w-full rounded-2xl text-hrms_green border border-hrms_green py-3 px-4 inline-block cursor-pointer">
-                                                                    <input id="upload" required name="images[]" multiple accept="image/png, image/gif, image/jpeg" type="file" className="opacity-0 absolute w-full cursor-pointer h-full" />
-                                                                    <div className="text-center w-full">
-                                                                        <div className="text-[150px] flex justify-center"><RiUploadCloud2Line /></div>
-                                                                        <div className="text-xs text-center px-8">Click and upload Front and Back of Card, Must not be more than 10mb</div>
-                                                                    </div>
-                                                                    <div className="flex-grow disabled:bg-opacity-35 shadow-md bg-black text-white  rounded-xl text-center font-bold cursor-pointer py-3">Upload</div>
-                                                                </label>
+                                                            <div className="space-y-3">
+                                                                <div className="">
+                                                                    <label htmlFor="upload" className="relative space-y-5 w-full rounded-2xl text-hrms_green border border-hrms_green py-3 px-4 inline-block cursor-pointer">
+                                                                        <input id="upload" required name="images[]" onChange={(e) => uploadUpdateImg(e)} multiple accept="image/png, image/gif, image/jpeg" type="file" className="opacity-0 absolute w-full cursor-pointer h-full" />
+                                                                        <div className="text-center w-full">
+                                                                            <div className="text-[150px] flex justify-center"><RiUploadCloud2Line /></div>
+                                                                            <div className="text-xs text-center px-8">Click and upload Front and Back of Card, Must not be more than 10mb</div>
+                                                                        </div>
+                                                                        <div className="flex-grow disabled:bg-opacity-35 shadow-md bg-black text-white  rounded-xl text-center font-bold cursor-pointer py-3">Upload</div>
+                                                                    </label>
+                                                                </div>
+                                                                <div className="space-y-2">
+                                                                    {
+                                                                        uploadImg.map((img, i) => (
+                                                                            <div key={i} className="flex gap-2 items-center">
+                                                                                <div className="">
+                                                                                    <div className="w-12 h-12 rounded-sm">
+                                                                                        <Image
+                                                                                            src={URL.createObjectURL(img)}
+                                                                                            alt={img.name}
+                                                                                            className="w-full h-full"
+                                                                                            width={'150'}
+                                                                                            height={'150'}
+                                                                                        />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="flex-grow space-y-1">
+                                                                                    <div className="flex items-center justify-between">
+                                                                                        <div className="text-xs w-52 truncate">{img.name}</div>
+                                                                                        <div className="text-xs">{Math.round(((img.size / 1024) * 10) / 10) > 1023 ? Math.round((((img.size / 1024) / 1024) * 10) / 10) : Math.round(((img.size / 1024) * 10) / 10)} {Math.round(((img.size / 1024) * 10) / 10) > 1024 ? "mb": "kb"}</div>
+                                                                                    </div>
+                                                                                    <div className="">
+                                                                                        <div className="bg-black py-1 rounded-full"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="cursor-pointer p-2" onClick={() => removeImg(img)}>
+                                                                                    <IoMdClose />
+                                                                                </div>
+                                                                            </div>
+                                                                        ))
+                                                                    }
+                                                                </div>
                                                             </div>
                                                         )
                                                     }
