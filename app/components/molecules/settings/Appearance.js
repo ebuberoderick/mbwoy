@@ -4,6 +4,7 @@ import { FaAngleLeft } from "react-icons/fa";
 
 const Appearance = ({ goBack }) => {
   const [theme, setTheme] = useState("light")
+  const handleThemeToggle = () => {}
 
   return (
     <div className="flex flex-col h-full">
