@@ -25,6 +25,7 @@ function Page({ params }) {
     const [transactionReceipt, setTransactionReceipt] = useState({})
     const [view, setView] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [uploadImg, setUploadImg] = useState([])
     const [cryptos, setCrypto] = useState({})
 
     const headers = { 'Authorization': TOKEN }
@@ -41,6 +42,14 @@ function Page({ params }) {
     }
 
 
+
+    const uploadUpdateImg = async (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setUploadImg([e.target.files[0]])
+        }
+    }
+
+
     const sellNow = async (e) => {
         e.preventDefault()
         setErrMsg('')
@@ -49,7 +58,7 @@ function Page({ params }) {
 
     const process = async (e) => {
         const data = serialize(e.target)
-        const images = e.target[2].files
+        const images = uploadImg
         const formdata = new FormData()
         setProcessing(true)
 
@@ -202,10 +211,10 @@ function Page({ params }) {
                                                     </div>
                                                     <div className="">
                                                         <label htmlFor="upload" className="relative w-full rounded-2xl text-hrms_green border border-hrms_green p-2 inline-block cursor-pointer">
-                                                            <input id="upload" required name="images[]" accept="image/png, image/gif, image/jpeg" type="file" className="opacity-0 absolute w-full cursor-pointer h-full" />
+                                                            <input id="upload" required name="images[]" onChange={(e) => uploadUpdateImg(e)} accept="image/png, image/gif, image/jpeg" type="file" className="opacity-0 absolute w-full cursor-pointer h-full" />
                                                             <div className="flex items-center w-full">
                                                                 <div className="flex-grow text-gray-400">
-                                                                    <div className="flex"><RiUploadCloud2Line /></div>
+                                                                    <div className="flex items-center gap-2"><RiUploadCloud2Line /> <div className="w-52 truncate">{!uploadImg[0]?.name ? "Upload Receipt" : uploadImg[0]?.name }</div></div>
                                                                 </div>
                                                                 <div className=""><div className="flex-grow px-6 disabled:bg-opacity-35 shadow-md bg-black text-white text-xs rounded-xl text-center font-bold cursor-pointer py-2">Upload</div></div>
                                                             </div>
