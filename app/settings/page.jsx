@@ -111,11 +111,10 @@ function Page() {
         <div className="">
           <div className="md:w-[80%] md:border dark:border-gray-700 border-[#F2F4F7] p-3 rounded-lg">
             {settingsTabs.map((tab, i) => (
-              <div className="">
+              <div key={i}>
                 {
                   tab.asLink ? (
                     <Link
-                      key={i}
                       target='_blank'
                       href={tab.href}
                     >
@@ -133,7 +132,6 @@ function Page() {
                     </Link>
                   ) : (
                     <div
-                      key={i}
                       className={
                         activeTab === `${tab.id}`
                           ? `md:bg-[#fff] border-b dark:border-gray-600 dark:md:bg-gray-700 dark:text-white-1 md:border-none md:px-4 py-3 mb-2 md:rounded-lg md:text-[#344051] font-medium cursor-pointer md:[boxShadow:0px_2px_4px_0px_rgba(52,_64,_81,_0.12)]`
