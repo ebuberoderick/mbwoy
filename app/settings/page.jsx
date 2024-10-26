@@ -116,6 +116,7 @@ function Page() {
                   tab.asLink ? (
                     <Link
                       key={i}
+                      target='_blank'
                       href={tab.href}
                     >
                       <div className={
