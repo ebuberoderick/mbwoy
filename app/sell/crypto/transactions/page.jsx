@@ -71,7 +71,7 @@ function Page() {
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <div className="">Rate</div>
-                                        <div className="font-bold text-lg">${Number(view?.rate).toLocaleString('en-US')}</div>
+                                        <div className="font-bold text-lg">&#8358;{Number(view?.rate).toLocaleString('en-US')}</div>
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <div className="">Amount</div>
@@ -81,6 +81,19 @@ function Page() {
                                         <div className="">Payment in Naira</div>
                                         <div className="font-bold text-lg">&#8358;{Number(view?.amount_to_pay).toLocaleString('en-US')}</div>
                                     </div>
+                                    <div className="flex items-center justify-between">
+                                        <div className="">Status</div>
+                                        <div className={`text-[9px] px-3 inline py-[2px] rounded-lg bg-opacity-10 ${view.status === "success" ? "text-success bg-success" : view.status === "rejected" ? "text-danger bg-danger" : "text-yellow bg-yellow"}`}>{view.status}</div>
+                                    </div>
+                                    {
+                                        view.cancel_reason !== null && (
+                                            <div className="">
+                                                <div className="">Reason</div>
+                                                <div className="font-bold text-lg">{view?.cancel_reason}</div>
+                                            </div>
+                                        )
+                                    }
+                                    {view.cancel_image !== null && <Image src={view.cancel_image} width={"100"} height={"100"} className='w-full h-96' alt='' />}
                                     <div className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
                                 </div>
                             </div>
@@ -100,7 +113,7 @@ function Page() {
                                                     <div className="text-xs">{data.transaction_id}</div>
                                                 </div>
                                                 <div className="text-right">
-                                                    <div className={`font-bold text-lg ${data.status === "processing" ? "text-yellow" : data.status === "success" ? "text-success" : "text-danger"}`}>&#8358;{Number(data.amount).toLocaleString('en-US')}</div>
+                                                    <div className={`font-bold text-lg ${data.status === "processing" ? "text-yellow" : data.status === "success" ? "text-success" : "text-danger"}`}>${Number(data.amount).toLocaleString('en-US')}</div>
                                                     <div className="text-xs capitalize">{data.status}</div>
                                                 </div>
                                             </div>
