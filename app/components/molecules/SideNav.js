@@ -59,7 +59,7 @@ function SideNav({ user }) {
           </div>
 
         </div>
-        <div className="space-y-3">
+        <div className="space-y-3 pb-16 sm:pb-0">
           <div onClick={() => setModal(true)} className="text-danger hover:bg-danger hover:bg-opacity-15 flex px-3 py-2 items-center gap-1 rounded-lg cursor-pointer">
             <CiPower className="text-2xl" /> SignOut
           </div>

@@ -29,7 +29,7 @@ function AppInput({ label,maxLength, checked, type, required, name, max, options
             <input
               type={type}
               id={name + Fid}
-              className="peer group hidden appearance-none"
+              className="peer group opacity-0 appearance-none"
               name={name}
               required={required}
               maxLength={maxLength}
