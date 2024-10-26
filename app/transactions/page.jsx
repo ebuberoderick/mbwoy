@@ -36,7 +36,7 @@ function Page() {
         <div className="flex items-center">
           <div className="flex-grow items-center flex">
             <div className="flex-grow">
-              <div onClick={() => router.back()} className="cursor-pointer flex items-center gap-1">
+              <div onClick={() => Object.keys(view).length > 0 ? setView({}) : router.back()} className="cursor-pointer flex items-center gap-1">
                 <IoIosArrowRoundBack /> Back
               </div>
             </div>
