@@ -7,6 +7,7 @@ import DeleteAccount from '@/app/components/molecules/settings/DeleteAccount';
 import Appearance from '@/app/components/molecules/settings/Appearance';
 import WithdrawalAccounts from '../components/molecules/settings/WithdrawalAccounts';
 import Referrals from '../components/molecules/settings/Referrals';
+import { RxExternalLink } from "react-icons/rx";
 import ChangePin from '../components/molecules/settings/ChangePin';
 import AboutMbwoy from '../components/molecules/settings/AboutMbwoy';
 import PXT from '../components/molecules/settings/PXT';
@@ -14,6 +15,7 @@ import FAQs from '../components/molecules/settings/FAQs';
 import Support from '../components/molecules/settings/Support';
 import AddBankModal from '../components/molecules/AddBankModal';
 import { fetchBanks } from '../services/authService';
+import Link from 'next/link';
 
 function Page() {
   const [activeTab, setActiveTab] = useState("personal-info");
@@ -42,46 +44,60 @@ function Page() {
     {
       title: "Personal Info",
       id: "personal-info",
+      asLink: false
     },
     {
       title: "Withdrawal Accounts",
       id: "withdrawal_accounts",
+      asLink: false
     },
     {
       title: "Referrals",
       id: "referrals",
+      asLink: false
     },
     {
       title: "Change Password",
       id: "change-password",
+      asLink: false
     },
     {
       title: "Change Pin",
       id: "change-pin",
+      asLink: false
     },
     {
       title: "Appearance",
       id: "appearance",
+      asLink: false
     },
     {
       title: "About Mbwoy",
       id: "about-mbwoy",
+      asLink: true,
+      href: "https://mbwoyafrotech.com/about"
     },
     {
       title: "Privacy & Terms of Use",
       id: "pxt",
+      asLink: true,
+      href: "https://mbwoyafrotech.com/policy"
     },
     {
       title: "FAQs",
       id: "faqs",
+      asLink: true,
+      href: "https://mbwoyafrotech.com/service"
     },
     {
       title: "Support",
       id: "support",
+      asLink: false
     },
     {
       title: "Delete Account",
       id: "delete-account",
+      asLink: false
     },
 
   ];
@@ -95,19 +111,42 @@ function Page() {
         <div className="">
           <div className="md:w-[80%] md:border dark:border-gray-700 border-[#F2F4F7] p-3 rounded-lg">
             {settingsTabs.map((tab, i) => (
-              <div
-                key={i}
-                className={
-                  activeTab === `${tab.id}`
-                    ? `md:bg-[#fff] border-b dark:border-gray-600 dark:md:bg-gray-700 dark:text-white-1 md:border-none md:px-4 py-3 mb-2 md:rounded-lg md:text-[#344051] font-medium cursor-pointer md:[boxShadow:0px_2px_4px_0px_rgba(52,_64,_81,_0.12)]`
-                    : `md:px-4 py-3 dark:text-white-1 dark:border-gray-600 dark:md:text-gray-300 border-b md:border-none mb-2 md:rounded-lg md:text-[#637083] font-medium cursor-pointer`
+              <div className="">
+                {
+                  tab.asLink ? (
+                    <Link
+                      key={i}
+                      href={tab.href}
+                    >
+                      <div className={
+                        activeTab === `${tab.id}`
+                          ? `md:bg-[#fff] border-b dark:border-gray-600 dark:md:bg-gray-700 dark:text-white-1 md:border-none md:px-4 py-3 mb-2 md:rounded-lg md:text-[#344051] font-medium cursor-pointer md:[boxShadow:0px_2px_4px_0px_rgba(52,_64,_81,_0.12)]`
+                          : `md:px-4 py-3 dark:text-white-1 dark:border-gray-600 dark:md:text-gray-300 border-b md:border-none mb-2 md:rounded-lg md:text-[#637083] font-medium cursor-pointer`
+                      }>
+                        <div className="flex items-center">
+                          <div className="flex-grow">{tab.title}</div>
+                          <div className=""><RxExternalLink /></div>
+                        </div>
+                      </div>
+
+                    </Link>
+                  ) : (
+                    <div
+                      key={i}
+                      className={
+                        activeTab === `${tab.id}`
+                          ? `md:bg-[#fff] border-b dark:border-gray-600 dark:md:bg-gray-700 dark:text-white-1 md:border-none md:px-4 py-3 mb-2 md:rounded-lg md:text-[#344051] font-medium cursor-pointer md:[boxShadow:0px_2px_4px_0px_rgba(52,_64,_81,_0.12)]`
+                          : `md:px-4 py-3 dark:text-white-1 dark:border-gray-600 dark:md:text-gray-300 border-b md:border-none mb-2 md:rounded-lg md:text-[#637083] font-medium cursor-pointer`
+                      }
+                      onClick={() => { setActiveTab(`${tab.id}`); setShowNav(false) }}
+                    >
+                      <div className="flex items-center">
+                        <div className="flex-grow">{tab.title}</div>
+                        <div className="md:hidden"><i className="ri-arrow-right-s-line"></i></div>
+                      </div>
+                    </div>
+                  )
                 }
-                onClick={() => { setActiveTab(`${tab.id}`); setShowNav(false) }}
-              >
-                <div className="flex items-center">
-                  <div className="flex-grow">{tab.title}</div>
-                  <div className="md:hidden"><i className="ri-arrow-right-s-line"></i></div>
-                </div>
               </div>
             ))}
           </div>

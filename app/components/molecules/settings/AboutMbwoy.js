@@ -1,5 +1,5 @@
 import { FaAngleLeft } from "react-icons/fa6";
-const AboutMbwoy = ({ goBack,openModal }) => {
+const AboutMbwoy = ({ goBack, openModal }) => {
 
     return (
         <div className="flex flex-col h-full">
@@ -15,7 +15,14 @@ const AboutMbwoy = ({ goBack,openModal }) => {
             </div>
 
             <div className="px-4 space-y-6 pt-5 flex-grow md:px-0 md:w-[65%]">
-                
+                <iframe
+                    src="https://hrms-sandy.vercel.app/"
+                    sandbox="allow-scripts"
+                    loading="lazy"
+                    aria-hidden="false"
+                    className="w-full h-screen"
+                    tabindex="0"
+                ></iframe>
             </div>
         </div>
     );
