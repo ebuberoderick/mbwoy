@@ -266,7 +266,7 @@ function Page({ params }) {
                                                                                 <div className="flex-grow space-y-1">
                                                                                     <div className="flex items-center justify-between">
                                                                                         <div className="text-xs w-52 truncate">{img.name}</div>
-                                                                                        <div className="text-xs">{Math.round(((img.size / 1024) * 10) / 10) > 1023 ? Math.round((((img.size / 1024) / 1024) * 10) / 10) : Math.round(((img.size / 1024) * 10) / 10)} {Math.round(((img.size / 1024) * 10) / 10) > 1024 ? "mb": "kb"}</div>
+                                                                                        <div className="text-xs">{Math.round(((img.size / 1024) * 10) / 10) > 1023 ? Math.round((((img.size / 1024) / 1024) * 10) / 10) : Math.round(((img.size / 1024) * 10) / 10)} {Math.round(((img.size / 1024) * 10) / 10) > 1024 ? "mb" : "kb"}</div>
                                                                                     </div>
                                                                                     <div className="">
                                                                                         <div className="bg-black py-1 rounded-full"></div>
@@ -314,6 +314,20 @@ function Page({ params }) {
 
                                                             </div>
                                                         </div>
+                                                        {
+                                                            Object?.keys(selected).length > 0 && (
+                                                                <div className="space-y-1">
+                                                                    <div className="flex text-xs justify-between items-center">
+                                                                        <div className="">10 - 500</div>
+                                                                        <div className="">Rate: <span className='text-success'>&#8358;{Number(selected.sell_rate_low).toLocaleString('en-US')}</span></div>
+                                                                    </div>
+                                                                    <div className="flex text-xs justify-between items-center">
+                                                                        <div className="">500 - Above</div>
+                                                                        <div className="">Rate: <span className='text-success'>&#8358;{Number(selected.sell_rate_high).toLocaleString('en-US')}</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        }
                                                     </div>
                                                     <div className="flex gap-3">
                                                         <button className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Confirm Transaction</button>

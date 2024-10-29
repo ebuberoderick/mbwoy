@@ -45,14 +45,19 @@ const DeleteAccount = ({ goBack }) => {
           To proceed with deleting your account, please let us know the reason for your departure. Once we receive this information, we&apos;ll process your request promptly. Thank you.
         </div>
         <div className="space-y-5">
-          <AppInput type={"text"} name="email" onChange={() => setDisabled(false)} label={"Email Address"} required  />
-          <AppInput type={"textarea"} name="reason" onChange={() => setDisabled(false)} label={"Reason(s)"} required  />
+          <AppInput type={"text"} name="email" onChange={() => setDisabled(false)} label={"Email Address"} required />
+          <AppInput type={"textarea"} name="reason" onChange={() => setDisabled(false)} label={"Reason(s)"} required />
         </div>
         <div className="flex items-start">
           <AppInput type={"checkbox"} required />
-          <p className="font-medium relative -left-10 dark:text-gray-300 leading-[24px] text-[#344051] text-[15px]">
-            Yes, I want to permanently delete my account and all my personal information attached to this acocunt.
-          </p>
+          <div className="space-y-3">
+            <p className="font-medium relative -left-10 dark:text-gray-300 leading-[24px] text-[#344051] text-[15px]">
+              Yes, I want to permanently delete my account and all my personal information attached to this acocunt.
+            </p>
+            <p className="font-medium relative -left-10 dark:text-gray-300 leading-[24px] text-[#344051] text-[15px]">
+              When you delete your account, you&apos;ll have the option to restore within 30 days
+            </p>
+          </div>
         </div>
 
         <div className="md:w-[65%] pb-8 px-4 md:px-0">

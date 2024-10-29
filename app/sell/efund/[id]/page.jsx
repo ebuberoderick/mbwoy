@@ -90,10 +90,24 @@ function Page({ params }) {
 
                                                     </div>
                                                 </div>
+                                                {
+                                                    Object?.keys(EFundData).length > 0 && (
+                                                        <div className="space-y-1">
+                                                            <div className="flex text-xs justify-between items-center">
+                                                                <div className="">10 - 500</div>
+                                                                <div className="">Rate: <span className='text-success'>&#8358;{Number(EFundData.sell_rate_low).toLocaleString('en-US')}</span></div>
+                                                            </div>
+                                                            <div className="flex text-xs justify-between items-center">
+                                                                <div className="">500 - Above</div>
+                                                                <div className="">Rate: <span className='text-success'>&#8358;{Number(EFundData.sell_rate_high).toLocaleString('en-US')}</span></div>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
                                             </div>
 
                                             <div className="flex gap-3">
-                                                <button className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Confirm Transaction</button>
+                                                <button className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Request Tag</button>
                                             </div>
                                         </form>
                                     </div>

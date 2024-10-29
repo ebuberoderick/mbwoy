@@ -214,12 +214,26 @@ function Page({ params }) {
                                                             <input id="upload" required name="images[]" onChange={(e) => uploadUpdateImg(e)} accept="image/png, image/gif, image/jpeg" type="file" className="opacity-0 absolute w-full cursor-pointer h-full" />
                                                             <div className="flex items-center w-full">
                                                                 <div className="flex-grow text-gray-400">
-                                                                    <div className="flex items-center gap-2"><RiUploadCloud2Line /> <div className="w-52 truncate">{!uploadImg[0]?.name ? "Upload Receipt" : uploadImg[0]?.name }</div></div>
+                                                                    <div className="flex items-center gap-2"><RiUploadCloud2Line /> <div className="w-52 truncate">{!uploadImg[0]?.name ? "Upload Receipt" : uploadImg[0]?.name}</div></div>
                                                                 </div>
                                                                 <div className=""><div className="flex-grow px-6 disabled:bg-opacity-35 shadow-md bg-black text-white text-xs rounded-xl text-center font-bold cursor-pointer py-2">Upload</div></div>
                                                             </div>
                                                         </label>
                                                     </div>
+                                                    {
+                                                        Object?.keys(cryptos).length > 0 && (
+                                                            <div className="space-y-1">
+                                                                <div className="flex text-xs justify-between items-center">
+                                                                    <div className="">10 - 500</div>
+                                                                    <div className="">Rate: <span className='text-success'>&#8358;{Number(cryptos.sell_rate_low).toLocaleString('en-US')}</span></div>
+                                                                </div>
+                                                                <div className="flex text-xs justify-between items-center">
+                                                                    <div className="">500 - Above</div>
+                                                                    <div className="">Rate: <span className='text-success'>&#8358;{Number(cryptos.sell_rate_high).toLocaleString('en-US')}</span></div>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
 
                                                     <div className="flex gap-3">
                                                         <button className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Confirm Transaction</button>
