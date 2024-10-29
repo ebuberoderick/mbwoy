@@ -1,5 +1,13 @@
-import { FaAngleLeft } from "react-icons/fa6";
-const Support = ({ goBack,openModal }) => {
+import { FaAngleLeft, FaRegFaceSmile, FaXTwitter } from "react-icons/fa6";
+import { LiaAngleRightSolid } from "react-icons/lia";
+import { SiWhatsapp } from "react-icons/si";
+import { RiErrorWarningLine, RiFacebookCircleLine } from "react-icons/ri";
+import { IoLogoInstagram } from "react-icons/io5";
+import { MdOutlineLocalPhone } from "react-icons/md";
+import { LuMail } from "react-icons/lu";
+
+
+const Support = ({ goBack }) => {
 
     return (
         <div className="flex flex-col h-full">
@@ -15,7 +23,61 @@ const Support = ({ goBack,openModal }) => {
             </div>
 
             <div className="px-4 space-y-6 pt-5 flex-grow md:px-0 md:w-[65%]">
-                
+                <div>
+                    <div className="font-semibold text-lg">Issue/Feddback</div>
+                    <div>
+                        <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                            <div><RiErrorWarningLine /></div>
+                            <div className="flex-grow">Report an Issue</div>
+                            <div><LiaAngleRightSolid /></div>
+                        </div>
+                        <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                            <div><FaRegFaceSmile /></div>
+                            <div className="flex-grow">Send Feedback</div>
+                            <div><LiaAngleRightSolid /></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className="font-semibold text-lg">Social Media Handles</div>
+                    <div>
+                        <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                            <div><RiFacebookCircleLine /></div>
+                            <div className="flex-grow">Facebook</div>
+                            <div><LiaAngleRightSolid /></div>
+                        </div>
+                        <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                            <div><SiWhatsapp /></div>
+                            <div className="flex-grow">Whatsapp</div>
+                            <div><LiaAngleRightSolid /></div>
+                        </div>
+                        <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                            <div><FaXTwitter /></div>
+                            <div className="flex-grow">Twitter</div>
+                            <div><LiaAngleRightSolid /></div>
+                        </div>
+                        <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                            <div><IoLogoInstagram /></div>
+                            <div className="flex-grow">Instagram</div>
+                            <div><LiaAngleRightSolid /></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className="font-semibold text-lg">Customer Support contacts</div>
+                    <div>
+                        <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                            <div><MdOutlineLocalPhone /></div>
+                            <div className="flex-grow">+2349169724828</div>
+                            <div><LiaAngleRightSolid /></div>
+                        </div>
+                        <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                            <div><LuMail /></div>
+                            <div className="flex-grow">support@mbwoyafrotech.com</div>
+                            <div><LiaAngleRightSolid /></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
