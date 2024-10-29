@@ -35,3 +35,9 @@ export const fetchEFund = () => apiWithAuth.post("app/efund/fetch_efund").then(g
 export const updateInfoAPI = (formData) => apiWithAuth.post("app/profile/update",formData).then(getApiResponse).catch(getErrorResponse);
 export const deactivateAccount = (formData) => apiWithAuth.post("app/profile/delete_account",formData).then(getApiResponse).catch(getErrorResponse);
 export const updatePassword = (formData) => apiWithAuth.post("app/profile/update_password",formData).then(getApiResponse).catch(getErrorResponse);
+
+
+export const fetchNotification = () => apiWithAuth.post("app/notifications/fetch").then(getApiResponse).catch(getErrorResponse);
+export const fetchUnreadNotification = () => apiWithAuth.post("app/notifications/fetch-unread").then(getApiResponse).catch(getErrorResponse);
+export const markAsUnread = (formData) => apiWithAuth.post("app/notifications/mark-asread",formData).then(getApiResponse).catch(getErrorResponse);
+export const markAllAsUnread = (formData) => apiWithAuth.post("app/notifications/markall-asread",formData).then(getApiResponse).catch(getErrorResponse);  

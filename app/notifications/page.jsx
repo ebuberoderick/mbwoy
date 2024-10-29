@@ -2,19 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import AppLayout from '@component/layouts/appLayout'
 import NotificationChip from '@/app/components/organisms/NotificationChip'
+import { fetchNotification } from '../services/authService'
 
 function Page() {
   const [notification, setNotification] = useState([])
 
   const getNotification = async () => {
-    const list = []
-    // const { status, data } = await fetchNotification().catch(err => console.log(err))
-    // if (status) {
-    //   await data.data.notifications.forEach(element => {
-    //     list.push(JSON.parse(element.data));
-    //   });
-    // }
-    setNotification(list)
+    const { status, data } = await fetchNotification().catch(err => console.log(err))
+    if (status) {
+      console.log(data)
+      setNotification(data.data.notifications)
+    }
   }
 
   useEffect(() => {
