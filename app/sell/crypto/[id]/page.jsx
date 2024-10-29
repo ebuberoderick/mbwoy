@@ -14,6 +14,8 @@ import axios from 'axios'
 import logo from "@assets/images/viloxLogo.png"
 import success from "@assets/images/success.png"
 import Image from 'next/image';
+import QRCode from "react-qr-code";
+
 
 function Page({ params }) {
     const router = useRouter()
@@ -199,7 +201,9 @@ function Page({ params }) {
                                                     <div className="space-y-3 text-center text-xs text-gray-400">
                                                         Send Coins the wallet below  and upload receipt in the provided field below
                                                     </div>
-                                                    <div className="w-52 h-52 bg-gray-100 mx-auto rounded-lg"></div>
+                                                    <div className="w-52 h-52 bg-gray-100 mx-auto rounded-lg">
+                                                        <QRCode value={cryptos.wallet_address} size={256} style={{ height: "auto", maxWidth: "100%", width: "100%" }} viewBox={`0 0 256 256`} />
+                                                    </div>
                                                     <div title='Click to Copy' onClick={() => navigator?.clipboard?.writeText(cryptos.wallet_address)} className="bg-gray-100 pl-1 relative pr-8 rounded-xl">
                                                         <div className="max-w-sm trunck-text space-x-3 p-2 rounded-lg">
                                                             <div className="max-w-[18rem] inline-block flex-grow">
