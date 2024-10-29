@@ -10,7 +10,6 @@ function Page() {
   const getNotification = async () => {
     const { status, data } = await fetchNotification().catch(err => console.log(err))
     if (status) {
-      console.log(data)
       setNotification(data.data.notifications)
     }
   }
