@@ -8,10 +8,12 @@ import { IoIosArrowRoundBack } from 'react-icons/io'
 import Ticon from "@assets/images/TIcon.png"
 import logo from "@assets/images/viloxLogo.png"
 import Image from 'next/image';
+import ChatChip from '@/app/components/organisms/ChatChip';
 
 function Page() {
     const router = useRouter()
     const [orders, setOrders] = useState([])
+    const [showChat, setShowChat] = useState(false)
     const [loading, setLoading] = useState(true)
     const [view, setView] = useState({})
 
@@ -34,7 +36,7 @@ function Page() {
                 <div className="flex items-center">
                     <div className="flex-grow items-center flex">
                         <div className="flex-grow">
-                            <div onClick={() => Object.keys(view).length > 0 ? setView({}) : router.back()} className="cursor-pointer flex items-center gap-1">
+                            <div onClick={() => Object.keys(view).length > 0 ?( showChat ? setShowChat(false) : setView({})) : router.back()} className="cursor-pointer flex items-center gap-1">
                                 <IoIosArrowRoundBack /> Back
                             </div>
                         </div>
@@ -44,67 +46,77 @@ function Page() {
                     {
                         Object.keys(view).length > 0 ? (
                             <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
-                                <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
-                                <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
-                                    <div className="space-y-3">
-                                        <div className="bg-gray-50 py-3 rounded-lg"><img src={view.card.image} className='bg-contain mx-auto' width={50} height={50} /></div>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="">Country</div>
-                                        <div className="font-bold text-lg">{view.card.name}</div>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="">Card Type</div>
-                                        <div className="font-bold text-lg capitalize">{view?.type}</div>
-                                    </div>
-                                    {
-                                        view?.type === `physical` ? (
-                                            <div className="flex items-center justify-between">
-                                                <div className="">Uploads</div>
-                                                <div className="font-bold flex gap-2 text-lg">
-                                                    {
-                                                        view?.images.map((data, i) => (
-                                                            <div key={i} className="h-10 w-10 bg-gray-50">
-                                                                <img src={data} alt="" className="w-full h-full" srcset="" />
-                                                            </div>
-                                                        ))
-                                                    }
+                                {
+                                    showChat ? (
+                                        <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
+                                            <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 w-full"><ChatChip /></div>
+                                        </div>
+                                    ) : (
+                                        <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
+                                            <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
+                                            <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
+                                                <div className="space-y-3">
+                                                    <div className="bg-gray-50 py-3 rounded-lg"><img src={view.card.image} className='bg-contain mx-auto' width={50} height={50} /></div>
                                                 </div>
+                                                <div className="flex items-center justify-between">
+                                                    <div className="">Country</div>
+                                                    <div className="font-bold text-lg">{view.card.name}</div>
+                                                </div>
+                                                <div className="flex items-center justify-between">
+                                                    <div className="">Card Type</div>
+                                                    <div className="font-bold text-lg capitalize">{view?.type}</div>
+                                                </div>
+                                                {
+                                                    view?.type === `physical` ? (
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="">Uploads</div>
+                                                            <div className="font-bold flex gap-2 text-lg">
+                                                                {
+                                                                    view?.images.map((data, i) => (
+                                                                        <div key={i} className="h-10 w-10 bg-gray-50">
+                                                                            <img src={data} alt="" className="w-full h-full" srcset="" />
+                                                                        </div>
+                                                                    ))
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="">E-code</div>
+                                                            <div className="font-bold text-lg">{view?.ecode}</div>
+                                                        </div>
+                                                    )
+                                                }
+                                                <div className="flex items-center justify-between">
+                                                    <div className="">Rate</div>
+                                                    <div className="font-bold text-lg">&#8358;{Number(view?.rate).toLocaleString('en-US')}</div>
+                                                </div>
+                                                <div className="flex items-center justify-between">
+                                                    <div className="">Amount</div>
+                                                    <div className="font-bold text-lg">${Number(view?.amount).toLocaleString('en-US')}</div>
+                                                </div>
+                                                <div className="flex items-center justify-between">
+                                                    <div className="">Payment in Naira</div>
+                                                    <div className="font-bold text-lg">&#8358;{Number(view?.amount_to_pay).toLocaleString('en-US')}</div>
+                                                </div>
+                                                <div className="flex items-center justify-between">
+                                                    <div className="">Status</div>
+                                                    <div className={`text-[9px] px-3 inline py-[2px] rounded-lg bg-opacity-10 ${view.status === "success" ? "text-success bg-success" : view.status === "rejected" ? "text-danger bg-danger" : "text-yellow bg-yellow"}`}>{view.status}</div>
+                                                </div>
+                                                {
+                                                    view.cancel_reason !== null && (
+                                                        <div className="">
+                                                            <div className="">Reason</div>
+                                                            <div className="">{view?.cancel_reason}</div>
+                                                        </div>
+                                                    )
+                                                }
+                                                {view.cancel_image !== null && <Image src={view.cancel_image} width={"100"} height={"100"} className='w-full h-96' alt='' />}
+                                                <div onClick={() => setShowChat(true)} className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
                                             </div>
-                                        ) : (
-                                            <div className="flex items-center justify-between">
-                                                <div className="">E-code</div>
-                                                <div className="font-bold text-lg">{view?.ecode}</div>
-                                            </div>
-                                        )
-                                    }
-                                    <div className="flex items-center justify-between">
-                                        <div className="">Rate</div>
-                                        <div className="font-bold text-lg">&#8358;{Number(view?.rate).toLocaleString('en-US')}</div>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="">Amount</div>
-                                        <div className="font-bold text-lg">${Number(view?.amount).toLocaleString('en-US')}</div>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="">Payment in Naira</div>
-                                        <div className="font-bold text-lg">&#8358;{Number(view?.amount_to_pay).toLocaleString('en-US')}</div>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="">Status</div>
-                                        <div className={`text-[9px] px-3 inline py-[2px] rounded-lg bg-opacity-10 ${view.status === "success" ? "text-success bg-success" : view.status === "rejected" ? "text-danger bg-danger" : "text-yellow bg-yellow"}`}>{view.status}</div>
-                                    </div>
-                                    {
-                                        view.cancel_reason !== null && (
-                                            <div className="">
-                                                <div className="">Reason</div>
-                                                <div className="">{view?.cancel_reason}</div>
-                                            </div>
-                                        )
-                                    }
-                                    {view.cancel_image !== null && <Image src={view.cancel_image} width={"100"} height={"100"} className='w-full h-96' alt='' />}
-                                    <div className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
-                                </div>
+                                        </div>
+                                    )
+                                }
                             </div>
                         ) : (
                             <div className="col-span-2 space-y-2">

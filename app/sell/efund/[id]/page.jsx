@@ -9,6 +9,7 @@ import { IoIosArrowRoundBack } from 'react-icons/io'
 import { fetchEFund } from '@/app/services/authService'
 import logo from "@assets/images/viloxLogo.png"
 import Image from 'next/image';
+import ChatChip from '@/app/components/organisms/ChatChip';
 
 function Page({ params }) {
     const router = useRouter()
@@ -47,7 +48,7 @@ function Page({ params }) {
             <div className="space-y-5">
                 <div className="flex items-center">
                     <div className="flex-grow flex">
-                        <div onClick={() => router.back()} className="cursor-pointer flex items-center gap-1">
+                        <div onClick={() => view ? setView(false) : router.back()} className="cursor-pointer flex items-center gap-1">
                             <IoIosArrowRoundBack /> Back
                         </div>
                     </div>
@@ -58,10 +59,7 @@ function Page({ params }) {
                             {
                                 view ? (
                                     <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
-                                        <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
-                                        <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
-                                            Chat Module
-                                        </div>
+                                        <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 w-full"><ChatChip /></div>
                                     </div>
                                 ) : (
                                     <div className="col-span-2 space-y-5 flex py-20 items-center justify-center w-full">

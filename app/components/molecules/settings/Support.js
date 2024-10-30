@@ -31,11 +31,11 @@ const Support = ({ goBack }) => {
                             <div className="flex-grow">Report an Issue</div>
                             <div><LiaAngleRightSolid /></div>
                         </div>
-                        <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                        {/* <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
                             <div><FaRegFaceSmile /></div>
                             <div className="flex-grow">Send Feedback</div>
                             <div><LiaAngleRightSolid /></div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div>

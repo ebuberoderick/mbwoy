@@ -13,6 +13,7 @@ import axios from 'axios'
 import logo from "@assets/images/viloxLogo.png"
 import success from "@assets/images/success.png"
 import Image from 'next/image';
+import ChatChip from '@/app/components/organisms/ChatChip';
 
 
 function Page({ params }) {
@@ -20,6 +21,7 @@ function Page({ params }) {
     const [type, updateType] = useState('')
     const [amt, setAmt] = useState('')
     const [confirmModal, setConfirmModal] = useState(false)
+    const [showChat, setShowChat] = useState(false)
     const [errMsg, setErrMsg] = useState(false)
     const [proccessing, setProcessing] = useState(false)
     const [completed, setCompleted] = useState(false)
@@ -121,7 +123,7 @@ function Page({ params }) {
             <div className="space-y-5">
                 <div className="flex items-center">
                     <div className="flex-grow flex">
-                        <div onClick={() => router.back()} className="cursor-pointer flex items-center gap-1">
+                        <div onClick={() => showChat ? setShowChat(false) : router.back()} className="cursor-pointer flex items-center gap-1">
                             <IoIosArrowRoundBack /> Back
                         </div>
                     </div>
@@ -132,54 +134,64 @@ function Page({ params }) {
                             {
                                 view ? (
                                     <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
-                                        <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
-                                        <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
-                                            <div className="space-y-3">
-                                                <div className="bg-gray-50 py-3 rounded-lg"><img src={cardDetail.image} className='bg-contain mx-auto' width={50} height={50} /></div>
-                                            </div>
-                                            <div className="flex items-center justify-between">
-                                                <div className="">Country</div>
-                                                <div className="font-bold text-lg">{selected.name}</div>
-                                            </div>
-                                            <div className="flex items-center justify-between">
-                                                <div className="">Card Type</div>
-                                                <div className="font-bold text-lg capitalize">{transactionReceipt?.type}</div>
-                                            </div>
-                                            {
-                                                transactionReceipt?.type === `physical` ? (
-                                                    <div className="flex items-center justify-between">
-                                                        <div className="">Uploads</div>
-                                                        <div className="font-bold flex gap-2 text-lg">
-                                                            {
-                                                                transactionReceipt?.images.map((data, i) => (
-                                                                    <div key={i} className="h-10 w-10 bg-gray-50">
-                                                                        <img src={data} alt="" className="w-full h-full" srcset="" />
-                                                                    </div>
-                                                                ))
-                                                            }
+                                        {
+                                            showChat ? (
+                                                <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
+                                                    <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 w-full"><ChatChip /></div>
+                                                </div>
+                                            ) : (
+                                                <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
+                                                    <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
+                                                    <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
+                                                        <div className="space-y-3">
+                                                            <div className="bg-gray-50 py-3 rounded-lg"><img src={cardDetail.image} className='bg-contain mx-auto' width={50} height={50} /></div>
                                                         </div>
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="">Country</div>
+                                                            <div className="font-bold text-lg">{selected.name}</div>
+                                                        </div>
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="">Card Type</div>
+                                                            <div className="font-bold text-lg capitalize">{transactionReceipt?.type}</div>
+                                                        </div>
+                                                        {
+                                                            transactionReceipt?.type === `physical` ? (
+                                                                <div className="flex items-center justify-between">
+                                                                    <div className="">Uploads</div>
+                                                                    <div className="font-bold flex gap-2 text-lg">
+                                                                        {
+                                                                            transactionReceipt?.images.map((data, i) => (
+                                                                                <div key={i} className="h-10 w-10 bg-gray-50">
+                                                                                    <img src={data} alt="" className="w-full h-full" srcset="" />
+                                                                                </div>
+                                                                            ))
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            ) : (
+                                                                <div className="flex items-center justify-between">
+                                                                    <div className="">E-code</div>
+                                                                    <div className="font-bold text-lg">{transactionReceipt?.ecode}</div>
+                                                                </div>
+                                                            )
+                                                        }
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="">Rate</div>
+                                                            <div className="font-bold text-lg">${Number(transactionReceipt?.rate).toLocaleString('en-US')}</div>
+                                                        </div>
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="">Amount</div>
+                                                            <div className="font-bold text-lg">${Number(transactionReceipt?.amount).toLocaleString('en-US')}</div>
+                                                        </div>
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="">Payment in Naira</div>
+                                                            <div className="font-bold text-lg">&#8358;{Number(transactionReceipt?.amount_to_pay).toLocaleString('en-US')}</div>
+                                                        </div>
+                                                        <div onClick={() => setShowChat(true)} className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
                                                     </div>
-                                                ) : (
-                                                    <div className="flex items-center justify-between">
-                                                        <div className="">E-code</div>
-                                                        <div className="font-bold text-lg">{transactionReceipt?.ecode}</div>
-                                                    </div>
-                                                )
-                                            }
-                                            <div className="flex items-center justify-between">
-                                                <div className="">Rate</div>
-                                                <div className="font-bold text-lg">${Number(transactionReceipt?.rate).toLocaleString('en-US')}</div>
-                                            </div>
-                                            <div className="flex items-center justify-between">
-                                                <div className="">Amount</div>
-                                                <div className="font-bold text-lg">${Number(transactionReceipt?.amount).toLocaleString('en-US')}</div>
-                                            </div>
-                                            <div className="flex items-center justify-between">
-                                                <div className="">Payment in Naira</div>
-                                                <div className="font-bold text-lg">&#8358;{Number(transactionReceipt?.amount_to_pay).toLocaleString('en-US')}</div>
-                                            </div>
-                                            <div className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
-                                        </div>
+                                                </div>
+                                            )
+                                        }
                                     </div>
                                 ) : (
                                     <div className="col-span-2 space-y-5 flex py-20 items-center justify-center w-full">
