@@ -7,6 +7,7 @@ import { IoEllipsisVerticalOutline, IoWalletOutline } from "react-icons/io5";
 import { CiPower } from "react-icons/ci";
 import Modal from "../organisms/Modal";
 import { LuHome } from "react-icons/lu";
+import lox from "@assets/images/20240911_220045.png"
 import { SignOut } from "@/app/hooks/Auth";
 import { useDispatch } from "react-redux";
 import { FaRegFileAlt } from "react-icons/fa";
@@ -65,7 +66,15 @@ function SideNav({ user }) {
           </div>
           <div className="px-2 flex items-center gap-2">
             <div>
-              <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
+              <div className="w-10 h-10 bg-gray-300 rounded-full">
+                <Image
+                  src={ user?.value?.user?.avatar === "avatar.png" ? lox : user?.value?.user?.avatar}
+                  alt={user?.value?.user?.name}
+                  className="w-full h-full rounded-full"
+                  width={'150'}
+                  height={'150'}
+                />
+              </div>
             </div>
             <div className="flex-grow">
               <div className="font-bold text-sm">{user.value.user.name}</div>
