@@ -26,7 +26,7 @@ const Faq = () => {
 
       <div className="lg:grid grid-cols-2 my-11 mx-auto" >
         <div className="gridContent" data-aos="fade-out">
-          <Image src={FaqImg} alt="FAQ Image" />
+          <Image draggable={false} className=' pointer-events-none' src={FaqImg} alt="FAQ Image" />
         </div>
         <div className="gridContent mt-18 relative lg-ml-20">
           <ul className="relative p-6 lg:p-1 item-center flex flex-col gap-[60px] lg:mt-14 lg:ml-36" >

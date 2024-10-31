@@ -17,7 +17,7 @@ const WhyUs = () => {
                 <div className="gridItem p-6 pt-2 pb-11 lg:m-4 m-2 bg-lightText rounded-[20px]"
                     data-aos="fade-up" data-aos-delay="100"
                 >
-                    <Image src={wIcon} className="py-3" alt="Icon" />
+                    <Image src={wIcon}  draggable={false} className="pointer-events-none py-3" alt="Icon" />
                     <h5 className="font-semibold text-2xl py-3 text-blackText"
                     >Secure & Safe</h5>
                     <p  className="text-[14px] text-paraText">
@@ -27,7 +27,7 @@ const WhyUs = () => {
                 <div className="gridItem p-6 pt-2 pb-11 lg:m-4 m-2 bg-lightText rounded-[20px]"
                     data-aos="fade-up" data-aos-delay="200"
                 >
-                    <Image src={wIcon} className="py-3" alt="Icon" />
+                    <Image src={wIcon}  draggable={false} className="pointer-events-none py-3" alt="Icon" />
                     <h5 className="font-semibold text-2xl py-3 text-blackText"
                   
                     >Customers Satisfaction</h5>
@@ -41,7 +41,7 @@ const WhyUs = () => {
                    
                     
                 >
-                    <Image src={wIcon} className="py-3" alt="Icon" />
+                    <Image src={wIcon}  draggable={false} className="pointer-events-none py-3" alt="Icon" />
                     <h5 className="font-semibold text-2xl py-3 text-blackText"
                       
                     >Fast pay, High Rate</h5>

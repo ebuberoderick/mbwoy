@@ -23,7 +23,7 @@ function GiftCardChip({ data, refresh, upDate }) {
             <div className="">
                 <div className="flex items-start">
                     <div className="flex-grow">
-                        <div className="w-12 h-12 rounded-full overflow-hidden"><img src={data.image} width={100} height={100} /></div>
+                        <div className="w-12 h-12 rounded-full overflow-hidden"><img draggable={false} className=' pointer-events-none' src={data.image} width={100} height={100} /></div>
                     </div>
                     <div>
                         {

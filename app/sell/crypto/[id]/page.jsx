@@ -124,10 +124,10 @@ function Page({ params }) {
                                                 </div>
                                             ) : (
                                                 <div className="space-y-5 flex-col flex py-20 items-center justify-center w-full">
-                                                    <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
+                                                    <Image src={logo}  draggable={false} className="pointer-events-none w-20 mx-auto" alt="LOGO" />
                                                     <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
                                                         <div className="space-y-3">
-                                                            <div className="bg-gray-50 py-3 rounded-lg"><img src={cryptos.icon} className='bg-contain mx-auto' width={50} height={50} /></div>
+                                                            <div className="bg-gray-50 py-3 rounded-lg"><img src={cryptos.icon} draggable={false} className=' pointer-events-none bg-contain mx-auto' width={50} height={50} /></div>
                                                         </div>
                                                         <div className="flex items-center justify-between">
                                                             <div className="">Crypto</div>
@@ -143,7 +143,7 @@ function Page({ params }) {
                                                                 {
                                                                     transactionReceipt?.images.map((data, i) => (
                                                                         <div key={i} className="h-10 w-10 bg-gray-50">
-                                                                            <img src={data} alt="" className="w-full h-full" srcset="" />
+                                                                            <img src={data} alt="" draggable={false} className="pointer-events-none w-full h-full" srcset="" />
                                                                         </div>
                                                                     ))
                                                                 }
@@ -174,7 +174,7 @@ function Page({ params }) {
                                             completed && (
                                                 <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
                                                     <div className="font-extrabold text-2xl text-center">
-                                                        <Image src={success} className="mx-auto h-64" alt="" />
+                                                        <Image src={success} draggable={false} className="pointer-events-none mx-auto h-64" alt="" />
                                                     </div>
                                                     <div className="font-extrabold text-2xl text-center">Transaction Successful</div>
                                                     <div className="text-center text-sm">Transaction would take 10-15 minutes to process please be patient</div>
@@ -199,7 +199,7 @@ function Page({ params }) {
                                                         </div>
                                                     </Modal>
                                                     <div className="space-y-3">
-                                                        <div className="bg-gray-50 py-3 rounded-lg"><img src={cryptos.icon} className='bg-contain mx-auto' width={50} height={50} /></div>
+                                                        <div className="bg-gray-50 py-3 rounded-lg"><img src={cryptos.icon} draggable={false} className=' pointer-events-none bg-contain mx-auto' width={50} height={50} /></div>
                                                     </div>
                                                     <div className="space-y-1">
                                                         <div className="space-y-3">
@@ -279,7 +279,7 @@ function Page({ params }) {
                                             parseInt(data.id) !== parseInt(params.id) && (
                                                 <Link href={`${data.id}`} key={i} className="py-3 space-y-1 cursor-pointer border rounded-xl">
                                                     <div className="sm:w-16 w-10 sm:h-16 h-10 mx-auto">
-                                                        <img src={data.icon} className='bg-contain' width={100} height={100} />
+                                                        <img src={data.icon} draggable={false} className=' pointer-events-none bg-contain' width={100} height={100} />
                                                     </div>
                                                     <div className="font-bold sm:text-xl text-center">{data.name}</div>
                                                 </Link>

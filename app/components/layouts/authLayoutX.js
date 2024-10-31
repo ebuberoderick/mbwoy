@@ -65,7 +65,7 @@ function AuthLayoutX({ title, children, onSubmit, errMsg }) {
         <div className='max-w-sm mx-auto'>
           <div className="bg-white min-h-screen p-4 flex flex-col">
             <div>
-              <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
+              <Image src={logo} draggable={false} className="pointer-events-none w-20 mx-auto" alt="LOGO" />
             </div>
             <div className="flex-grow flex flex-col space-y-4 w-full justify-center">
               <div className="space-y-1">

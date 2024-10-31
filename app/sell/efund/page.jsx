@@ -45,7 +45,7 @@ function Page() {
                         efd.map((data, i) => (
                             <Link href={`efund/${data.id}`} key={i} className="py-3 space-y-1 cursor-pointer border rounded-xl">
                                 <div className="sm:w-16 w-10 sm:h-16 h-10 mx-auto">
-                                    <img src={data.icon} className='bg-contain' width={100} height={100} />
+                                    <img src={data.icon} draggable={false} className=' pointer-events-none bg-contain' width={100} height={100} />
                                 </div>
                                 <div className="font-bold sm:text-xl text-center">{data.name}</div>
                             </Link>

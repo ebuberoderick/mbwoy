@@ -13,7 +13,7 @@ function GoogleBtn() {
     return (
         <div>
             <div onClick={() => login()} className="bg-gray-100 cursor-pointer hover:bg-gray-200 flex gap-1 justify-center py-3 rounded-lg">
-                <Image className="w-6 h-6" alt="google" src={google} /> Sign up with Google
+                <Image  draggable={false} className="pointer-events-none w-6 h-6" alt="google" src={google} /> Sign up with Google
             </div>
             {/* <GoogleLogin
                 onSuccess={credentialResponse => {

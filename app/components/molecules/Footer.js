@@ -50,7 +50,7 @@ from 'react-icons/fa'
             </div>
             <div className="footerImg text-center flex justify-center my-4">
                 <a href="#">
-                    <Image src={Logo} />
+                    <Image draggable={false} className=' pointer-events-none' src={Logo} />
                 </a>
             </div>
         </div>

@@ -20,10 +20,10 @@ const Download = () => {
         </h1>
         <div className="ml-0 pl-0 buttonDivs flex my-10 space-x-6 items-center">
           <a href="">
-            <Image src={GooglePlay} alt="Google Play Download" />
+            <Image draggable={false} className=' pointer-events-none' src={GooglePlay} alt="Google Play Download" />
           </a>
           <a href="">
-            <Image src={AppStore} alt="App Store Download" />
+            <Image draggable={false} className=' pointer-events-none' src={AppStore} alt="App Store Download" />
           </a>
         </div>
       </div>
@@ -31,7 +31,7 @@ const Download = () => {
         className="gridContent"
         data-aos="fade-in"
       >
-        <Image src={DownloadPng} alt="Download Image" />
+        <Image draggable={false} className=' pointer-events-none' src={DownloadPng} alt="Download Image" />
       </div>
     </div>
   );

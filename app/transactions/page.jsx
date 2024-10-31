@@ -59,7 +59,7 @@ function Page() {
                       </div>
                     ) : (
                       <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
-                        <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
+                        <Image src={logo} draggable={false} className="pointer-events-none w-20 mx-auto" alt="LOGO" />
                         <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
                           <div className="flex items-center justify-between">
                             <div className="">Transaction Type</div>
@@ -119,7 +119,7 @@ function Page() {
                         transactions.length === 0 && !loading && (
                           <div className="space-y-2">
                             <div className="">
-                              <Image src={Ticon} className='w-44 mx-auto' alt='' />
+                              <Image src={Ticon} draggable={false} className=' pointer-events-none w-44 mx-auto' alt='' />
                             </div>
                             <div className="text-center text-gray-400">There is no recent transaction</div>
                           </div>

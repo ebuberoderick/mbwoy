@@ -68,7 +68,7 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
         <div className='max-w-sm mx-auto'>
           <div className="bg-white min-h-screen p-4 flex flex-col">
             <div>
-              <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
+              <Image src={logo} draggable={false} className=" pointer-events-none w-20 mx-auto" alt="LOGO" />
             </div>
             <div className="flex-grow flex flex-col space-y-4 w-full justify-center">
               <div className="space-y-1">
@@ -97,9 +97,9 @@ function AuthLayout({ title, children, onSubmit, errMsg }) {
             <div className='bg-black flex text-center flex-col h-full w-full rounded-3xl'>
               <div className='flex-grow relative'>
                 <div className="absolute w-full bottom-0 ">
-                  {counter === 1 && <Image src={F1} className="mx-auto transition-all duration-500" alt="LOGO" />}
-                  {counter === 2 && <Image src={F2} className="mx-auto transition-all duration-500" alt="LOGO" />}
-                  {counter === 3 && <Image src={F3} className="mx-auto transition-all duration-500" alt="LOGO" />}
+                  {counter === 1 && <Image src={F1} draggable={false} className="pointer-events-none mx-auto transition-all duration-500" alt="LOGO" />}
+                  {counter === 2 && <Image src={F2} draggable={false} className="pointer-events-none mx-auto transition-all duration-500" alt="LOGO" />}
+                  {counter === 3 && <Image src={F3} draggable={false} className="pointer-events-none mx-auto transition-all duration-500" alt="LOGO" />}
 
                 </div>
               </div>

@@ -85,7 +85,8 @@ const PersonalInfo = ({ goBack }) => {
               <Image
                 src={changed ? URL.createObjectURL(selectedUpdateImage) : selectedUpdateImage === "avatar.png" ? logo : selectedUpdateImage}
                 alt={user?.name}
-                className="w-full h-full rounded-full"
+                draggable={false}
+                className="pointer-events-none w-full h-full rounded-full"
                 width={'150'}
                 height={'150'}
               />

@@ -41,7 +41,7 @@ function CryptoChip({ data , reload }) {
                 <div className="">
                     <div className="flex items-start">
                         <div className="flex-grow">
-                            <div className="w-12 h-12 overflow-hidden rounded-full"><img src={data.icon} width={100} height={100} /></div>
+                            <div className="w-12 h-12 overflow-hidden rounded-full"><img draggable={false} className=' pointer-events-none' src={data.icon} width={100} height={100} /></div>
                         </div>
                         <div className='flex items-center gap-2'>
                             <div onClick={() => setShowModal(true)} className='w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center cursor-pointer'><LiaEye /></div>
@@ -123,7 +123,7 @@ function CryptoChip({ data , reload }) {
                                 <div className="">
                                     <div className="flex items-start">
                                         <div className="flex-grow">
-                                            <div className="w-12 h-12 rounded-full"><img src={data.icon} width={100} height={100} /></div>
+                                            <div className="w-12 h-12 rounded-full"><img draggable={false} className=' pointer-events-none' src={data.icon} width={100} height={100} /></div>
                                         </div>
                                     </div>
                                     <div>

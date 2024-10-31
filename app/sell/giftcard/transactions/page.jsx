@@ -53,10 +53,10 @@ function Page() {
                                         </div>
                                     ) : (
                                         <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
-                                            <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
+                                            <Image src={logo} draggable={false} className="pointer-events-none w-20 mx-auto" alt="LOGO" />
                                             <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
                                                 <div className="space-y-3">
-                                                    <div className="bg-gray-50 py-3 rounded-lg"><img src={view.card.image} className='bg-contain mx-auto' width={50} height={50} /></div>
+                                                    <div className="bg-gray-50 py-3 rounded-lg"><img src={view.card.image} draggable={false} className=' pointer-events-none bg-contain mx-auto' width={50} height={50} /></div>
                                                 </div>
                                                 <div className="flex items-center justify-between">
                                                     <div className="">Country</div>
@@ -74,7 +74,7 @@ function Page() {
                                                                 {
                                                                     view?.images.map((data, i) => (
                                                                         <div key={i} className="h-10 w-10 bg-gray-50">
-                                                                            <img src={data} alt="" className="w-full h-full" srcset="" />
+                                                                            <img src={data} alt="" draggable={false} className="pointer-events-none w-full h-full" srcset="" />
                                                                         </div>
                                                                     ))
                                                                 }
@@ -111,7 +111,7 @@ function Page() {
                                                         </div>
                                                     )
                                                 }
-                                                {view.cancel_image !== null && <Image src={view.cancel_image} width={"100"} height={"100"} className='w-full h-96' alt='' />}
+                                                {view.cancel_image !== null && <Image src={view.cancel_image} width={"100"} height={"100"} draggable={false} className=' pointer-events-none w-full h-96' alt='' />}
                                                 <div onClick={() => setShowChat(true)} className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
                                             </div>
                                         </div>
@@ -145,7 +145,7 @@ function Page() {
                                     orders.length === 0 && !loading && (
                                         <div className="space-y-2">
                                             <div className="">
-                                                <Image src={Ticon} className='w-44 mx-auto' alt='' />
+                                                <Image src={Ticon} draggable={false} className='pointer-events-none w-44 mx-auto' alt='' />
                                             </div>
                                             <div className="text-center text-gray-400">There is no recent transaction</div>
                                         </div>

@@ -13,7 +13,7 @@ import PhoneImg from '@assets/images/contactPhone.png'
 
         <div className="lg:grid p-4 lg:p-12 mx-auto grid-cols-2  items-center justify-center gap-[40px]" >
             <div className="gridContent">
-                <Image src={PhoneImg}  />
+                <Image draggable={false} className=' pointer-events-none' src={PhoneImg}  />
             </div>
             <div className="gridContent">
                 <form>

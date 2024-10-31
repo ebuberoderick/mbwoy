@@ -25,15 +25,15 @@ import AppStore from '@assets/images/appStoreButton.png'
         </p>
         <div className="buttonDivs flex my-10 justify-center space-x-6 items-center" data-aos="fade-up" data-aos-delay="300" >
            <a href="">
-           <Image src={GooglePlay} alt="" />
+           <Image draggable={false} className=' pointer-events-none' src={GooglePlay} alt="" />
            </a>
            <a href="">
-           <Image src={AppStore} alt="" />
+           <Image draggable={false} className=' pointer-events-none' src={AppStore} alt="" />
            </a>
         </div>
        </div>
        <div className="imgInfo flex justify-center" >
-        <Image src={HeroImg}  />
+        <Image draggable={false} className=' pointer-events-none' src={HeroImg}  />
        </div>
     </div>
   )

@@ -30,7 +30,7 @@ function SideNav({ user }) {
       </Modal>
       <div className="fixed bg-white select-none overflow-y-auto flex flex-col h-screen shadow-md w-64 gap-y-6 py-8 px-1">
         <div className="text-2xl px-1">
-          <Image src={logo} className="w-28" alt="Michael Michael" />
+          <Image src={logo} draggable={false} className="pointer-events-none w-28" alt="Michael Michael" />
         </div>
         <div className="flex-grow gap-y-4 flex flex-col gap-2">
           <div>
@@ -68,9 +68,10 @@ function SideNav({ user }) {
             <div>
               <div className="w-10 h-10 bg-gray-300 rounded-full">
                 <Image
-                  src={ user?.value?.user?.avatar === "avatar.png" ? lox : user?.value?.user?.avatar}
+                  src={user?.value?.user?.avatar === "avatar.png" ? lox : user?.value?.user?.avatar}
                   alt={user?.value?.user?.name}
-                  className="w-full h-full rounded-full"
+                  draggable={false}
+                  className="pointer-events-none w-full h-full rounded-full"
                   width={'150'}
                   height={'150'}
                 />

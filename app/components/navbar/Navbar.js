@@ -9,7 +9,7 @@ const Navbar = () => {
     <div className="navbar container-fluid flex lg:px-14 px-5 py-4 justify-between items-center fixed bg-white w-full right-0 left-0 top-0 shadow-md z-[999]"
     >
       <a href="#">
-        <Image src={Logo} alt="Mbwoy Logo" className='mobileViewLogo' />
+        <Image src={Logo} alt="Mbwoy Logo" draggable={false} className=' pointer-events-none mobileViewLogo' />
       </a>
       < ul className='lg:flex gap-10 m-0 p-0 justify-end items-center hidden' >
         <li className='list-none'>
@@ -31,7 +31,7 @@ const Navbar = () => {
         <li className='list-none'>
           <a href="#faq"
             className='font-normal'
-  
+
           >
             FAQs
           </a>
@@ -39,13 +39,13 @@ const Navbar = () => {
         <li className='list-none'>
           <a href="#contact"
             className='font-normal'
-         
+
           >
             Contact us
           </a>
         </li>
         <button className="px-6 py-3 rounded border-2 border-solid border-blackText"
-  
+
         >Download App</button>
       </ul>
       <MobileView />

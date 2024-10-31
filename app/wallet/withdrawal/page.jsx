@@ -99,7 +99,7 @@ function Page() {
                                                     completed ? (
                                                         <div className="max-w-sm rounded-2xl space-y-4 p-4 py-10 w-full">
                                                             <div className="font-extrabold text-2xl text-center">
-                                                                <Image src={success} className="mx-auto h-64" alt="" />
+                                                                <Image src={success} draggable={false} className="pointer-events-none mx-auto h-64" alt="" />
                                                             </div>
                                                             <div className="font-extrabold text-2xl text-center">Transaction Successful</div>
                                                             <div className="text-center text-sm">Transaction would take 10-15 minutes to process please be patient</div>

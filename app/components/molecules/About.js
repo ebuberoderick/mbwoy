@@ -15,7 +15,7 @@ const About = () => {
       </p>
       <div className="lg:grid grid-cols-2 lg:p-10 p-0">
         <div className="gridContent p-4" >
-          <Image src={aboutImg} alt="About Mbwoy" data-aos="zoom-in" />
+          <Image draggable={false} className=' pointer-events-none' src={aboutImg} alt="About Mbwoy" data-aos="zoom-in" />
         </div>
         <div className="gridContent h-auto p-6">
           <div className="p-6 bg-footerBg rounded-[20px]" data-aos="fade-up">
@@ -37,10 +37,10 @@ const About = () => {
           </div>
           <div className="buttonDivs flex my-10 space-x-6 items-center" data-aos="fade-up">
             <a href="">
-              <Image src={GooglePlay} alt="Google Play" />
+              <Image draggable={false} className=' pointer-events-none' src={GooglePlay} alt="Google Play" />
             </a>
             <a href="">
-              <Image src={AppStore} alt="App Store" />
+              <Image draggable={false} className=' pointer-events-none' src={AppStore} alt="App Store" />
             </a>
           </div>
         </div>
