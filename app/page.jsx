@@ -55,7 +55,7 @@ export default function Home() {
               </div>
             </div>
             <div className="px-4 py-8 bg-opacity-5 rounded-xl relative">
-              <Image draggable={false} src={f} className="absolute hidden z-0 xl:block bottom-12 right-6 h-32 my-auto w-auto" />
+              <Image draggable={false} src={f} className="absolute xl:hidden z-0 block bottom-12 right-6 h-32 my-auto w-auto" />
               <div className="relative z-20">
                 <div className="font-bold text-lg">Trade Smart &</div>
                 <div className="font-bold text-lg">Efficient with us</div>
@@ -69,21 +69,21 @@ export default function Home() {
                 <div className="font-bold text-lg text-blue">Sell Giftcard</div>
                 <div className="text-sm w-48 text-gray-400">Sell any kind of giftcard with ease</div>
               </div>
-              <Image draggable={false} src={s} className="absolute hidden z-0 xl:block bottom-6 right-0 h-24 my-auto w-auto" />
+              <Image draggable={false} src={s} className="absolute xl:hidden z-0 block bottom-6 right-0 h-24 my-auto w-auto" />
             </Link>
             <Link href="/sell/crypto" className="px-4 py-8 bg-opacity-5 rounded-xl bg-success relative">
               <div className="relative z-20">
                 <div className="font-bold text-lg text-success">Sell Crypto Currency</div>
                 <div className="text-sm w-48 text-gray-400">Sell crypto at best market rate with Mbwoy</div>
               </div>
-              <Image draggable={false} src={t} className="absolute hidden z-0 xl:block bottom-6 right-0 h-24 my-auto w-auto" />
+              <Image draggable={false} src={t} className="absolute xl:hidden z-0 block bottom-6 right-0 h-24 my-auto w-auto" />
             </Link>
             <Link href="/sell/efund" className="px-4 py-8 bg-opacity-5 rounded-xl bg-danger relative">
               <div className="relative z-20">
                 <div className="font-bold text-lg text-danger">Sell E-Fund</div>
                 <div className="text-sm w-48 text-gray-400">Sell E-Fund at best market</div>
               </div>
-              <Image draggable={false} src={fu} className="absolute hidden z-0 xl:block bottom-6 right-0 h-24 my-auto w-auto" />
+              <Image draggable={false} src={fu} className="absolute xl:hidden z-0 block bottom-6 right-0 h-24 my-auto w-auto" />
             </Link>
           </div>
         </div>
