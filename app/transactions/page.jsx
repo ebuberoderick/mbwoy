@@ -11,6 +11,7 @@ import Ticon from "@assets/images/TIcon.png"
 import logo from "@assets/images/viloxLogo.png"
 import Image from 'next/image'
 import ChatChip from '../components/organisms/ChatChip'
+import ExtarSide from '../components/molecules/ExtarSide'
 
 function Page() {
   const router = useRouter()
@@ -153,7 +154,7 @@ function Page() {
 
 
           </div>
-
+          <ExtarSide />
         </div >
       </div >
     </AppLayout >

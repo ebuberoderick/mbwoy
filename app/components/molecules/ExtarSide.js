@@ -12,7 +12,7 @@ function ExtarSide() {
     }, [counter]);
     return (
         <div className='px-3 hidden xl:block '>
-            <div className='h-full rounded-3xl text-white'>
+            <div className='h-full rounded-3xl'>
                 <div className='flex text-center flex-col h-full w-full rounded-3xl'>
                     <div className='flex-grow relative'>
                         <div className="absolute w-full bottom-0 ">
@@ -26,8 +26,8 @@ function ExtarSide() {
                         {
                             counter === 1 && (
                                 <div className='py-14 space-y-4 border border-gray-800 rounded-3xl'>
-                                    <div className='text-white font-extrabold text-4xl'>Welcome to Mbwoy</div>
-                                    <div className='text-gray-300 text-sm max-w-sm mx-auto'>Mbwoy is your onestep solution for selling gift cards, crypto currencies and electronic funds</div>
+                                    <div className='font-extrabold text-4xl'>Welcome to Mbwoy</div>
+                                    <div className='text-gray-500 text-sm max-w-sm mx-auto'>Mbwoy is your onestep solution for selling gift cards, crypto currencies and electronic funds</div>
                                 </div>
                             )
                         }
@@ -35,8 +35,8 @@ function ExtarSide() {
                         {
                             counter === 2 && (
                                 <div className='py-14 space-y-4 border border-gray-800 rounded-3xl'>
-                                    <div className='text-white font-extrabold text-4xl'>Sell with Ease</div>
-                                    <div className='text-gray-300 text-sm max-w-sm mx-auto'>With Mbwoy, selling is simple and secure.It&apos;s fast, convenient, and puts money back in your pocket.</div>
+                                    <div className='font-extrabold text-4xl'>Sell with Ease</div>
+                                    <div className='text-gray-500 text-sm max-w-sm mx-auto'>With Mbwoy, selling is simple and secure.It&apos;s fast, convenient, and puts money back in your pocket.</div>
                                 </div>
                             )
                         }
@@ -45,17 +45,17 @@ function ExtarSide() {
                         {
                             counter === 3 && (
                                 <div className='py-14 space-y-4 border border-gray-800 rounded-3xl'>
-                                    <div className='text-white font-extrabold text-4xl'>Unlock Your Assets</div>
-                                    <div className='text-gray-300 text-sm max-w-sm mx-auto'>Mbwoy enables you to optimize the value of your assets. Sign up for an Mbwoy account today.</div>
+                                    <div className='font-extrabold text-4xl'>Unlock Your Assets</div>
+                                    <div className='text-gray-500 text-sm max-w-sm mx-auto'>Mbwoy enables you to optimize the value of your assets. Sign up for an Mbwoy account today.</div>
                                 </div>
                             )}
 
                     </div>
                     {/* <div></div> */}
                     <div className='flex pb-12 justify-center gap-2'>
-                        <div className={`h-2 ${counter === 1 ? 'bg-white w-8' : 'w-2 bg-gray-400'} transition-all duration-500 rounded-full cursor-pointer`} onClick={() => setCounter(1)}></div>
-                        <div className={`h-2 ${counter === 2 ? 'bg-white w-8' : 'w-2 bg-gray-400'} transition-all duration-500 rounded-full cursor-pointer`} onClick={() => setCounter(2)}></div>
-                        <div className={`h-2 ${counter === 3 ? 'bg-white w-8' : 'w-2 bg-gray-400'} transition-all duration-500 rounded-full cursor-pointer`} onClick={() => setCounter(3)}></div>
+                        <div className={`h-2 ${counter === 1 ? 'bg-black w-8' : 'w-2 bg-gray-400'} transition-all duration-500 rounded-full cursor-pointer`} onClick={() => setCounter(1)}></div>
+                        <div className={`h-2 ${counter === 2 ? 'bg-black w-8' : 'w-2 bg-gray-400'} transition-all duration-500 rounded-full cursor-pointer`} onClick={() => setCounter(2)}></div>
+                        <div className={`h-2 ${counter === 3 ? 'bg-black w-8' : 'w-2 bg-gray-400'} transition-all duration-500 rounded-full cursor-pointer`} onClick={() => setCounter(3)}></div>
                     </div>
                 </div>
             </div>
