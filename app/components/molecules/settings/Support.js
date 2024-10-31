@@ -7,6 +7,7 @@ import { MdOutlineLocalPhone } from "react-icons/md";
 import { LuMail } from "react-icons/lu";
 import ChatChip from "../../organisms/ChatChip";
 import { useState } from "react";
+import Link from "next/link";
 
 
 const Support = ({ goBack }) => {
@@ -53,26 +54,34 @@ const Support = ({ goBack }) => {
                         <div>
                             <div className="font-semibold text-lg">Social Media Handles</div>
                             <div>
-                                <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
-                                    <div><RiFacebookCircleLine /></div>
-                                    <div className="flex-grow">Facebook</div>
-                                    <div><LiaAngleRightSolid /></div>
-                                </div>
-                                <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
-                                    <div><SiWhatsapp /></div>
-                                    <div className="flex-grow">Whatsapp</div>
-                                    <div><LiaAngleRightSolid /></div>
-                                </div>
-                                <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
-                                    <div><FaXTwitter /></div>
-                                    <div className="flex-grow">Twitter</div>
-                                    <div><LiaAngleRightSolid /></div>
-                                </div>
-                                <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
-                                    <div><IoLogoInstagram /></div>
-                                    <div className="flex-grow">Instagram</div>
-                                    <div><LiaAngleRightSolid /></div>
-                                </div>
+                                <Link target="_blank" href="https://www.facebook.com/profile.php?id=100086377680178&mibextid=LQQJ4d" >
+                                    <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                                        <div><RiFacebookCircleLine /></div>
+                                        <div className="flex-grow">Facebook</div>
+                                        <div><LiaAngleRightSolid /></div>
+                                    </div>
+                                </Link>
+                                <Link target="_blank" href="https://wa.me/message/PXILPJHJFQ2BL1" >
+                                    <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                                        <div><SiWhatsapp /></div>
+                                        <div className="flex-grow">Whatsapp</div>
+                                        <div><LiaAngleRightSolid /></div>
+                                    </div>
+                                </Link>
+                                <Link target="_blank" href="https://x.com/mbwoyapp?s=21" >
+                                    <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                                        <div><FaXTwitter /></div>
+                                        <div className="flex-grow">Twitter</div>
+                                        <div><LiaAngleRightSolid /></div>
+                                    </div>
+                                </Link>
+                                <Link target="_blank" href="https://www.instagram.com/mbwoyexchange/profilecard" >
+                                    <div className="flex py-2 hover:px-2 transition-all duration-300 rounded-lg hover:bg-gray-50 cursor-pointer  items-center gap-2">
+                                        <div><IoLogoInstagram /></div>
+                                        <div className="flex-grow">Instagram</div>
+                                        <div><LiaAngleRightSolid /></div>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                         <div>
