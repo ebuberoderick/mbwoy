@@ -8,13 +8,16 @@ import { VscEye, VscEyeClosed } from 'react-icons/vsc'
 import { fetchTransactions, fetchWallet } from '../services/authService'
 import { FaMoneyBills } from 'react-icons/fa6'
 import Ticon from "@assets/images/TIcon.png"
+import logo from "@assets/images/viloxLogo.png"
 import Image from 'next/image'
+import ChatChip from '../components/organisms/ChatChip'
 
 function Page() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
   const [transactions, updateTransactions] = useState([])
   const [view, setView] = useState({})
+  const [showChat, setShowChat] = useState(false)
 
 
   const fetch = async () => {
@@ -36,7 +39,7 @@ function Page() {
         <div className="flex items-center">
           <div className="flex-grow items-center flex">
             <div className="flex-grow">
-              <div onClick={() => Object.keys(view).length > 0 ? setView({}) : router.back()} className="cursor-pointer flex items-center gap-1">
+              <div onClick={() => Object.keys(view).length > 0 ? (showChat ? setShowChat(false) : setView({})) : router.back()} className="cursor-pointer flex items-center gap-1">
                 <IoIosArrowRoundBack /> Back
               </div>
             </div>
@@ -47,7 +50,42 @@ function Page() {
 
             {
               Object.keys(view).length > 0 ? (
-                <div className=""></div>
+                <div className="col-span-2 space-y-5">
+                  {
+                    showChat ? (
+                      <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
+                        <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 w-full"><ChatChip /></div>
+                      </div>
+                    ) : (
+                      <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
+                        <Image src={logo} className="w-20 mx-auto" alt="LOGO" />
+                        <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
+                          <div className="flex items-center justify-between">
+                            <div className="">Transaction Type</div>
+                            <div className="font-bold text-lg capitalize">{view?.type}</div>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="">Reference</div>
+                            <div className="font-bold text-lg">{view?.transaction_id}</div>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="">Payment in Naira</div>
+                            <div className="font-bold text-lg">&#8358;{Number(view?.amount).toLocaleString('en-US')}</div>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="">Status</div>
+                            <div className={`text-[9px] px-3 inline py-[2px] rounded-lg bg-opacity-10 ${view.status === "success" ? "text-success bg-success" : view.status === "rejected" ? "text-danger bg-danger" : "text-yellow bg-yellow"}`}>{view.status}</div>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="">Date</div>
+                            <div className="font-bold text-lg">{view?.created_at.split("T")[0]}</div>
+                          </div>
+                          <div onClick={() => setShowChat(true)} className="flex-grow text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3">Report issue</div>
+                        </div>
+                      </div>
+                    )
+                  }
+                </div>
               ) : (
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">

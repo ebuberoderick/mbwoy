@@ -10,6 +10,7 @@ import fu from "@assets/images/fur.png"
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { useState, useEffect } from "react";
 import { fetchWallet } from "./services/authService";
+import ExtarSide from "./components/molecules/ExtarSide";
 
 export default function Home() {
 
@@ -86,7 +87,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className=""></div>
+        <ExtarSide />
       </div>
     </AppLayout>
   );
