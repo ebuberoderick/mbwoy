@@ -10,6 +10,7 @@ import 'aos/dist/aos.css'; // AOS styles
 import { useEffect } from 'react';
 import AOS from 'aos';
 import Loading from "./components/organisms/Loading";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +26,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Provider store={Store}>
           <PersistGate loading={<Loading />} persistor={persistor}>
-            {children}
+            <GoogleOAuthProvider clientId="1040779469294-gron1r0eu22m5bt0mrksl5746lna91e3.apps.googleusercontent.com">
+              {children}
+            </GoogleOAuthProvider>
           </PersistGate>
         </Provider>
       </body>

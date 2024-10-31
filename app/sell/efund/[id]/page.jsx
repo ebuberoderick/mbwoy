@@ -10,6 +10,7 @@ import { fetchEFund } from '@/app/services/authService'
 import logo from "@assets/images/viloxLogo.png"
 import Image from 'next/image';
 import ChatChip from '@/app/components/organisms/ChatChip';
+import Link from 'next/link';
 
 function Page({ params }) {
     const router = useRouter()
@@ -27,8 +28,20 @@ function Page({ params }) {
             });
             setEFund(...newArray)
         }
+        await fetchx()
         setLoading(false)
     }
+
+    const [efd, setefd] = useState([])
+
+    const fetchx = async () => {
+        const { status, data } = await fetchEFund().catch(err => console.log(err))
+        if (status) {
+            setefd(data.data[0]);
+        }
+        setLoading(false)
+    }
+
 
 
     const sellNow = async (e) => {
@@ -55,14 +68,14 @@ function Page({ params }) {
                 </div>
                 {
                     !loading && (
-                        <div className="grid lg:grid-cols-3">
+                        <div className="grid lg:grid-cols-2">
                             {
                                 view ? (
-                                    <div className="col-span-2 space-y-5 flex-col flex py-20 items-center justify-center w-full">
+                                    <div className="space-y-5 flex-col flex py-20 items-center justify-center w-full">
                                         <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 w-full"><ChatChip /></div>
                                     </div>
                                 ) : (
-                                    <div className="col-span-2 space-y-5 flex py-20 items-center justify-center w-full">
+                                    <div className="space-y-5 flex py-20 items-center justify-center w-full">
 
                                         <form enctype="multipart/form-data" onSubmit={sellNow} className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 p-4 py-10 w-full">
                                             <div className="space-y-3">
@@ -111,7 +124,22 @@ function Page({ params }) {
                                     </div>
                                 )
                             }
-
+                            <div className="">
+                                <div className="lg:grid hidden grid-cols-2 xl:grid-cols-3 gap-5">
+                                    {
+                                        efd.map((data, i) => (
+                                            parseInt(data.id) !== parseInt(params.id) && (
+                                                <Link href={`${data.id}`} key={i} className="py-3 space-y-1 cursor-pointer border rounded-xl">
+                                                    <div className="sm:w-16 w-10 sm:h-16 h-10 mx-auto">
+                                                        <img src={data.icon} className='bg-contain' width={100} height={100} />
+                                                    </div>
+                                                    <div className="font-bold sm:text-xl text-center">{data.name}</div>
+                                                </Link>
+                                            )
+                                        ))
+                                    }
+                                </div>
+                            </div>
                         </div>
                     )
                 }

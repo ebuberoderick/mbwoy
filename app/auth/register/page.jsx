@@ -55,12 +55,12 @@ function Page() {
                 <div className="flex gap-3">
                     <button disabled={proccessing} className="flex-grow disabled:bg-opacity-35 shadow-md bg-black text-white rounded-lg py-3"> {proccessing ? "Proccessing..." : "Create Account"}</button>
                 </div>
-                {/* <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3">
                     <hr className="flex-grow" />
                     <div className="">or</div>
                     <hr className="flex-grow" />
                 </div>
-                <GoogleBtn /> */}
+                <GoogleBtn />
             </div>
 
             <div className="text-center">Already have an account? <Link href="login" className="font-extrabold">Login</Link> </div>

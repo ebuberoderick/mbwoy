@@ -11,13 +11,13 @@ import { IoIosArrowRoundBack } from 'react-icons/io'
 function Page() {
     const router = useRouter()
 
-    const [cryptos, setCrypto] = useState([])
+    const [efd, setefd] = useState([])
     const [loading, setLoading] = useState(true)
 
     const fetch = async () => {
         const { status, data } = await fetchEFund().catch(err => console.log(err))
         if (status) {
-            setCrypto(data.data[0]);
+            setefd(data.data[0]);
         }
         setLoading(false)
     }
@@ -42,7 +42,7 @@ function Page() {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
                     {
-                        cryptos.map((data, i) => (
+                        efd.map((data, i) => (
                             <Link href={`efund/${data.id}`} key={i} className="py-3 space-y-1 cursor-pointer border rounded-xl">
                                 <div className="sm:w-16 w-10 sm:h-16 h-10 mx-auto">
                                     <img src={data.icon} className='bg-contain' width={100} height={100} />
