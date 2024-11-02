@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Provider store={Store}>
           <PersistGate loading={<Loading />} persistor={persistor}>
-            <GoogleOAuthProvider clientId="1040779469294-gron1r0eu22m5bt0mrksl5746lna91e3.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId="6126168386-05469vbiq4beo44tpg0ff7g4m18hlkf0.apps.googleusercontent.com">
               {children}
             </GoogleOAuthProvider>
           </PersistGate>

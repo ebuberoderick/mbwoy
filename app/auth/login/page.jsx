@@ -53,9 +53,8 @@ function Page() {
                     <div className="">or</div>
                     <hr className="flex-grow" />
                 </div>
-                <GoogleBtn />
+                <GoogleBtn err={e => setErrMsg(e)} />
             </div>
-
             <div className="text-center">Don&apos;t have an account? <Link href="register" className="font-extrabold">sign Up</Link> </div>
         </AuthLayout>
     )

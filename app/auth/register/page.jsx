@@ -60,7 +60,7 @@ function Page() {
                     <div className="">or</div>
                     <hr className="flex-grow" />
                 </div>
-                <GoogleBtn />
+                <GoogleBtn err={e => setErrMsg(e)} />
             </div>
 
             <div className="text-center">Already have an account? <Link href="login" className="font-extrabold">Login</Link> </div>

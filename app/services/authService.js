@@ -8,6 +8,7 @@ export const resendOTP = (formData) => apiWithOutAuth.post("/recover/resend_otp"
 export const verifyOTP = (formData) => apiWithOutAuth.post("/recover/verify_otp", formData).then(getApiResponse).catch(getErrorResponse);
 export const setNewPassword = (formData) => apiWithOutAuth.post("/recover/create_new_password", formData).then(getApiResponse).catch(getErrorResponse);
 export const verifyReferral = (formData) => apiWithAuth.post("/app/verify_referral", formData).then(getApiResponse).catch(getErrorResponse);
+export const googleAuth = (formData) => apiWithAuth.post("/google_auth", formData).then(getApiResponse).catch(getErrorResponse);
 
 
 export const setTransactionPin = (formData) => apiWithAuth.post("app/wallet/create_pin",formData).then(getApiResponse).catch(getErrorResponse);
