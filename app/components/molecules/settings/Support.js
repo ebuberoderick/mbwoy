@@ -34,7 +34,7 @@ const Support = ({ goBack }) => {
                             <ChatChip />
                         </div>
                     </div>
-                ) : (
+                ) : (   
                     <div className="px-4 space-y-6 pt-5 flex-grow md:px-0 md:w-[65%]">
                         <div>
                             <div className="font-semibold text-lg">Issue/Feddback</div>

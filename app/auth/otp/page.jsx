@@ -45,7 +45,6 @@ function Page() {
                 setErrMsg('')
                 SignInAuth(user.value, dispatch)
                 dispatch(addPreuser({}))
-                // router.push('setpin')
                 window !== "undefined" && (window.location.href = 'setpin');
             } else {
                 setErrMsg(data.message)

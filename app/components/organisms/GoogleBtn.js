@@ -19,8 +19,7 @@ function GoogleBtn({ err }) {
         const { status, data } = await googleAuth(xinfo).catch(err => console.log(err))
         if (status) {
             SignInAuth(data, dispatch)
-            router.push("/")
-            window !== "undefined" && window.location.reload()
+            window !== "undefined" && (window.location.href = 'setpin');
         } else {
             err(data?.data?.email[0])
         }
@@ -61,7 +60,7 @@ function GoogleBtn({ err }) {
     return (
         <div>
             <div onClick={() => login()} className="bg-gray-100 cursor-pointer hover:bg-gray-200 flex gap-1 justify-center py-3 rounded-lg">
-                <Image draggable={false} className="pointer-events-none w-6 h-6" alt="google" src={google} /> Sign up with Google
+                <Image draggable={false} className="pointer-events-none w-6 h-6" alt="google" src={google} /> Continue with Google
             </div>
         </div>
     )
