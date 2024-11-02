@@ -119,7 +119,7 @@ function Page() {
                     </div>
                   </div>
                   <div className="px-4 py-8 bg-opacity-5 rounded-xl relative">
-                    <Image draggable={false} src={f} draggable={false} className="pointer-events-none absolute xl:hidden z-0 block bottom-12 right-6 h-32 my-auto w-auto" />
+                    <Image src={f} draggable={false} className="pointer-events-none absolute xl:hidden z-0 block bottom-12 right-6 h-32 my-auto w-auto" />
                     <div className="relative z-20">
                       <div className="font-bold text-lg">Trade Smart &</div>
                       <div className="font-bold text-lg">Efficient with us</div>

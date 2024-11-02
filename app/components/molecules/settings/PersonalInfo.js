@@ -83,7 +83,7 @@ const PersonalInfo = ({ goBack }) => {
           <div className='w-full overflow-hidden'>
             <div className="h-28 w-28 mx-auto lg:mx-0 rounded-full bg-gray-200 relative">
               <Image
-                src={changed ? URL.createObjectURL(selectedUpdateImage) : selectedUpdateImage === "avatar.png" ? logo : selectedUpdateImage}
+                src={changed ? URL.createObjectURL(selectedUpdateImage) : (selectedUpdateImage === "avatar.png" || selectedUpdateImage === null) ? logo : selectedUpdateImage}
                 alt={user?.name}
                 draggable={false}
                 className="pointer-events-none w-full h-full rounded-full"

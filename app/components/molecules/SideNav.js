@@ -68,15 +68,14 @@ function SideNav({ user }) {
             <div>
               <div className="w-10 h-10 bg-gray-300 rounded-full">
                 <Image
-                src={ user?.value?.user?.avatar === "avatar.png" ? lox : lox}
-                alt={user?.value?.user?.name}
-                draggable={false}
-                className="pointer-events-none w-full h-full rounded-full"
-                width={'150'}
-                height={'150'}
+                  src={(user?.value?.user?.avatar === "avatar.png" || user?.value?.user?.avatar === null) ? lox : user?.value?.user?.avatar}
+                  alt={user?.value?.user?.name}
+                  draggable={false}
+                  className="pointer-events-none w-full h-full rounded-full"
+                  width={'150'}
+                  height={'150'}
                 />
               </div>
-              {user?.value?.user?.avatar}
             </div>
             <div className="flex-grow">
               <div className="font-bold text-sm">{user.value.user.name}</div>
