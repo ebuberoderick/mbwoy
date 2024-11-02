@@ -76,6 +76,7 @@ function SideNav({ user }) {
                 height={'150'}
                 />
               </div>
+              {user?.value?.user?.avatar}
             </div>
             <div className="flex-grow">
               <div className="font-bold text-sm">{user.value.user.name}</div>
