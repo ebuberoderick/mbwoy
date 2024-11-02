@@ -29,8 +29,8 @@ const Support = ({ goBack }) => {
             {
                 showChat ? (
                     <div className="col-span-2 space-y-5 flex-col flex items-center justify-center w-full">
-                        <div className="max-w-sm sm:shadow-lg rounded-2xl space-y-4 w-full">
-                            <div onClick={() => setShowChat(false)} className="flex-grow hidden lg:block text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black w-full text-white rounded-lg py-3">Report issue</div>
+                        <div className="max-w-sm rounded-2xl space-y-4 w-full">
+                            <div onClick={() => setShowChat(false)} className="flex-grow hidden lg:block text-center cursor-pointer disabled:bg-opacity-35 shadow-md bg-black w-full text-white rounded-lg py-3">Back</div>
                             <ChatChip />
                         </div>
                     </div>
