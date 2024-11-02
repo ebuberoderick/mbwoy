@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 
 function GoogleBtn({ err }) {
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState(false);
     const [xinfo, setData] = useState({});
     const router = useRouter()
     const dispatch = useDispatch()
