@@ -108,7 +108,7 @@ function Page({ params }) {
             }
         }
 
-        await axios.post(`${API_BASE_URL}app/giftcard/sell`, formdata, { headers }).then(async (res) => {
+        await axios.post(`${API_BASE_URL}/app/giftcard/sell`, formdata, { headers }).then(async (res) => {
             setTransactionReceipt(res.data.data[0]);
             setCompleted(true)
         }).catch((error) => {
