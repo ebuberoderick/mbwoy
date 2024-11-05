@@ -42,7 +42,7 @@ const Referrals = ({ goBack }) => {
                 </div>
                 <div className="max-w-[300px] space-y-2 mx-auto text-center">
                     <div className="font-bold text-2xl">Redeemed &#8358;{!loading && Number(referralList?.user.wallet.bonus).toLocaleString("en-US")}</div>
-                    <div className="text-xs text-gray-400">Each time a friend signs up and transact with Vilox using your referral code.</div>
+                    <div className="text-xs text-gray-400">Each time a friend signs up and transact with Mbwoy using your referral code.</div>
                     <div title="Click to copy" onClick={() => navigator?.clipboard?.writeText(!loading && referralList?.user.referral_id)} className="inline-flex gap-2 p-1 cursor-pointer rounded-lg bg-black">
                         <div className="text-white pl-2">{!loading && referralList?.user.referral_id}</div>
                         <div className="bg-white rounded-md flex items-center justify-center w-7 h-7"><FaRegCopy /></div>
